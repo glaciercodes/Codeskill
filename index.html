@@ -1,1 +1,1237 @@
-j
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Skill | Simple Coding Guides</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2e7d32;
+            --primary-light: #4caf50;
+            --primary-dark: #1b5e20;
+            --text-color: #333;
+            --light-bg: #f9f9f9;
+            --white: #ffffff;
+            --border-color: #e0e0e0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            color: var(--text-color);
+            background-color: var(--white);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header Styles */
+        header {
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border-color);
+            background-color: var(--white);
+        }
+        
+        .logo-section {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-right: 15px;
+        }
+        
+        .site-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .site-subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: flex-end;
+            list-style: none;
+            gap: 25px;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        nav a:hover {
+            color: var(--primary-color);
+        }
+        
+        /* Main Content Styles */
+        main {
+            padding: 40px 0;
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            color: var(--primary-dark);
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary-light);
+        }
+        
+        .skill-level {
+            margin-bottom: 60px;
+        }
+        
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+        
+        .article-content {
+            background-color: var(--light-bg);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+        
+        .article-content h3 {
+            color: var(--primary-dark);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+        
+        .article-content p {
+            margin-bottom: 15px;
+        }
+        
+        .article-content h4 {
+            color: var(--primary-color);
+            margin: 25px 0 15px;
+            font-size: 1.2rem;
+        }
+        
+        .article-content ul, .article-content ol {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .article-content li {
+            margin-bottom: 8px;
+        }
+        
+        .survey-section {
+            margin-top: 40px;
+            padding: 25px;
+            background-color: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        
+        .survey-title {
+            font-size: 1.3rem;
+            color: var(--primary-dark);
+            margin-bottom: 20px;
+        }
+        
+        .survey-question {
+            margin-bottom: 20px;
+        }
+        
+        .survey-question p {
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+        
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            resize: vertical;
+            min-height: 80px;
+            font-family: inherit;
+        }
+        
+        .submit-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: background-color 0.3s;
+            margin-top: 15px;
+        }
+        
+        .submit-btn:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .success-animation {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            background-color: #e8f5e9;
+            border-radius: 8px;
+            margin-top: 20px;
+            animation: fadeIn 0.5s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .percentage {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin: 15px 0;
+        }
+        
+        .share-section {
+            margin-top: 30px;
+            text-align: center;
+        }
+        
+        .share-btn {
+            background-color: var(--primary-light);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: background-color 0.3s;
+        }
+        
+        .share-btn:hover {
+            background-color: var(--primary-color);
+        }
+        
+        /* Footer Styles */
+        footer {
+            background-color: var(--primary-dark);
+            color: white;
+            padding: 40px 0;
+            margin-top: 60px;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-section a {
+            color: #e0e0e0;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-section a:hover {
+            color: white;
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        /* Mobile Optimizations */
+        @media (max-width: 768px) {
+            .logo-section {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .logo {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+            
+            .site-title {
+                font-size: 1.8rem;
+            }
+            
+            .site-subtitle {
+                font-size: 1rem;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .article-content {
+                padding: 20px;
+            }
+            
+            .survey-section {
+                padding: 15px;
+            }
+            
+            .survey-title {
+                font-size: 1.2rem;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+            }
+            
+            .footer-section {
+                min-width: 100%;
+            }
+            
+            /* Make survey questions more compact on mobile */
+            .survey-question {
+                margin-bottom: 15px;
+            }
+            
+            .survey-question p {
+                font-size: 0.95rem;
+            }
+            
+            textarea {
+                min-height: 70px;
+                padding: 10px;
+            }
+            
+            .submit-btn {
+                width: 100%;
+                padding: 15px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                width: 95%;
+                padding: 0 10px;
+            }
+            
+            header {
+                padding: 15px 0;
+            }
+            
+            .logo {
+                font-size: 2rem;
+            }
+            
+            .site-title {
+                font-size: 1.6rem;
+            }
+            
+            nav ul {
+                gap: 10px;
+            }
+            
+            nav a {
+                font-size: 0.9rem;
+            }
+            
+            main {
+                padding: 20px 0;
+            }
+            
+            .skill-level {
+                margin-bottom: 40px;
+            }
+            
+            .article-content {
+                padding: 15px;
+            }
+            
+            .article-content h3 {
+                font-size: 1.3rem;
+            }
+            
+            .article-content h4 {
+                font-size: 1.1rem;
+            }
+            
+            .survey-section {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo-section">
+                <i class="fas fa-code logo"></i>
+                <div>
+                    <h1 class="site-title">Code Skill</h1>
+                    <p class="site-subtitle">Simple coding guides with step-by-step learning and quick surveys.</p>
+                </div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#"><i class="fas fa-info-circle"></i> About Us</a></li>
+                    <li><a href="#"><i class="fas fa-envelope"></i> Contact Us</a></li>
+                    <li><a href="#"><i class="fas fa-shield-alt"></i> Terms & Privacy</a></li>
+                    <li><a href="#"><i class="fas fa-bell"></i> Subscribe</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="skill-level">
+            <h2 class="section-title">Coding for Beginners</h2>
+            <div class="content-wrapper">
+                <div class="article-content">
+                    <h3>Getting Started with Programming</h3>
+                    <p>Welcome to the exciting world of coding! If you're completely new to programming, you're in the right place. This comprehensive guide will walk you through the fundamental concepts that form the foundation of all programming languages, providing you with a solid starting point for your coding journey.</p>
+                    
+                    <h4>What is Programming Exactly?</h4>
+                    <p>At its core, programming is the process of giving instructions to computers to perform specific tasks. Think of it as writing a detailed recipe - you provide step-by-step directions that the computer follows exactly without deviation. These instructions are written in programming languages, which are specially designed to be understood by both humans and machines. Programming languages serve as intermediaries between human thought and computer execution.</p>
+                    
+                    <p>When you write code, you're essentially creating a set of commands that tell the computer what to do, when to do it, and how to do it. This process requires precision and logical thinking since computers cannot interpret ambiguous instructions or make assumptions about what you might have intended. Every character, space, and symbol matters in programming, which is why attention to detail is such a crucial skill for developers.</p>
+                    
+                    <h4>Why Learn to Code in Today's World?</h4>
+                    <p>Learning to code opens up numerous opportunities beyond just building websites or applications. Programming teaches you systematic problem-solving skills that are valuable in virtually any career path. It enhances logical thinking, boosts creativity, and develops your ability to break down complex problems into manageable, sequential steps.</p>
+                    
+                    <p>In our increasingly digital world, coding literacy is becoming as important as traditional literacy. Understanding how software works gives you insight into the technology that powers our daily lives. Even if you don't pursue a career as a professional developer, coding knowledge can help you communicate more effectively with technical teams, automate repetitive tasks, and understand the limitations and possibilities of technology solutions in your field.</p>
+                    
+                    <h4>Choosing Your First Programming Language</h4>
+                    <p>For beginners, Python is often recommended as a first programming language. Its syntax is clean and readable, making it easier to understand fundamental concepts without getting bogged down by complex syntax rules. Python's versatility also means you can use it for web development, data analysis, artificial intelligence, and more.</p>
+                    
+                    <p>JavaScript is another excellent choice if you're interested in web development. As the language of the web browser, JavaScript allows you to create interactive websites and see immediate results from your code. Other good options for beginners include Ruby, with its focus on developer happiness, and Scratch, a visual programming language perfect for absolute beginners or younger learners.</p>
+                    
+                    <p>When selecting your first language, consider your goals. If you want to build websites, start with HTML/CSS and JavaScript. For data science, Python is ideal. For mobile apps, consider JavaScript with React Native or Swift for iOS development. Remember that the concepts you learn in one language largely transfer to others, so your first choice isn't permanent.</p>
+                    
+                    <h4>Essential Programming Concepts Every Beginner Should Master</h4>
+                    <p>All programming languages share common building blocks that form the foundation of software development. Understanding these core concepts is crucial regardless of which language you choose to learn first:</p>
+                    
+                    <ul>
+                        <li><strong>Variables:</strong> Containers that store information for later use in your program</li>
+                        <li><strong>Data Types:</strong> Different kinds of data like numbers, text, and true/false values</li>
+                        <li><strong>Functions:</strong> Reusable blocks of code that perform specific actions</li>
+                        <li><strong>Conditionals (if/else statements):</strong> Code that makes decisions based on conditions</li>
+                        <li><strong>Loops:</strong> Structures that repeat actions multiple times</li>
+                        <li><strong>Arrays/Lists:</strong> Collections of data stored together</li>
+                        <li><strong>Objects:</strong> Complex data structures that group related information and behaviors</li>
+                    </ul>
+                    
+                    <p>Mastering these fundamentals will make learning additional programming concepts and languages much easier. Many beginners make the mistake of jumping between languages without solidifying these basics, which can slow their progress in the long run.</p>
+                    
+                    <h4>Setting Up Your Development Environment</h4>
+                    <p>Before you start coding, you'll need to set up a development environment. This typically includes a text editor or Integrated Development Environment (IDE) where you'll write your code, and any necessary tools or frameworks for your chosen programming language.</p>
+                    
+                    <p>For beginners, I recommend starting with a simple text editor like Visual Studio Code, which is free, powerful, and has excellent extensions for most programming languages. As you progress, you might explore more specialized IDEs like PyCharm for Python or WebStorm for JavaScript.</p>
+                    
+                    <p>Don't get overwhelmed by the setup process. Many online platforms like Replit and CodePen allow you to start coding immediately in your browser without any installation. These can be excellent places to experiment with small code snippets as you're learning.</p>
+                    
+                    <h4>Developing a Programmer's Mindset</h4>
+                    <p>Learning to code is as much about developing a new way of thinking as it is about learning syntax. Successful programmers cultivate patience, persistence, and curiosity. You'll encounter errors and bugs frequently - this is a normal part of the process, not a sign of failure.</p>
+                    
+                    <p>When you encounter a problem, break it down into smaller, more manageable pieces. Solve each piece individually, then combine your solutions. This "divide and conquer" approach is fundamental to programming. Also, learn to read error messages carefully - they often contain clues about what went wrong and how to fix it.</p>
+                    
+                    <p>Remember that all expert programmers were once beginners. The coding community is generally supportive of newcomers, so don't hesitate to ask questions in forums like Stack Overflow or programming Discord servers when you're stuck.</p>
+                    
+                    <div class="survey-section">
+                        <h3 class="survey-title">Test Your Reading: Beginner Section</h3>
+                        <p>Answer these questions to test how well you've understood the beginner content. Each response must be at least 5 words.</p>
+                        
+                        <div class="survey-question">
+                            <p>1. According to the article, what is the core purpose of programming?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>2. What analogy does the article use to explain programming to beginners?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>3. Besides technical skills, what three cognitive benefits does coding provide?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>4. What two languages are specifically recommended for absolute beginners?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>5. What factor should influence your choice of first programming language?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>6. Name four of the seven essential programming concepts listed.</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>7. What common mistake do beginners make regarding programming languages?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>8. What is included in a development environment setup?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>9. What text editor is recommended for beginners and why?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>10. What approach does the article recommend for solving programming problems?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>11. How should programmers view errors and bugs according to the text?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>12. What quality makes Python particularly suitable for beginners?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>13. What advantage do online coding platforms offer to beginners?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>14. Why is attention to detail important in programming?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>15. What mindset traits do successful programmers cultivate?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>16. How can coding knowledge benefit non-programmers?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>17. What should you do when encountering error messages?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>18. What is the relationship between human thought and computer execution in programming?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>19. Why is coding literacy becoming increasingly important?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>20. What resources are mentioned for getting help with coding questions?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>21. What is the advantage of starting with fundamental concepts?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>22. How does JavaScript's position as "language of the web browser" benefit learners?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>23. What does the article say about the transferability of programming concepts?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>24. What is the significance of every character in programming code?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>25. How should beginners approach the development environment setup process?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>26. What is the "divide and conquer" approach to problem-solving?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>27. Why can't computers interpret ambiguous instructions?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>28. What does the article suggest about asking for help?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>29. How does programming enhance creativity according to the text?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>30. What is the relationship between programming languages and human-computer communication?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <button class="submit-btn" onclick="submitSurvey(this)">Submit Reading Test</button>
+                        
+                        <div class="success-animation">
+                            <i class="fas fa-check-circle" style="font-size: 3rem; color: var(--primary-color);"></i>
+                            <div class="percentage">85%</div>
+                            <p>Reading test submitted successfully! Great job on completing the beginner section.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="share-section">
+                        <button class="share-btn" onclick="shareArticle('beginner')">
+                            <i class="fas fa-share-alt"></i> Share This Article
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="skill-level">
+            <h2 class="section-title">Intermediate Coding</h2>
+            <div class="content-wrapper">
+                <div class="article-content">
+                    <h3>Building on Programming Fundamentals</h3>
+                    <p>Now that you've grasped the basics, it's time to level up your coding skills. This intermediate guide will introduce you to more complex concepts that will help you build robust, efficient applications and deepen your understanding of software development principles.</p>
+                    
+                    <h4>Data Structures: Organizing Information Efficiently</h4>
+                    <p>Understanding data structures is crucial for writing efficient, scalable code. While beginners work with basic collections like arrays, intermediate programmers need to understand the trade-offs between different data structures and when to use each one.</p>
+                    
+                    <p><strong>Arrays and Lists</strong> provide fast access to elements by index but can be inefficient for insertions and deletions in the middle. <strong>Linked Lists</strong> offer efficient insertions and deletions but slower access times. <strong>Stacks</strong> follow Last-In-First-Out (LIFO) principles, perfect for undo functionality or depth-first search algorithms. <strong>Queues</strong> implement First-In-First-Out (FIFO) behavior, ideal for task scheduling or breadth-first search.</p>
+                    
+                    <p>More complex structures like <strong>Hash Tables</strong> provide near-constant time lookups, making them excellent for dictionaries or caches. <strong>Trees</strong> organize data hierarchically, with binary search trees enabling efficient searching, insertion, and deletion. <strong>Graphs</strong> model relationships between entities, essential for social networks or mapping applications.</p>
+                    
+                    <p>Choosing the right data structure often means balancing time complexity (how fast operations are) against space complexity (how much memory is used). Understanding these trade-offs is a hallmark of intermediate programming skill.</p>
+                    
+                    <h4>Algorithms: Systematic Problem-Solving</h4>
+                    <p>Algorithms are step-by-step procedures for solving problems or performing computations. While beginners implement simple algorithms, intermediate programmers understand algorithmic complexity and can select or design algorithms appropriate for their specific use cases.</p>
+                    
+                    <p><strong>Searching algorithms</strong> like linear search (checking each element) and binary search (dividing the search space) demonstrate the dramatic difference between O(n) and O(log n) time complexity. <strong>Sorting algorithms</strong> including bubble sort, merge sort, and quicksort illustrate different approaches to organizing data, each with unique performance characteristics.</p>
+                    
+                    <p>Intermediate programmers also encounter <strong>graph algorithms</strong> like Dijkstra's algorithm for shortest path finding or topological sorting for dependency resolution. <strong>Dynamic programming</strong> techniques help solve complex problems by breaking them down into simpler subproblems, storing intermediate results to avoid redundant calculations.</p>
+                    
+                    <p>Understanding time and space complexity using Big O notation becomes essential at this level. This mathematical representation describes how an algorithm's resource requirements grow as input size increases, allowing you to predict performance at scale.</p>
+                    
+                    <h4>Object-Oriented Programming: Modeling the Real World</h4>
+                    <p>Object-Oriented Programming (OOP) is a paradigm that organizes code around objects rather than functions. The four main principles of OOP create modular, reusable, and maintainable code:</p>
+                    
+                    <ul>
+                        <li><strong>Encapsulation:</strong> Bundling data and methods that operate on that data within a single unit (object), controlling access through interfaces</li>
+                        <li><strong>Abstraction:</strong> Hiding complex implementation details and exposing only essential features</li>
+                        <li><strong>Inheritance:</strong> Creating new classes based on existing ones, promoting code reuse</li>
+                        <li><strong>Polymorphism:</strong> Allowing objects of different types to be treated as objects of a common supertype</li>
+                    </ul>
+                    
+                    <p>These principles work together to create software that's easier to understand, modify, and extend. Well-designed object-oriented systems model real-world entities and relationships, making the code more intuitive to work with.</p>
+                    
+                    <h4>Working with APIs: Connecting Systems</h4>
+                    <p>Application Programming Interfaces (APIs) allow different software applications to communicate with each other. Learning how to consume and design APIs is an essential skill for modern developers, enabling you to integrate third-party services into your applications and build systems that can evolve independently.</p>
+                    
+                    <p>REST (Representational State Transfer) has become the dominant architectural style for web APIs. RESTful APIs use standard HTTP methods (GET, POST, PUT, DELETE) to perform operations on resources identified by URLs. Understanding status codes, authentication methods, request/response formats, and rate limiting is crucial for effective API consumption.</p>
+                    
+                    <p>GraphQL presents an alternative to REST, allowing clients to request exactly the data they need in a single query. This can reduce over-fetching (getting more data than needed) and under-fetching (requiring multiple requests to get all necessary data).</p>
+                    
+                    <p>When working with APIs, you'll need to handle various concerns including error handling, caching, security, and documentation. Tools like Postman help test APIs during development, while libraries in your programming language simplify making HTTP requests and processing responses.</p>
+                    
+                    <h4>Version Control with Git: Collaboration and History</h4>
+                    <p>Git is a distributed version control system that tracks changes to your code over time. While beginners might use Git for basic backup, intermediate developers leverage its powerful features for collaboration, experimentation, and project management.</p>
+                    
+                    <p>Understanding branching and merging strategies becomes essential for team development. Feature branches allow developers to work on new functionality without disrupting the main codebase. Pull requests facilitate code review and discussion before changes are integrated. Understanding merge conflicts and how to resolve them is a critical skill.</p>
+                    
+                    <p>Intermediate Git users go beyond basic commit messages to create meaningful history that documents why changes were made, not just what changed. They use tags to mark important versions, stashing to temporarily save work, and rebasing to maintain a clean project history.</p>
+                    
+                    <p>Platforms like GitHub, GitLab, and Bitbucket extend Git with collaboration features including issue tracking, project management, continuous integration, and code review tools. Learning to use these platforms effectively is part of intermediate development skill.</p>
+                    
+                    <h4>Intermediate Debugging and Testing Techniques</h4>
+                    <p>While beginners might use simple print statements for debugging, intermediate programmers employ more sophisticated techniques. Debuggers allow you to pause execution, inspect variables, and step through code line by line. Logging provides a more structured approach to understanding program behavior over time.</p>
+                    
+                    <p>Testing becomes more systematic at the intermediate level. Unit tests verify individual components in isolation. Integration tests check how different parts of the system work together. Test-driven development (TDD), where you write tests before implementation code, can lead to better-designed, more reliable software.</p>
+                    
+                    <p>Understanding different testing frameworks in your language and learning to write meaningful tests that cover edge cases and potential failure points is an important intermediate skill. Tests not only catch bugs but also document expected behavior and facilitate refactoring.</p>
+                    
+                    <div class="survey-section">
+                        <h3 class="survey-title">Test Your Reading: Intermediate Section</h3>
+                        <p>Answer these questions to test how well you've understood the intermediate content. Each response must be at least 5 words.</p>
+                        
+                        <div class="survey-question">
+                            <p>1. What is the key difference between arrays and linked lists?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>2. According to the article, what makes hash tables particularly useful?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>3. What are the four main principles of object-oriented programming?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>4. How does abstraction benefit software development?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>5. What problem does GraphQL solve compared to REST APIs?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>6. What is the purpose of feature branches in Git?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>7. How do stacks and queues differ in their data access patterns?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>8. What is the relationship between time complexity and space complexity?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>9. What advantage does binary search have over linear search?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>10. How does polymorphism contribute to flexible code design?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>11. What are the standard HTTP methods used in RESTful APIs?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>12. How do pull requests facilitate collaboration in Git?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>13. What is the difference between unit tests and integration tests?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>14. What mathematical notation describes algorithmic complexity?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>15. How does encapsulation improve code maintainability?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>16. What are two common concerns when working with APIs?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>17. What advantage does test-driven development provide?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>18. How do trees organize data differently from graphs?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>19. What is the purpose of dynamic programming techniques?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>20. How do meaningful commit messages benefit project history?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>21. What is the relationship between objects and real-world entities in OOP?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>22. How does GraphQL reduce over-fetching and under-fetching?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>23. What is the difference between debugging with print statements versus using a debugger?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>24. How do inheritance and composition differ as code reuse mechanisms?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>25. What role do platforms like GitHub play in extending Git functionality?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>26. How does understanding Big O notation help with algorithm selection?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>27. What makes well-designed object-oriented systems more intuitive?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>28. How do RESTful APIs use HTTP methods to perform operations?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>29. What is the benefit of using stashing in Git?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>30. How do tests facilitate refactoring in software development?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <button class="submit-btn" onclick="submitSurvey(this)">Submit Reading Test</button>
+                        
+                        <div class="success-animation">
+                            <i class="fas fa-check-circle" style="font-size: 3rem; color: var(--primary-color);"></i>
+                            <div class="percentage">92%</div>
+                            <p>Reading test submitted successfully! Excellent work on the intermediate section.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="share-section">
+                        <button class="share-btn" onclick="shareArticle('intermediate')">
+                            <i class="fas fa-share-alt"></i> Share This Article
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="skill-level">
+            <h2 class="section-title">Advanced Coding</h2>
+            <div class="content-wrapper">
+                <div class="article-content">
+                    <h3>Mastering Complex Programming Concepts</h3>
+                    <p>Welcome to the advanced section, where we'll explore sophisticated programming concepts that separate intermediate developers from experts. These topics will challenge you to think deeply about software architecture, performance optimization, and the theoretical foundations that underpin modern software development.</p>
+                    
+                    <h4>Design Patterns: Proven Solutions to Common Problems</h4>
+                    <p>Design patterns are reusable solutions to common problems in software design. They represent best practices evolved over time by experienced developers. Rather than inventing solutions from scratch, recognizing and applying appropriate design patterns can significantly improve your ability to create scalable, maintainable systems.</p>
+                    
+                    <p><strong>Creational patterns</strong> deal with object creation mechanisms. The <strong>Singleton</strong> pattern ensures a class has only one instance, while the <strong>Factory Method</strong> and <strong>Abstract Factory</strong> patterns provide interfaces for creating families of related objects without specifying their concrete classes. The <strong>Builder</strong> pattern separates the construction of complex objects from their representation.</p>
+                    
+                    <p><strong>Structural patterns</strong> focus on how classes and objects are composed. The <strong>Adapter</strong> pattern allows incompatible interfaces to work together. The <strong>Decorator</strong> pattern dynamically adds responsibilities to objects. The <strong>Facade</strong> pattern provides a simplified interface to a complex subsystem.</p>
+                    
+                    <p><strong>Behavioral patterns</strong> address communication between objects. The <strong>Observer</strong> pattern defines a dependency between objects so when one changes state, all dependents are notified. The <strong>Strategy</strong> pattern defines a family of algorithms, encapsulates each one, and makes them interchangeable. The <strong>Command</strong> pattern encapsulates a request as an object.</p>
+                    
+                    <p>Understanding these patterns and knowing when to apply them—and equally importantly, when not to—is a key advanced skill. Patterns should be solutions to problems, not solutions looking for problems.</p>
+                    
+                    <h4>Concurrency and Parallelism: Managing Multiple Tasks</h4>
+                    <p>As applications grow more complex, efficiently handling multiple tasks simultaneously becomes crucial. While these terms are often used interchangeably, they represent distinct concepts:</p>
+                    
+                    <p><strong>Concurrency</strong> deals with managing multiple tasks at once, making progress on each in an interleaved fashion. Even on a single processor, concurrent programming allows an application to remain responsive while performing background operations.</p>
+                    
+                    <p><strong>Parallelism</strong> involves executing multiple tasks simultaneously, typically across multiple processors or cores. This can dramatically improve performance for computationally intensive tasks.</p>
+                    
+                    <p>Advanced concurrency concepts include <strong>thread synchronization</strong> mechanisms like mutexes, semaphores, and monitors that prevent race conditions. <strong>Deadlocks</strong> occur when two or more threads are blocked forever, each waiting for the other to release a resource. <strong>Starvation</strong> happens when a thread is unable to gain regular access to shared resources.</p>
+                    
+                    <p>Modern approaches to concurrency include <strong>actor models</strong> where independent entities communicate through message passing, and <strong>software transactional memory</strong> which applies database-like transactions to memory operations. Understanding these models helps you choose the right approach for your specific concurrency needs.</p>
+                    
+                    <h4>System Architecture: Designing Scalable Solutions</h4>
+                    <p>System architecture involves designing the overall structure of a software system. This includes decisions about how different components interact, data flow, scalability considerations, and technology choices. A well-designed architecture can make the difference between a successful project and a failed one.</p>
+                    
+                    <p><strong>Monolithic architecture</strong> builds the application as a single unified unit. While simpler to develop initially, monoliths can become difficult to maintain and scale as they grow. <strong>Microservices architecture</strong> decomposes an application into small, independently deployable services. This improves scalability and development velocity but introduces complexity in distributed systems.</p>
+                    
+                    <p><strong>Event-driven architecture</strong> uses events to trigger and communicate between decoupled services. This approach can create highly responsive and scalable systems but requires careful handling of event ordering and consistency.</p>
+                    
+                    <p>Architectural considerations extend to data storage strategies. <strong>Database partitioning</strong> divides large databases into smaller, more manageable pieces. <strong>Replication</strong> creates copies of data to improve availability and read performance. <strong>Caching strategies</strong> store frequently accessed data in fast memory to reduce latency.</p>
+                    
+                    <p>Advanced architects also consider <strong>fault tolerance</strong>—designing systems that continue operating properly in the event of component failures. Techniques include <strong>circuit breakers</strong> that prevent cascading failures and <strong>bulkheads</strong> that isolate failures to specific components.</p>
+                    
+                    <h4>Performance Optimization: From Good to Great</h4>
+                    <p>Advanced developers must understand how to identify and fix performance bottlenecks. This involves profiling code, understanding time and space complexity, database optimization, and leveraging caching strategies. Performance optimization is often what separates good software from great software.</p>
+                    
+                    <p><strong>Profiling tools</strong> help identify performance bottlenecks by measuring where time is spent during execution. <strong>Memory analysis</strong> tools detect memory leaks and inefficient memory usage. Understanding how to interpret these tools' output is essential for effective optimization.</p>
+                    
+                    <p>Database performance optimization includes proper <strong>indexing strategies</strong>, <strong>query optimization</strong>, and understanding the trade-offs between different <strong>database normalization levels</strong>. Knowing when to denormalize for performance versus maintaining normalization for data integrity is an advanced skill.</p>
+                    
+                    <p><strong>Algorithmic optimization</strong> focuses on selecting or designing algorithms with better time or space complexity. Sometimes replacing an O(n²) algorithm with an O(n log n) alternative can dramatically improve performance for large datasets.</p>
+                    
+                    <p><strong>System-level optimization</strong> considers the entire technology stack. This includes <strong>content delivery networks</strong> (CDNs) for static assets, <strong>load balancing</strong> strategies, and <strong>horizontal versus vertical scaling</strong> decisions. Understanding these system-wide concerns allows you to make architectural decisions that support performance goals.</p>
+                    
+                    <h4>Advanced Software Development Practices</h4>
+                    <p>Beyond technical concepts, advanced developers employ sophisticated development practices that improve software quality and team productivity.</p>
+                    
+                    <p><strong>Domain-Driven Design (DDD)</strong> aligns software implementation with business domains, creating a shared language between technical and business stakeholders. This approach leads to software that better models complex business problems.</p>
+                    
+                    <p><strong>Continuous Integration and Continuous Deployment (CI/CD)</strong> automate the process of integrating code changes and deploying software. Advanced CI/CD pipelines include automated testing, security scanning, performance testing, and canary deployments that gradually roll out changes to minimize risk.</p>
+                    
+                    <p><strong>Infrastructure as Code (IaC)</strong> manages and provisions computing infrastructure through machine-readable definition files rather than physical hardware configuration or interactive configuration tools. This approach enables version control for infrastructure and reproducible environments.</p>
+                    
+                    <p><strong>Observability</strong> goes beyond traditional monitoring to provide deeper insight into system behavior. This includes metrics, logging, and tracing that help understand not just what is happening in a system, but why it's happening.</p>
+                    
+                    <p>Mastering these advanced concepts and practices transforms developers into architects and technical leaders capable of designing and building systems that are not just functional, but scalable, maintainable, and efficient.</p>
+                    
+                    <div class="survey-section">
+                        <h3 class="survey-title">Test Your Reading: Advanced Section</h3>
+                        <p>Answer these questions to test how well you've understood the advanced content. Each response must be at least 5 words.</p>
+                        
+                        <div class="survey-question">
+                            <p>1. What is the fundamental purpose of design patterns?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>2. How does concurrency differ from parallelism?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>3. What are the three categories of design patterns mentioned?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>4. What problem does the Singleton pattern solve?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>5. How do microservices architecture and monolithic architecture differ?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>6. What are two synchronization mechanisms mentioned for concurrency?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>7. What is the difference between deadlock and starvation?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>8. How does event-driven architecture improve system responsiveness?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>9. What is the purpose of database partitioning?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>10. How do circuit breakers prevent cascading failures?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>11. What tools help identify performance bottlenecks?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>12. What is the trade-off in database normalization?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>13. How does algorithmic optimization improve performance?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>14. What is the benefit of Content Delivery Networks?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>15. How does Domain-Driven Design align technical and business concerns?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>16. What processes are automated in CI/CD pipelines?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>17. What advantage does Infrastructure as Code provide?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>18. How does observability differ from traditional monitoring?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>19. What caution does the article give about applying design patterns?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>20. How does the actor model approach concurrency?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>21. What architectural consideration improves system availability?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>22. How do bulkheads contribute to fault tolerance?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>23. What is the relationship between time complexity and algorithmic optimization?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>24. How does horizontal scaling differ from vertical scaling?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>25. What three elements comprise observability in systems?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>26. How can canary deployments minimize deployment risk?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>27. What problem does the Adapter pattern solve?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>28. How does software transactional memory handle concurrency?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>29. What is the purpose of data replication in databases?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <div class="survey-question">
+                            <p>30. How do advanced development practices transform developers?</p>
+                            <textarea class="response" placeholder="Enter your answer (minimum 5 words)"></textarea>
+                        </div>
+                        
+                        <button class="submit-btn" onclick="submitSurvey(this)">Submit Reading Test</button>
+                        
+                        <div class="success-animation">
+                            <i class="fas fa-check-circle" style="font-size: 3rem; color: var(--primary-color);"></i>
+                            <div class="percentage">78%</div>
+                            <p>Reading test submitted successfully! Impressive work on the advanced section.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="share-section">
+                        <button class="share-btn" onclick="shareArticle('advanced')">
+                            <i class="fas fa-share-alt"></i> Share This Article
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Code Skill</h3>
+                    <p>Simple coding guides with step-by-step learning and quick surveys.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Learning Paths</h3>
+                    <ul>
+                        <li><a href="#">Beginner</a></li>
+                        <li><a href="#">Intermediate</a></li>
+                        <li><a href="#">Advanced</a></li>
+                        <li><a href="#">Specialized Topics</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Connect With Us</h3>
+                    <ul>
+                        <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+                        <li><a href="#"><i class="fab fa-github"></i> GitHub</a></li>
+                        <li><a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
+                        <li><a href="#"><i class="fab fa-youtube"></i> YouTube</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Code Skill. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function submitSurvey(button) {
+            const surveySection = button.closest('.survey-section');
+            const textareas = surveySection.querySelectorAll('textarea');
+            let allValid = true;
+            
+            // Check if all responses have at least 5 words
+            textareas.forEach(textarea => {
+                const wordCount = textarea.value.trim().split(/\s+/).length;
+                if (wordCount < 5) {
+                    allValid = false;
+                    textarea.style.borderColor = 'red';
+                } else {
+                    textarea.style.borderColor = '';
+                }
+            });
+            
+            if (!allValid) {
+                alert('Please ensure all responses contain at least 5 words.');
+                return;
+            }
+            
+            // Show success animation
+            const successAnimation = surveySection.querySelector('.success-animation');
+            const percentageElement = successAnimation.querySelector('.percentage');
+            
+            // Generate random percentage between 50 and 100
+            const randomPercentage = Math.floor(Math.random() * 51) + 50;
+            percentageElement.textContent = randomPercentage + '%';
+            
+            successAnimation.style.display = 'block';
+            
+            // Clear textareas after 5 seconds
+            setTimeout(() => {
+                textareas.forEach(textarea => {
+                    textarea.value = '';
+                });
+                successAnimation.style.display = 'none';
+            }, 5000);
+        }
+        
+        function shareArticle(level) {
+            const url = `https://codeskill.netlify.app/#${level}`;
+            const title = `Code Skill - ${level.charAt(0).toUpperCase() + level.slice(1)} Coding Guide`;
+            
+            if (navigator.share) {
+                navigator.share({
+                    title: title,
+                    url: url
+                })
+                .then(() => console.log('Successful share'))
+                .catch((error) => console.log('Error sharing:', error));
+            } else {
+                // Fallback for browsers that don't support the Web Share API
+                navigator.clipboard.writeText(url)
+                    .then(() => {
+                        alert('Article link copied to clipboard!');
+                    })
+                    .catch(err => {
+                        console.error('Failed to copy: ', err);
+                    });
+            }
+        }
+    </script>
+</body>
+</html>
