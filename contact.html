@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - CodeSkill</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2e7d32;
+            --primary-light: #4caf50;
+            --primary-dark: #1b5e20;
+            --text-color: #333;
+            --light-bg: #f9f9f9;
+            --white: #ffffff;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--white);
+            box-shadow: var(--box-shadow);
+            padding: 15px 0;
+            position: relative;
+        }
+
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .logo-section {
+            width: 100%;
+        }
+
+        .logo-title-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-right: 12px;
+        }
+
+        .site-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-right: 10px;
+        }
+
+        .site-subtitle {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.4;
+            width: 100%;
+        }
+
+        /* Navigation */
+        .nav-toggle {
+            display: block;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            cursor: pointer;
+            z-index: 1001;
+            position: absolute;
+            top: 15px;
+            right: 15px;
+        }
+
+        .nav-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 85%;
+            max-width: 300px;
+            height: 100vh;
+            background-color: var(--white);
+            flex-direction: column;
+            padding: 70px 20px 20px;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            transition: right 0.3s;
+            z-index: 999;
+            overflow-y: auto;
+        }
+
+        .nav-menu.active {
+            display: flex;
+            right: 0;
+        }
+
+        .nav-menu li {
+            margin: 0 0 15px 0;
+            width: 100%;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            font-size: 1rem;
+            padding: 12px 15px;
+            border-radius: var(--border-radius);
+            background-color: #f5f5f5;
+        }
+
+        .nav-menu a i {
+            margin-right: 10px;
+            font-size: 1.1rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary-color);
+            background-color: #e8f5e9;
+        }
+
+        .nav-close {
+            display: block;
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        /* Main Content */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            margin: 25px 0;
+        }
+
+        .contact-section {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 20px;
+            width: 100%;
+        }
+
+        .page-title {
+            color: var(--primary-dark);
+            margin-bottom: 12px;
+            font-size: 1.8rem;
+            line-height: 1.3;
+            text-align: center;
+        }
+
+        .page-subtitle {
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            font-size: 1.2rem;
+            font-style: italic;
+            line-height: 1.4;
+            text-align: center;
+        }
+
+        .contact-content {
+            margin-bottom: 20px;
+        }
+
+        .contact-content h3 {
+            color: var(--primary-dark);
+            margin: 25px 0 15px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--primary-light);
+            font-size: 1.4rem;
+            line-height: 1.3;
+        }
+
+        .contact-content h4 {
+            color: var(--primary-dark);
+            margin: 20px 0 12px;
+            font-size: 1.2rem;
+            line-height: 1.3;
+        }
+
+        .contact-content p {
+            margin-bottom: 15px;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .contact-content ul, .contact-content ol {
+            margin: 15px 0 15px 25px;
+        }
+
+        .contact-content li {
+            margin-bottom: 10px;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        .contact-methods {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .contact-card {
+            background-color: #f9f9f9;
+            border-radius: var(--border-radius);
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .contact-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .contact-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--primary-dark);
+            margin-bottom: 10px;
+        }
+
+        .contact-description {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .email-box {
+            background-color: #e8f5e9;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            text-align: center;
+            margin: 20px 0;
+            border: 2px solid var(--primary-light);
+        }
+
+        .email-address {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--primary-dark);
+            margin: 15px 0;
+            word-break: break-all;
+        }
+
+        .copy-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+        }
+
+        .copy-btn:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .response-info {
+            background-color: #e3f2fd;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin: 25px 0;
+            text-align: center;
+        }
+
+        .faq-section {
+            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+            padding: 25px;
+            border-radius: var(--border-radius);
+            margin: 25px 0;
+            border: 1px solid #a5d6a7;
+        }
+
+        .faq-item {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .faq-question {
+            font-weight: 600;
+            color: var(--primary-dark);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .urgent-box {
+            background-color: #fff3e0;
+            border: 2px solid #ffb74d;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-dark);
+            color: white;
+            padding: 30px 0;
+            margin-top: 40px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .footer-section {
+            width: 100%;
+        }
+
+        .footer-title {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #a5d6a7;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 8px;
+        }
+
+        .footer-links a {
+            color: #e8f5e9;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .footer-links a:hover {
+            color: #a5d6a7;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid #4caf50;
+            color: #a5d6a7;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (min-width: 768px) {
+            .container {
+                max-width: 720px;
+                padding: 0 20px;
+            }
+            
+            .header-content {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+            
+            .logo-section {
+                width: auto;
+            }
+            
+            .logo-title-container {
+                margin-bottom: 0;
+            }
+            
+            .site-subtitle {
+                width: 100%;
+            }
+            
+            .nav-toggle {
+                display: none;
+            }
+            
+            .nav-menu {
+                display: flex;
+                position: static;
+                width: auto;
+                height: auto;
+                flex-direction: row;
+                padding: 0;
+                box-shadow: none;
+                background: transparent;
+            }
+            
+            .nav-menu li {
+                margin: 0 0 0 20px;
+                width: auto;
+            }
+            
+            .nav-menu a {
+                padding: 8px 12px;
+                background: transparent;
+                font-size: 0.9rem;
+            }
+            
+            .nav-close {
+                display: none;
+            }
+            
+            .contact-methods {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .footer-content {
+                flex-direction: row;
+            }
+            
+            .footer-section {
+                width: 33.33%;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .container {
+                max-width: 960px;
+            }
+            
+            .contact-methods {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .container {
+                max-width: 1140px;
+            }
+        }
+
+        /* Improve touch targets for mobile */
+        .nav-menu a, .copy-btn {
+            min-height: 44px;
+            align-items: center;
+        }
+
+        /* Prevent horizontal scrolling */
+        html, body {
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+        
+        /* Backdrop for mobile menu */
+        .menu-backdrop {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 998;
+        }
+        
+        .menu-backdrop.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Backdrop for mobile menu -->
+    <div class="menu-backdrop" id="menuBackdrop"></div>
+    
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-section">
+                    <div class="logo-title-container">
+                        <i class="fas fa-code logo"></i>
+                        <h1 class="site-title">CodeSkill</h1>
+                    </div>
+                    <p class="site-subtitle">CodeSkill offers free hands-on coding tutorials, practical projects, and problem-solving challenges, guiding beginners and advanced learners alike to master programming languages, build real applications, and develop skills step by step.</p>
+                </div>
+                
+                <button class="nav-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <ul class="nav-menu">
+                    <button class="nav-close">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="about.html"><i class="fas fa-info-circle"></i> About Us</a></li>
+                    <li><a href="contact.html" class="active"><i class="fas fa-envelope"></i> Contact Us</a></li>
+                    <li><a href="terms.html"><i class="fas fa-file-contract"></i> Terms of Service</a></li>
+                    <li><a href="#"><i class="fas fa-shield-alt"></i> Privacy Policy</a></li>
+                    <li><a href="#"><i class="fas fa-user-edit"></i> Writer</a></li>
+                    <li><a href="#"><i class="fas fa-bell"></i> Subscribe</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="main-content">
+            <div class="contact-section">
+                <h1 class="page-title">Get In Touch With CodeSkill</h1>
+                <p class="page-subtitle">We're here to help with any questions, problems, or partnership opportunities</p>
+                
+                <div class="contact-content">
+                    <div class="email-box">
+                        <i class="fas fa-envelope contact-icon"></i>
+                        <h3 class="contact-title">Primary Contact Email</h3>
+                        <p class="contact-description">For all inquiries, please reach out to our main email address:</p>
+                        <div class="email-address" id="emailAddress">theofficialbunch@gmail.com</div>
+                        <button class="copy-btn" id="copyEmailBtn">
+                            <i class="fas fa-copy"></i> Copy Email Address
+                        </button>
+                    </div>
+
+                    <h3>How We Can Help You</h3>
+                    <p>Whether you're stuck on a coding problem, have suggestions for improving our content, or want to explore partnership opportunities, we're here to listen and help. Our team is passionate about making coding education accessible and effective for everyone.</p>
+
+                    <div class="contact-methods">
+                        <div class="contact-card">
+                            <i class="fas fa-code contact-icon"></i>
+                            <div class="contact-title">Technical Support</div>
+                            <div class="contact-description">
+                                <p>Having trouble with our tutorials, code examples, or platform functionality? We'll help you get unstuck and back to learning.</p>
+                                <ul style="text-align: left; margin-top: 10px;">
+                                    <li>Bug reports</li>
+                                    <li>Code not working</li>
+                                    <li>Platform issues</li>
+                                    <li>Browser compatibility</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="contact-card">
+                            <i class="fas fa-lightbulb contact-icon"></i>
+                            <div class="contact-title">Content Suggestions</div>
+                            <div class="contact-description">
+                                <p>Have ideas for new tutorials, projects, or learning resources? We're always looking for ways to improve and expand our content.</p>
+                                <ul style="text-align: left; margin-top: 10px;">
+                                    <li>New tutorial topics</li>
+                                    <li>Project ideas</li>
+                                    <li>Learning path suggestions</li>
+                                    <li>Content improvements</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="contact-card">
+                            <i class="fas fa-handshake contact-icon"></i>
+                            <div class="contact-title">Partnerships</div>
+                            <div class="contact-description">
+                                <p>Interested in collaborating, sponsoring content, or exploring business opportunities? Let's discuss how we can work together.</p>
+                                <ul style="text-align: left; margin-top: 10px;">
+                                    <li>Content partnerships</li>
+                                    <li>Sponsorship opportunities</li>
+                                    <li>Educational collaborations</li>
+                                    <li>Business development</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="response-info">
+                        <h3>What to Expect When You Contact Us</h3>
+                        <p>We're committed to providing timely and helpful responses to all inquiries:</p>
+                        <ul>
+                            <li><strong>Response Time:</strong> We aim to respond to all emails within 24-48 hours</li>
+                            <li><strong>Technical Support:</strong> Coding problems typically get responses within 12-24 hours</li>
+                            <li><strong>Weekends:</strong> We monitor emails on weekends but response times may be slightly longer</li>
+                            <li><strong>Detailed Help:</strong> We provide thorough, step-by-step assistance for technical issues</li>
+                        </ul>
+                    </div>
+
+                    <div class="urgent-box">
+                        <h3><i class="fas fa-exclamation-triangle"></i> Urgent Technical Issues</h3>
+                        <p>If you're experiencing a critical issue that prevents you from using CodeSkill (like being unable to access your account or complete tutorials), please include <strong>"[URGENT]"</strong> in your email subject line. We prioritize these requests and will respond as quickly as possible.</p>
+                    </div>
+
+                    <h3>How to Write an Effective Support Request</h3>
+                    <p>To help us assist you more efficiently, please include the following information in your email:</p>
+                    
+                    <div class="contact-card">
+                        <h4>For Technical Issues:</h4>
+                        <ul>
+                            <li><strong>Detailed description</strong> of the problem you're experiencing</li>
+                            <li><strong>Steps to reproduce</strong> the issue</li>
+                            <li><strong>Browser and version</strong> you're using</li>
+                            <li><strong>Device type</strong> (desktop, tablet, mobile)</li>
+                            <li><strong>Screenshots or error messages</strong> if applicable</li>
+                        </ul>
+                    </div>
+
+                    <div class="contact-card">
+                        <h4>For Content Suggestions:</h4>
+                        <ul>
+                            <li><strong>Specific topic or concept</strong> you'd like covered</li>
+                            <li><strong>Why this would be helpful</strong> for learners</li>
+                            <li><strong>Any related resources</strong> you've found useful</li>
+                            <li><strong>Your skill level</strong> (beginner, intermediate, advanced)</li>
+                        </ul>
+                    </div>
+
+                    <div class="contact-card">
+                        <h4>For Partnership Inquiries:</h4>
+                        <ul>
+                            <li><strong>Your organization or company</strong> name</li>
+                            <li><strong>Nature of proposed partnership</strong></li>
+                            <li><strong>How you see CodeSkill fitting in</strong></li>
+                            <li><strong>Your contact information</strong> and availability</li>
+                        </ul>
+                    </div>
+
+                    <div class="faq-section">
+                        <h3>Frequently Asked Questions</h3>
+                        
+                        <div class="faq-item">
+                            <div class="faq-question">How long does it typically take to get a response?</div>
+                            <p>Most emails receive a response within 24 hours. Technical support questions often get faster responses (12-24 hours), while partnership inquiries might take slightly longer as they're reviewed by our team.</p>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question">Do you offer one-on-one coding help?</div>
+                            <p>While we can't provide extensive one-on-one tutoring through email, we're happy to help with specific problems you encounter in our tutorials or suggest additional resources for concepts you're struggling with.</p>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question">Can I contribute tutorials or content to CodeSkill?</div>
+                            <p>Absolutely! We're always open to content collaborations. Please email us with your background, topic ideas, and writing samples, and we'll discuss potential opportunities.</p>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question">Do you offer certificates for completing courses?</div>
+                            <p>Currently, we focus on providing free, high-quality educational content. While we don't offer formal certificates, the skills and projects you build through our tutorials are valuable additions to your portfolio.</p>
+                        </div>
+                    </div>
+
+                    <div class="email-box">
+                        <h3>Ready to Get in Touch?</h3>
+                        <p>Don't hesitate to reach out with any questions, suggestions, or problems you're facing. We're here to support your coding journey every step of the way.</p>
+                        <div class="email-address">theofficialbunch@gmail.com</div>
+                        <button class="copy-btn" id="copyEmailBtnBottom">
+                            <i class="fas fa-copy"></i> Copy Email Address
+                        </button>
+                    </div>
+
+                    <p style="text-align: center; margin-top: 30px; font-style: italic;">We believe that every coding problem has a solution, and we're committed to helping you find yours. Your feedback and questions make CodeSkill better for everyone in our learning community.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-title">CodeSkill</h3>
+                    <p>Free hands-on coding tutorials, practical projects, and problem-solving challenges for all skill levels.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3 class="footer-title">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3 class="footer-title">Legal</h3>
+                    <ul class="footer-links">
+                        <li><a href="terms.html">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 CodeSkill. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Navigation Toggle
+        const navToggle = document.querySelector('.nav-toggle');
+        const navMenu = document.querySelector('.nav-menu');
+        const navClose = document.querySelector('.nav-close');
+        const menuBackdrop = document.getElementById('menuBackdrop');
+        
+        navToggle.addEventListener('click', () => {
+            navMenu.classList.add('active');
+            menuBackdrop.classList.add('active');
+            navToggle.style.display = 'none'; // Hide the menu icon
+            document.body.style.overflow = 'hidden';
+        });
+        
+        navClose.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+            menuBackdrop.classList.remove('active');
+            navToggle.style.display = 'block'; // Show the menu icon again
+            document.body.style.overflow = '';
+        });
+        
+        menuBackdrop.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+            menuBackdrop.classList.remove('active');
+            navToggle.style.display = 'block'; // Show the menu icon again
+            document.body.style.overflow = '';
+        });
+        
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                menuBackdrop.classList.remove('active');
+                navToggle.style.display = 'block'; // Show the menu icon again
+                document.body.style.overflow = '';
+            });
+        });
+
+        // Copy email functionality
+        const copyEmailBtn = document.getElementById('copyEmailBtn');
+        const copyEmailBtnBottom = document.getElementById('copyEmailBtnBottom');
+        const emailAddress = document.getElementById('emailAddress').textContent;
+
+        function copyEmailToClipboard() {
+            navigator.clipboard.writeText(emailAddress).then(() => {
+                // Change button text temporarily
+                const originalText = copyEmailBtn.innerHTML;
+                copyEmailBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                copyEmailBtnBottom.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                
+                setTimeout(() => {
+                    copyEmailBtn.innerHTML = originalText;
+                    copyEmailBtnBottom.innerHTML = originalText;
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy email: ', err);
+                alert('Failed to copy email address. Please copy it manually: ' + emailAddress);
+            });
+        }
+
+        copyEmailBtn.addEventListener('click', copyEmailToClipboard);
+        copyEmailBtnBottom.addEventListener('click', copyEmailToClipboard);
+    </script>
+</body>
+</html>
