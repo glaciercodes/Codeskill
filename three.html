@@ -1,0 +1,1463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algorithm Thinking - CodeSkill</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2e7d32;
+            --primary-light: #4caf50;
+            --primary-dark: #1b5e20;
+            --text-color: #333;
+            --light-bg: #f9f9f9;
+            --white: #ffffff;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--white);
+            box-shadow: var(--box-shadow);
+            padding: 15px 0;
+            position: relative;
+        }
+
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .logo-section {
+            width: 100%;
+        }
+
+        .logo-title-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-right: 12px;
+        }
+
+        .site-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-right: 10px;
+        }
+
+        .site-subtitle {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.4;
+            width: 100%;
+        }
+
+        /* Navigation */
+        .nav-toggle {
+            display: block;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            cursor: pointer;
+            z-index: 1001;
+            position: absolute;
+            top: 15px;
+            right: 15px;
+        }
+
+        .nav-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 85%;
+            max-width: 300px;
+            height: 100vh;
+            background-color: var(--white);
+            flex-direction: column;
+            padding: 70px 20px 20px;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            transition: right 0.3s;
+            z-index: 999;
+            overflow-y: auto;
+        }
+
+        .nav-menu.active {
+            display: flex;
+            right: 0;
+        }
+
+        .nav-menu li {
+            margin: 0 0 15px 0;
+            width: 100%;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            font-size: 1rem;
+            padding: 12px 15px;
+            border-radius: var(--border-radius);
+            background-color: #f5f5f5;
+        }
+
+        .nav-menu a i {
+            margin-right: 10px;
+            font-size: 1.1rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary-color);
+            background-color: #e8f5e9;
+        }
+
+        .nav-close {
+            display: block;
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        /* Main Content */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            margin: 25px 0;
+        }
+
+        .articles-section {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 20px;
+            width: 100%;
+        }
+
+        .article {
+            margin-bottom: 35px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .article:last-child {
+            border-bottom: none;
+        }
+
+        .article-title {
+            color: var(--primary-dark);
+            margin-bottom: 12px;
+            font-size: 1.6rem;
+            line-height: 1.3;
+        }
+
+        .article-subtitle {
+            color: var(--primary-color);
+            margin-bottom: 18px;
+            font-size: 1.1rem;
+            font-style: italic;
+            line-height: 1.4;
+        }
+
+        .article-content {
+            margin-bottom: 20px;
+        }
+
+        .article-content h3 {
+            color: var(--primary-dark);
+            margin: 20px 0 12px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--primary-light);
+            font-size: 1.3rem;
+            line-height: 1.3;
+        }
+
+        .article-content p {
+            margin-bottom: 12px;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .article-content ul, .article-content ol {
+            margin: 12px 0 12px 20px;
+        }
+
+        .article-content li {
+            margin-bottom: 6px;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        .step-by-step {
+            background-color: #f5f5f5;
+            border-left: 4px solid var(--primary-color);
+            padding: 18px;
+            margin: 18px 0;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+
+        .step {
+            margin-bottom: 12px;
+            display: flex;
+        }
+
+        .step-number {
+            background-color: var(--primary-color);
+            color: white;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            flex-shrink: 0;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .step-content {
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .visualization {
+            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+            padding: 18px;
+            border-radius: var(--border-radius);
+            margin: 18px 0;
+            border: 1px solid #a5d6a7;
+        }
+
+        .visualization h4 {
+            color: var(--primary-dark);
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .visualization p {
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .code-block {
+            background-color: #2d2d2d;
+            color: #f8f8f2;
+            padding: 12px;
+            border-radius: var(--border-radius);
+            margin: 12px 0;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+
+        .code-comment {
+            color: #6a9955;
+        }
+
+        .code-keyword {
+            color: #569cd6;
+        }
+
+        .code-function {
+            color: #dcdcaa;
+        }
+
+        .code-string {
+            color: #ce9178;
+        }
+
+        .diagram {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: var(--border-radius);
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+            overflow-x: auto;
+        }
+
+        .diagram-box {
+            display: inline-block;
+            background-color: var(--primary-light);
+            color: white;
+            padding: 10px 15px;
+            margin: 5px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+
+        .diagram-arrow {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            margin: 0 5px;
+        }
+
+        .exercise-section {
+            background-color: #f0f7f0;
+            padding: 18px;
+            border-radius: var(--border-radius);
+            margin: 25px 0;
+        }
+
+        .exercise-title {
+            color: var(--primary-dark);
+            margin-bottom: 12px;
+            font-size: 1.2rem;
+        }
+
+        .question {
+            margin-bottom: 18px;
+            padding: 15px;
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .question p {
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 12px 0;
+        }
+
+        .option {
+            display: flex;
+            align-items: flex-start;
+            padding: 12px 15px;
+            background-color: var(--white);
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        .option:hover {
+            background-color: #f0f0f0;
+            border-color: var(--primary-light);
+        }
+
+        .option input {
+            margin-right: 10px;
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+
+        .submit-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            margin-top: 15px;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .submit-btn:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+
+        .validation-error {
+            color: #d32f2f;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            display: none;
+            text-align: center;
+            padding: 10px;
+            background-color: #ffebee;
+            border-radius: var(--border-radius);
+        }
+
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            display: none;
+        }
+
+        .loading-dots {
+            display: flex;
+            gap: 10px;
+        }
+
+        .dot {
+            width: 18px;
+            height: 18px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            animation: bounce 1.4s infinite ease-in-out both;
+        }
+
+        .dot:nth-child(1) {
+            animation-delay: -0.32s;
+        }
+
+        .dot:nth-child(2) {
+            animation-delay: -0.16s;
+        }
+
+        @keyframes bounce {
+            0%, 80%, 100% {
+                transform: scale(0);
+            }
+            40% {
+                transform: scale(1);
+            }
+        }
+
+        .results-section {
+            margin-top: 18px;
+            padding: 18px;
+            background-color: #e8f5e9;
+            border-radius: var(--border-radius);
+            display: none;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .action-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .share-btn, .download-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 20px;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+            width: 100%;
+        }
+
+        .share-btn {
+            background-color: #e3f2fd;
+            color: #1976d2;
+            border: 1px solid #bbdefb;
+        }
+
+        .download-btn {
+            background-color: #e8f5e9;
+            color: var(--primary-color);
+            border: 1px solid #c8e6c9;
+        }
+
+        .share-btn:hover {
+            background-color: #bbdefb;
+        }
+
+        .download-btn:hover {
+            background-color: #c8e6c9;
+        }
+
+        .action-buttons i {
+            margin-right: 8px;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 20px;
+            width: 100%;
+            order: -1;
+        }
+
+        .writer-info {
+            text-align: center;
+            padding-bottom: 18px;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 18px;
+        }
+
+        .writer-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary-dark);
+            margin-bottom: 5px;
+        }
+
+        .writer-link {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .last-updated {
+            font-size: 0.9rem;
+            color: #777;
+            margin-bottom: 12px;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 12px;
+        }
+
+        .social-icons a {
+            color: var(--primary-color);
+            font-size: 1.3rem;
+            transition: color 0.3s;
+        }
+
+        .social-icons a:hover {
+            color: var(--primary-dark);
+        }
+
+        .sidebar-section {
+            margin-bottom: 25px;
+        }
+
+        .sidebar-title {
+            color: var(--primary-dark);
+            margin-bottom: 12px;
+            font-size: 1.2rem;
+        }
+
+        .sidebar-links {
+            list-style: none;
+        }
+
+        .sidebar-links li {
+            margin-bottom: 10px;
+        }
+
+        .sidebar-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+            transition: color 0.3s;
+            font-size: 1rem;
+            padding: 10px 0;
+        }
+
+        .sidebar-links a i {
+            margin-right: 10px;
+            color: var(--primary-color);
+            width: 20px;
+            text-align: center;
+        }
+
+        .sidebar-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-dark);
+            color: white;
+            padding: 30px 0;
+            margin-top: 40px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .footer-section {
+            width: 100%;
+        }
+
+        .footer-title {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #a5d6a7;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 8px;
+        }
+
+        .footer-links a {
+            color: #e8f5e9;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .footer-links a:hover {
+            color: #a5d6a7;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid #4caf50;
+            color: #a5d6a7;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (min-width: 768px) {
+            .container {
+                max-width: 720px;
+                padding: 0 20px;
+            }
+            
+            .header-content {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+            
+            .logo-section {
+                width: auto;
+            }
+            
+            .logo-title-container {
+                margin-bottom: 0;
+            }
+            
+            .site-subtitle {
+                width: 100%;
+            }
+            
+            .nav-toggle {
+                display: none;
+            }
+            
+            .nav-menu {
+                display: flex;
+                position: static;
+                width: auto;
+                height: auto;
+                flex-direction: row;
+                padding: 0;
+                box-shadow: none;
+                background: transparent;
+            }
+            
+            .nav-menu li {
+                margin: 0 0 0 20px;
+                width: auto;
+            }
+            
+            .nav-menu a {
+                padding: 8px 12px;
+                background: transparent;
+                font-size: 0.9rem;
+            }
+            
+            .nav-close {
+                display: none;
+            }
+            
+            .main-content {
+                flex-direction: row;
+            }
+            
+            .articles-section {
+                width: 70%;
+            }
+            
+            .sidebar {
+                width: 30%;
+                order: 0;
+            }
+            
+            .action-buttons {
+                flex-direction: row;
+            }
+            
+            .share-btn, .download-btn {
+                width: auto;
+            }
+            
+            .submit-btn {
+                width: auto;
+            }
+            
+            .footer-content {
+                flex-direction: row;
+            }
+            
+            .footer-section {
+                width: 33.33%;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .container {
+                max-width: 960px;
+            }
+            
+            .articles-section {
+                width: 75%;
+            }
+            
+            .sidebar {
+                width: 25%;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .container {
+                max-width: 1140px;
+            }
+        }
+
+        /* Improve touch targets for mobile */
+        .option, .submit-btn, .share-btn, .download-btn, .nav-menu a {
+            min-height: 44px;
+        }
+        
+        .nav-menu a, .sidebar-links a {
+            min-height: 44px;
+            align-items: center;
+        }
+
+        /* Prevent horizontal scrolling */
+        html, body {
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+        
+        /* Backdrop for mobile menu */
+        .menu-backdrop {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 998;
+        }
+        
+        .menu-backdrop.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Backdrop for mobile menu -->
+    <div class="menu-backdrop" id="menuBackdrop"></div>
+    
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-section">
+                    <div class="logo-title-container">
+                        <i class="fas fa-code logo"></i>
+                        <h1 class="site-title">CodeSkill</h1>
+                    </div>
+                    <p class="site-subtitle">CodeSkill offers free hands-on coding tutorials, practical projects, and problem-solving challenges, guiding beginners and advanced learners alike to master programming languages, build real applications, and develop skills step by step.</p>
+                </div>
+                
+                <button class="nav-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <ul class="nav-menu">
+                    <button class="nav-close">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="about.html"><i class="fas fa-info-circle"></i> About Us</a></li>
+                    <li><a href="#"><i class="fas fa-envelope"></i> Contact Us</a></li>
+                    <li><a href="#"><i class="fas fa-file-contract"></i> Terms of Service</a></li>
+                    <li><a href="#"><i class="fas fa-shield-alt"></i> Privacy Policy</a></li>
+                    <li><a href="#"><i class="fas fa-user-edit"></i> Writer</a></li>
+                    <li><a href="#"><i class="fas fa-bell"></i> Subscribe</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="main-content">
+            <div class="articles-section">
+                <!-- Algorithm Thinking Article -->
+                <article class="article" id="algorithm-thinking">
+                    <h2 class="article-title">Algorithm Thinking - Solve Problems with Efficient Code Patterns</h2>
+                    <p class="article-subtitle">Stop brute-forcing solutions - learn to think like a computer scientist!</p>
+                    
+                    <div class="article-content">
+                        <h3>What Algorithm Thinking Really Means</h3>
+                        <p>When I first heard the word "algorithm," I imagined complex mathematical formulas that only geniuses could understand. But here's the secret: algorithms are just recipes for solving problems efficiently.</p>
+                        
+                        <p>Think about making a peanut butter sandwich. You could:</p>
+                        <ul>
+                            <li>Grab bread, then peanut butter, then knife (efficient)</li>
+                            <li>Run to the store for bread, come back, realize you need peanut butter, go back to store... (inefficient)</li>
+                        </ul>
+                        
+                        <p>Algorithm thinking is about choosing the first approach over the second when writing code. It's not about being smart - it's about being strategic.</p>
+                        
+                        <div class="visualization">
+                            <h4>The Algorithm Mindset Shift</h4>
+                            <p><strong>Instead of:</strong> "How can I make this work?"<br>
+                            <strong>Think:</strong> "What's the most efficient way to solve this problem?"</p>
+                            <p>This small change transforms you from a coder who makes things work to a developer who makes things work well.</p>
+                        </div>
+                        
+                        <h3>Why Algorithm Thinking Matters More Than You Think</h3>
+                        <p>I used to believe that as long as my code worked, I was done. Then I built an app that took 30 seconds to load a simple list of users. My code "worked" - but it was practically unusable.</p>
+                        
+                        <p>Here's the reality: in the real world, efficiency isn't optional. Users abandon websites that take more than 3 seconds to load. Companies pay for server time - inefficient code costs real money.</p>
+                        
+                        <div class="code-block">
+                            <span class="code-comment">// Inefficient approach - checking every item</span><br>
+                            <span class="code-keyword">function</span> <span class="code-function">findUser</span>(users, targetId) {<br>
+                            &nbsp;&nbsp;<span class="code-keyword">for</span> (<span class="code-keyword">let</span> i = 0; i < users.length; i++) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">if</span> (users[i].id === targetId) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">return</span> users[i];<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                            &nbsp;&nbsp;}<br>
+                            &nbsp;&nbsp;<span class="code-keyword">return</span> <span class="code-keyword">null</span>;<br>
+                            }<br><br>
+                            
+                            <span class="code-comment">// Efficient approach - using a Map (if you have many lookups)</span><br>
+                            <span class="code-keyword">const</span> userMap = <span class="code-keyword">new</span> Map();<br>
+                            users.<span class="code-function">forEach</span>(user => userMap.<span class="code-function">set</span>(user.id, user));<br>
+                            <span class="code-keyword">function</span> <span class="code-function">findUserFast</span>(targetId) {<br>
+                            &nbsp;&nbsp;<span class="code-keyword">return</span> userMap.<span class="code-function">get</span>(targetId);<br>
+                            }
+                        </div>
+                        
+                        <p>The first approach works fine for 10 users. But for 10,000 users? The second approach is hundreds of times faster.</p>
+                        
+                        <h3>The Four Algorithm Thinking Patterns You'll Use Every Day</h3>
+                        <p>After years of coding, I've noticed that most efficient solutions use one of these four patterns:</p>
+                        
+                        <div class="step-by-step">
+                            <h3>Pattern 1: Divide and Conquer</h3>
+                            <div class="step">
+                                <div class="step-number">1</div>
+                                <div class="step-content"><strong>Break the problem into smaller pieces</strong> - Like sorting a deck of cards by first separating them by suit</div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">2</div>
+                                <div class="step-content"><strong>Solve each piece independently</strong> - Sort each suit separately</div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">3</div>
+                                <div class="step-content"><strong>Combine the solutions</strong> - Put the sorted suits together</div>
+                            </div>
+                        </div>
+                        
+                        <div class="code-block">
+                            <span class="code-comment">// Classic example: Merge Sort (divide and conquer)</span><br>
+                            <span class="code-keyword">function</span> <span class="code-function">mergeSort</span>(arr) {<br>
+                            &nbsp;&nbsp;<span class="code-keyword">if</span> (arr.length <= 1) <span class="code-keyword">return</span> arr;<br>
+                            &nbsp;&nbsp;<br>
+                            &nbsp;&nbsp;<span class="code-comment">// Divide</span><br>
+                            &nbsp;&nbsp;<span class="code-keyword">const</span> mid = Math.<span class="code-function">floor</span>(arr.length / 2);<br>
+                            &nbsp;&nbsp;<span class="code-keyword">const</span> left = arr.<span class="code-function">slice</span>(0, mid);<br>
+                            &nbsp;&nbsp;<span class="code-keyword">const</span> right = arr.<span class="code-function">slice</span>(mid);<br>
+                            &nbsp;&nbsp;<br>
+                            &nbsp;&nbsp;<span class="code-comment">// Conquer (recursively sort)</span><br>
+                            &nbsp;&nbsp;<span class="code-keyword">return</span> <span class="code-function">merge</span>(<span class="code-function">mergeSort</span>(left), <span class="code-function">mergeSort</span>(right));<br>
+                            }
+                        </div>
+                        
+                        <div class="step-by-step">
+                            <h3>Pattern 2: Sliding Window</h3>
+                            <div class="step">
+                                <div class="step-number">1</div>
+                                <div class="step-content"><strong>Maintain a "window" of elements</strong> - Like looking at products through a store window</div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">2</div>
+                                <div class="step-content"><strong>Slide the window through your data</strong> - Move to see different products</div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">3</div>
+                                <div class="step-content"><strong>Update efficiently as you go</strong> - Only change what's new in the window</div>
+                            </div>
+                        </div>
+                        
+                        <p>This pattern is perfect for problems like "find the longest substring without repeating characters" or "calculate maximum average of any contiguous subarray."</p>
+                        
+                        <div class="diagram">
+                            <h4>Sliding Window Visualization</h4>
+                            <div class="diagram-box">A</div>
+                            <div class="diagram-box">B</div>
+                            <div class="diagram-box" style="background-color: var(--primary-dark);">C</div>
+                            <div class="diagram-box" style="background-color: var(--primary-dark);">D</div>
+                            <div class="diagram-box" style="background-color: var(--primary-dark);">E</div>
+                            <div class="diagram-box">F</div>
+                            <div class="diagram-box">G</div>
+                            <p>Window size: 3 | Current window: C, D, E</p>
+                        </div>
+                        
+                        <h3>How to Develop Your Algorithm Thinking Skills</h3>
+                        <p>Becoming good at algorithms isn't about memorizing solutions - it's about developing a problem-solving mindset. Here's how I improved:</p>
+                        
+                        <ol>
+                            <li><strong>Start with the brute force solution first</strong> - Get something working, then ask "how can this be better?"</li>
+                            <li><strong>Look for patterns</strong> - Does this problem remind you of something you've solved before?</li>
+                            <li><strong>Consider the data</strong> - Is it sorted? Can it be sorted? What's the size?</li>
+                            <li><strong>Think about time vs space</strong> - Can you make it faster by using more memory?</li>
+                        </ol>
+                        
+                        <div class="visualization">
+                            <h4>Algorithm Thinking Process</h4>
+                            <p><strong>1. Understand the problem</strong> - Restate it in your own words<br>
+                            <strong>2. Identify input/output</strong> - What goes in, what comes out?<br>
+                            <strong>3. Consider edge cases</strong> - Empty input? Large input?<br>
+                            <strong>4. Brute force first</strong> - Get a working solution<br>
+                            <strong>5. Optimize</strong> - Look for inefficiencies and patterns</p>
+                        </div>
+                        
+                        <h3>Common Algorithm Mistakes (And How to Avoid Them)</h3>
+                        <p>We all make these mistakes when starting with algorithms:</p>
+                        
+                        <p><strong>Mistake 1: Premature Optimization</strong><br>
+                        Don't try to write the most efficient code right away. Get it working first, then make it fast. I've wasted hours trying to optimize code that didn't even work yet!</p>
+                        
+                        <p><strong>Mistake 2: Ignoring Edge Cases</strong><br>
+                        Your algorithm works for the example input? Great! Now test it with empty arrays, single items, very large inputs, and unexpected values.</p>
+                        
+                        <p><strong>Mistake 3: Overcomplicating Simple Problems</strong><br>
+                        Sometimes the simple solution is the best one. Don't use a complex algorithm when a simple loop would work fine for your use case.</p>
+                        
+                        <div class="code-block">
+                            <span class="code-comment">// Sometimes simple is better than "clever"</span><br>
+                            <span class="code-comment">// For small arrays, this is perfectly fine:</span><br>
+                            <span class="code-keyword">function</span> <span class="code-function">findMax</span>(arr) {<br>
+                            &nbsp;&nbsp;<span class="code-keyword">let</span> max = arr[0];<br>
+                            &nbsp;&nbsp;<span class="code-keyword">for</span> (<span class="code-keyword">let</span> i = 1; i < arr.length; i++) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">if</span> (arr[i] > max) max = arr[i];<br>
+                            &nbsp;&nbsp;}<br>
+                            &nbsp;&nbsp;<span class="code-keyword">return</span> max;<br>
+                            }<br><br>
+                            
+                            <span class="code-comment">// No need for anything more complex unless you have specific requirements!</span>
+                        </div>
+                        
+                        <h3>Practical Exercise: Thinking Through a Real Problem</h3>
+                        <p>Let's apply algorithm thinking to a common interview question: "Find if two numbers in an array add up to a target sum."</p>
+                        
+                        <div class="step-by-step">
+                            <h3>Problem-Solving Process</h3>
+                            <div class="step">
+                                <div class="step-number">1</div>
+                                <div class="step-content"><strong>Brute force approach</strong> - Check every pair of numbers. This works but is slow (O(n²) time)</div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">2</div>
+                                <div class="step-content"><strong>Look for patterns</strong> - For each number, we're looking for (target - current number)</div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">3</div>
+                                <div class="step-content"><strong>Optimize</strong> - Use a Set to remember numbers we've seen, check if complement exists</div>
+                            </div>
+                        </div>
+                        
+                        <div class="code-block">
+                            <span class="code-comment">// Efficient solution using a Set</span><br>
+                            <span class="code-keyword">function</span> <span class="code-function">hasTwoSum</span>(nums, target) {<br>
+                            &nbsp;&nbsp;<span class="code-keyword">const</span> seen = <span class="code-keyword">new</span> Set();<br>
+                            &nbsp;&nbsp;<br>
+                            &nbsp;&nbsp;<span class="code-keyword">for</span> (<span class="code-keyword">const</span> num <span class="code-keyword">of</span> nums) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">const</span> complement = target - num;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">if</span> (seen.<span class="code-function">has</span>(complement)) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">return</span> <span class="code-keyword">true</span>;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;seen.<span class="code-function">add</span>(num);<br>
+                            &nbsp;&nbsp;}<br>
+                            &nbsp;&nbsp;<br>
+                            &nbsp;&nbsp;<span class="code-keyword">return</span> <span class="code-keyword">false</span>;<br>
+                            }
+                        </div>
+                        
+                        <p>See how we went from a slow but working solution to a fast, elegant one by applying algorithm thinking?</p>
+                        
+                        <div class="visualization">
+                            <h4>Key Takeaway</h4>
+                            <p>Algorithm thinking isn't about being a math genius. It's about developing a systematic approach to problem-solving that considers efficiency from the start. Start with what works, then ask "how can this be better?"</p>
+                            <p>The best algorithm thinkers aren't the ones who know the most solutions - they're the ones who ask the best questions about the problem.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="exercise-section">
+                        <h3 class="exercise-title">Test Your Algorithm Thinking</h3>
+                        <div class="question">
+                            <p>1. What is the main goal of algorithm thinking?</p>
+                            <div class="options">
+                                <label class="option">
+                                    <input type="radio" name="q1" value="a"> 
+                                    <span>To solve problems in the most efficient way possible</span>
+                                </label>
+                                <label class="option">
+                                    <input type="radio" name="q1" value="b"> 
+                                    <span>To write the most complex code possible</span>
+                                </label>
+                                <label class="option">
+                                    <input type="radio" name="q1" value="c"> 
+                                    <span>To memorize as many algorithms as possible</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="question">
+                            <p>2. What should you do first when approaching a new coding problem?</p>
+                            <div class="options">
+                                <label class="option">
+                                    <input type="radio" name="q2" value="a"> 
+                                    <span>Write the most efficient solution immediately</span>
+                                </label>
+                                <label class="option">
+                                    <input type="radio" name="q2" value="b"> 
+                                    <span>Get a working solution first, then optimize</span>
+                                </label>
+                                <label class="option">
+                                    <input type="radio" name="q2" value="c"> 
+                                    <span>Look up the solution online</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="question">
+                            <p>3. Which algorithm pattern involves breaking a problem into smaller pieces?</p>
+                            <div class="options">
+                                <label class="option">
+                                    <input type="radio" name="q3" value="a"> 
+                                    <span>Divide and Conquer</span>
+                                </label>
+                                <label class="option">
+                                    <input type="radio" name="q3" value="b"> 
+                                    <span>Sliding Window</span>
+                                </label>
+                                <label class="option">
+                                    <input type="radio" name="q3" value="c"> 
+                                    <span>Brute Force</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="question">
+                            <p>4. Why is considering edge cases important in algorithm design?</p>
+                            <div class="options">
+                                <label class="option">
+                                    <input type="radio" name="q4" value="a"> 
+                                    <span>It ensures your algorithm works in all scenarios, not just the happy path</span>
+                                </label>
+                                <label class="option">
+                                    <input type="radio" name="q4" value="b"> 
+                                    <span>It makes your code more complex</span>
+                                </label>
+                                <label class="option">
+                                    <input type="radio" name="q4" value="c"> 
+                                    <span>It's only important for interview questions</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="question">
+                            <p>5. What data structure would you use to quickly check if you've seen a number before?</p>
+                            <div class="options">
+                                <label class="option">
+                                    <input type="radio" name="q5" value="a"> 
+                                    <span>Set</span>
+                                </label>
+                                <label class="option">
+                                    <input type="radio" name="q5" value="b"> 
+                                    <span>Array</span>
+                                </label>
+                                <label class="option">
+                                    <input type="radio" name="q5" value="c"> 
+                                    <span>String</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="question">
+                            <p>6. When is a simple solution better than a complex algorithm?</p>
+                            <div class="options">
+                                <label class="option">
+                                    <input type="radio" name="q6" value="a"> 
+                                    <span>When the data size is small and the simple solution is readable</span>
+                                </label>
+                                <label class="option">
+                                    <input type="radio" name="q6" value="b"> 
+                                    <span>Always - complex algorithms are never better</span>
+                                </label>
+                                <label class="option">
+                                    <input type="radio" name="q6" value="c"> 
+                                    <span>Only in personal projects, never in professional work</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="question">
+                            <p>7. What is the "sliding window" pattern useful for?</p>
+                            <div class="options">
+                                <label class="option">
+                                    <input type="radio" name="q7" value="a"> 
+                                    <span>Problems involving contiguous subarrays or substrings</span>
+                                </label>
+                                <label class="option">
+                                    <input type="radio" name="q7" value="b"> 
+                                    <span>Sorting large datasets</span>
+                                </label>
+                                <label class="option">
+                                    <input type="radio" name="q7" value="c"> 
+                                    <span>Storing data in databases</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="question">
+                            <p>8. What should you consider when choosing between different algorithms?</p>
+                            <div class="options">
+                                <label class="option">
+                                    <input type="radio" name="q8" value="a"> 
+                                    <span>Time complexity, space complexity, and readability</span>
+                                </label>
+                                <label class="option">
+                                    <input type="radio" name="q8" value="b"> 
+                                    <span>Which one uses the newest programming features</span>
+                                </label>
+                                <label class="option">
+                                    <input type="radio" name="q8" value="c"> 
+                                    <span>Which one your favorite programmer uses</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="question">
+                            <p>9. Why is algorithm thinking important in real-world development?</p>
+                            <div class="options">
+                                <label class="option">
+                                    <input type="radio" name="q9" value="a"> 
+                                    <span>Efficient code saves time, money, and provides better user experience</span>
+                                </label>
+                                <label class="option">
+                                    <input type="radio" name="q9" value="b"> 
+                                    <span>It's only important for passing technical interviews</span>
+                                </label>
+                                <label class="option">
+                                    <input type="radio" name="q9" value="c"> 
+                                    <span>It makes your code look more impressive</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="question">
+                            <p>10. What's the first step in developing algorithm thinking skills?</p>
+                            <div class="options">
+                                <label class="option">
+                                    <input type="radio" name="q10" value="a"> 
+                                    <span>Practice breaking down problems and looking for patterns</span>
+                                </label>
+                                <label class="option">
+                                    <input type="radio" name="q10" value="b"> 
+                                    <span>Memorize all common algorithms</span>
+                                </label>
+                                <label class="option">
+                                    <input type="radio" name="q10" value="c"> 
+                                    <span>Learn advanced mathematics</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <button class="submit-btn" data-article="algorithm">Check My Answers</button>
+                        <div class="validation-error" id="validation-algorithm">Please answer all questions before submitting.</div>
+                        <div class="results-section" id="results-algorithm"></div>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button class="share-btn"><i class="fas fa-share-alt"></i> Share This Article</button>
+                        <button class="download-btn"><i class="fas fa-download"></i> Download Article</button>
+                    </div>
+                </article>
+            </div>
+            
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div class="writer-info">
+                    <h3 class="writer-name"><a href="#" class="writer-link">Mike Adenuga</a></h3>
+                    <p class="last-updated">Last updated: June 18, 2023</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title">Quick Links</h3>
+                    <ul class="sidebar-links">
+                        <li><a href="index.html"><i class="fas fa-arrow-right"></i> Project-based Tutorials</a></li>
+                        <li><a href="#"><i class="fas fa-arrow-right"></i> Debugging & Problem Solving</a></li>
+                        <li><a href="#"><i class="fas fa-arrow-right"></i> Algorithm Visualizations</a></li>
+                        <li><a href="#"><i class="fas fa-arrow-right"></i> Mini Coding Challenges</a></li>
+                        <li><a href="#"><i class="fas fa-arrow-right"></i> Integrating APIs</a></li>
+                    </ul>
+                </div>
+                
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title">Algorithm Resources</h3>
+                    <ul class="sidebar-links">
+                        <li><a href="#"><i class="fas fa-book"></i> Common Patterns</a></li>
+                        <li><a href="#"><i class="fas fa-code"></i> Practice Problems</a></li>
+                        <li><a href="#"><i class="fas fa-chart-bar"></i> Complexity Guide</a></li>
+                        <li><a href="#"><i class="fas fa-lightbulb"></i> Thinking Exercises</a></li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-title">CodeSkill</h3>
+                    <p>Free hands-on coding tutorials, practical projects, and problem-solving challenges for all skill levels.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3 class="footer-title">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3 class="footer-title">Legal</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 CodeSkill. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-dots">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile Navigation Toggle
+        const navToggle = document.querySelector('.nav-toggle');
+        const navMenu = document.querySelector('.nav-menu');
+        const navClose = document.querySelector('.nav-close');
+        const menuBackdrop = document.getElementById('menuBackdrop');
+        
+        navToggle.addEventListener('click', () => {
+            navMenu.classList.add('active');
+            menuBackdrop.classList.add('active');
+            navToggle.style.display = 'none'; // Hide the menu icon
+            document.body.style.overflow = 'hidden';
+        });
+        
+        navClose.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+            menuBackdrop.classList.remove('active');
+            navToggle.style.display = 'block'; // Show the menu icon again
+            document.body.style.overflow = '';
+        });
+        
+        menuBackdrop.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+            menuBackdrop.classList.remove('active');
+            navToggle.style.display = 'block'; // Show the menu icon again
+            document.body.style.overflow = '';
+        });
+        
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                menuBackdrop.classList.remove('active');
+                navToggle.style.display = 'block'; // Show the menu icon again
+                document.body.style.overflow = '';
+            });
+        });
+        
+        // Quiz Validation and Submission
+        const submitButtons = document.querySelectorAll('.submit-btn');
+        const loadingScreen = document.getElementById('loadingScreen');
+        
+        submitButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const articleId = this.getAttribute('data-article');
+                const validationError = document.getElementById(`validation-${articleId}`);
+                const resultsSection = document.getElementById(`results-${articleId}`);
+                
+                // Check if all questions are answered
+                const questions = document.querySelectorAll(`#${articleId}-thinking .question`);
+                let allAnswered = true;
+                
+                questions.forEach((question, index) => {
+                    const questionNumber = index + 1;
+                    const selectedOption = question.querySelector('input[type="radio"]:checked');
+                    if (!selectedOption) {
+                        allAnswered = false;
+                    }
+                });
+                
+                if (!allAnswered) {
+                    validationError.style.display = 'block';
+                    resultsSection.style.display = 'none';
+                    return;
+                }
+                
+                // Hide validation error if all questions are answered
+                validationError.style.display = 'none';
+                
+                // Show loading screen
+                loadingScreen.style.display = 'flex';
+                
+                // Simulate processing time
+                setTimeout(() => {
+                    // Hide loading screen
+                    loadingScreen.style.display = 'none';
+                    
+                    // Show results
+                    if (articleId === "algorithm") {
+                        resultsSection.innerHTML = `
+                            <h3>Algorithm Thinking Quiz Results</h3>
+                            <p>Question 1: Correct answer is <strong>A - To solve problems in the most efficient way possible</strong></p>
+                            <p>Question 2: Correct answer is <strong>B - Get a working solution first, then optimize</strong></p>
+                            <p>Question 3: Correct answer is <strong>A - Divide and Conquer</strong></p>
+                            <p>Question 4: Correct answer is <strong>A - It ensures your algorithm works in all scenarios, not just the happy path</strong></p>
+                            <p>Question 5: Correct answer is <strong>A - Set</strong></p>
+                            <p>Question 6: Correct answer is <strong>A - When the data size is small and the simple solution is readable</strong></p>
+                            <p>Question 7: Correct answer is <strong>A - Problems involving contiguous subarrays or substrings</strong></p>
+                            <p>Question 8: Correct answer is <strong>A - Time complexity, space complexity, and readability</strong></p>
+                            <p>Question 9: Correct answer is <strong>A - Efficient code saves time, money, and provides better user experience</strong></p>
+                            <p>Question 10: Correct answer is <strong>A - Practice breaking down problems and looking for patterns</strong></p>
+                            <p>Excellent! You're developing the mindset of an algorithm thinker!</p>
+                        `;
+                    }
+                    resultsSection.style.display = 'block';
+                    
+                    // Scroll to results
+                    resultsSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }, 2000);
+            });
+        });
+        
+        // Share button functionality
+        const shareButtons = document.querySelectorAll('.share-btn');
+        shareButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                if (navigator.share) {
+                    navigator.share({
+                        title: 'CodeSkill - Algorithm Thinking',
+                        text: 'Check out this article on algorithm thinking and efficient code patterns!',
+                        url: window.location.href,
+                    })
+                    .catch(error => console.log('Error sharing:', error));
+                } else {
+                    alert('Share functionality not available in your browser. Copy the URL to share.');
+                }
+            });
+        });
+        
+        // Download button functionality
+        const downloadButtons = document.querySelectorAll('.download-btn');
+        downloadButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                alert('Article download feature would be implemented here. In a real application, this would generate a PDF or text file of the article content.');
+            });
+        });
+    </script>
+</body>
+</html>
