@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation - CodeSkill</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2e7d32;
+            --primary-light: #4caf50;
+            --primary-dark: #1b5e20;
+            --text-color: #333;
+            --light-bg: #f9f9f9;
+            --white: #ffffff;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--white);
+            box-shadow: var(--box-shadow);
+            padding: 15px 0;
+            position: relative;
+        }
+
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .logo-section {
+            width: 100%;
+        }
+
+        .logo-title-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-right: 12px;
+        }
+
+        .site-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-right: 10px;
+        }
+
+        .site-subtitle {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.4;
+            width: 100%;
+        }
+
+        /* Navigation */
+        .nav-toggle {
+            display: block;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            cursor: pointer;
+            z-index: 1001;
+            position: absolute;
+            top: 15px;
+            right: 15px;
+        }
+
+        .nav-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 85%;
+            max-width: 300px;
+            height: 100vh;
+            background-color: var(--white);
+            flex-direction: column;
+            padding: 70px 20px 20px;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            transition: right 0.3s;
+            z-index: 999;
+            overflow-y: auto;
+        }
+
+        .nav-menu.active {
+            display: flex;
+            right: 0;
+        }
+
+        .nav-menu li {
+            margin: 0 0 15px 0;
+            width: 100%;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            font-size: 1rem;
+            padding: 12px 15px;
+            border-radius: var(--border-radius);
+            background-color: #f5f5f5;
+        }
+
+        .nav-menu a i {
+            margin-right: 10px;
+            font-size: 1.1rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary-color);
+            background-color: #e8f5e9;
+        }
+
+        .nav-close {
+            display: block;
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        /* Main Content */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            margin: 25px 0;
+        }
+
+        .docs-section {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 20px;
+            width: 100%;
+        }
+
+        .page-title {
+            color: var(--primary-dark);
+            margin-bottom: 12px;
+            font-size: 1.8rem;
+            line-height: 1.3;
+            text-align: center;
+        }
+
+        .page-subtitle {
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            font-size: 1.2rem;
+            font-style: italic;
+            line-height: 1.4;
+            text-align: center;
+        }
+
+        .docs-content {
+            margin-bottom: 20px;
+        }
+
+        .docs-content h3 {
+            color: var(--primary-dark);
+            margin: 25px 0 15px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--primary-light);
+            font-size: 1.4rem;
+            line-height: 1.3;
+        }
+
+        .docs-content p {
+            margin-bottom: 15px;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .docs-content ul, .docs-content ol {
+            margin: 15px 0 15px 25px;
+        }
+
+        .docs-content li {
+            margin-bottom: 10px;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        .info-box {
+            background-color: #f0f7f0;
+            border-left: 4px solid var(--primary-color);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+
+        .warning-box {
+            background-color: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+
+        .code-block {
+            background-color: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: var(--border-radius);
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+
+        .code-comment {
+            color: #6a9955;
+        }
+
+        .code-keyword {
+            color: #569cd6;
+        }
+
+        .code-function {
+            color: #dcdcaa;
+        }
+
+        .code-string {
+            color: #ce9178;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .feature-item {
+            background-color: #f9f9f9;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .feature-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--primary-dark);
+            margin-bottom: 10px;
+        }
+
+        .quick-links {
+            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+            padding: 25px;
+            border-radius: var(--border-radius);
+            margin: 25px 0;
+            border: 1px solid #a5d6a7;
+        }
+
+        .quick-links h3 {
+            color: var(--primary-dark);
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .quick-links-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+
+        .quick-link-item {
+            background-color: var(--white);
+            padding: 15px;
+            border-radius: var(--border-radius);
+            text-align: center;
+        }
+
+        .quick-link-item a {
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: 600;
+            display: block;
+            padding: 10px;
+        }
+
+        .quick-link-item a:hover {
+            background-color: #e8f5e9;
+            border-radius: var(--border-radius);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-dark);
+            color: white;
+            padding: 30px 0;
+            margin-top: 40px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .footer-section {
+            width: 100%;
+        }
+
+        .footer-title {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #a5d6a7;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 8px;
+        }
+
+        .footer-links a {
+            color: #e8f5e9;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .footer-links a:hover {
+            color: #a5d6a7;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid #4caf50;
+            color: #a5d6a7;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (min-width: 768px) {
+            .container {
+                max-width: 720px;
+                padding: 0 20px;
+            }
+            
+            .header-content {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+            
+            .logo-section {
+                width: auto;
+            }
+            
+            .logo-title-container {
+                margin-bottom: 0;
+            }
+            
+            .site-subtitle {
+                width: 100%;
+            }
+            
+            .nav-toggle {
+                display: none;
+            }
+            
+            .nav-menu {
+                display: flex;
+                position: static;
+                width: auto;
+                height: auto;
+                flex-direction: row;
+                padding: 0;
+                box-shadow: none;
+                background: transparent;
+            }
+            
+            .nav-menu li {
+                margin: 0 0 0 20px;
+                width: auto;
+            }
+            
+            .nav-menu a {
+                padding: 8px 12px;
+                background: transparent;
+                font-size: 0.9rem;
+            }
+            
+            .nav-close {
+                display: none;
+            }
+            
+            .feature-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .quick-links-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .footer-content {
+                flex-direction: row;
+            }
+            
+            .footer-section {
+                width: 33.33%;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .container {
+                max-width: 960px;
+            }
+            
+            .feature-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .quick-links-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .container {
+                max-width: 1140px;
+            }
+        }
+
+        /* Improve touch targets for mobile */
+        .nav-menu a {
+            min-height: 44px;
+            align-items: center;
+        }
+
+        /* Prevent horizontal scrolling */
+        html, body {
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+        
+        /* Backdrop for mobile menu */
+        .menu-backdrop {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 998;
+        }
+        
+        .menu-backdrop.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Backdrop for mobile menu -->
+    <div class="menu-backdrop" id="menuBackdrop"></div>
+    
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-section">
+                    <div class="logo-title-container">
+                        <i class="fas fa-code logo"></i>
+                        <h1 class="site-title">CodeSkill</h1>
+                    </div>
+                    <p class="site-subtitle">CodeSkill offers free hands-on coding tutorials, practical projects, and problem-solving challenges, guiding beginners and advanced learners alike to master programming languages, build real applications, and develop skills step by step.</p>
+                </div>
+                
+                <button class="nav-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <ul class="nav-menu">
+                    <button class="nav-close">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="about.html"><i class="fas fa-info-circle"></i> About Us</a></li>
+                    <li><a href="#"><i class="fas fa-envelope"></i> Contact Us</a></li>
+                    <li><a href="#"><i class="fas fa-file-contract"></i> Terms of Service</a></li>
+                    <li><a href="#"><i class="fas fa-shield-alt"></i> Privacy Policy</a></li>
+                    <li><a href="documentation.html" class="active"><i class="fas fa-book"></i> Documentation</a></li>
+                    <li><a href="#"><i class="fas fa-bell"></i> Subscribe</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="main-content">
+            <div class="docs-section">
+                <h1 class="page-title">CodeSkill Documentation</h1>
+                <p class="page-subtitle">Your complete guide to mastering programming with our problem-first approach</p>
+                
+                <div class="docs-content">
+                    <h3>Welcome to CodeSkill Documentation</h3>
+                    <p>If you're tired of coding tutorials that feel disconnected from real-world problems, you've come to the right place. This documentation isn't just a reference guide - it's your roadmap to becoming a confident, practical programmer who can actually build things that work.</p>
+                    
+                    <div class="info-box">
+                        <p><strong>Quick Tip:</strong> Don't try to read this documentation from start to finish like a textbook. Use it as a reference when you encounter specific problems in your coding journey. That's how we designed it to be used!</p>
+                    </div>
+                    
+                    <h3>How Our Learning System Works</h3>
+                    <p>Traditional coding education often follows what I call the "textbook approach" - you learn concepts in isolation, then hope you can somehow connect them later. At CodeSkill, we've flipped this model completely:</p>
+                    
+                    <div class="feature-grid">
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-bug"></i>
+                            </div>
+                            <div class="feature-title">Problem-First Learning</div>
+                            <p>We start with real coding problems you'll actually encounter, then teach the concepts needed to solve them.</p>
+                        </div>
+                        
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-puzzle-piece"></i>
+                            </div>
+                            <div class="feature-title">Contextual Understanding</div>
+                            <p>You learn why concepts matter by seeing them solve immediate, tangible problems in your projects.</p>
+                        </div>
+                        
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-code-branch"></i>
+                            </div>
+                            <div class="feature-title">Progressive Complexity</div>
+                            <p>We build skills gradually, starting with small solvable problems and working up to complex challenges.</p>
+                        </div>
+                    </div>
+                    
+                    <h3>Getting Started: Your First Week</h3>
+                    <p>I know that feeling of staring at a blank code editor, wondering where to even begin. Here's a battle-tested approach for your first week with CodeSkill:</p>
+                    
+                    <ol>
+                        <li><strong>Day 1: Build Something (Anything!)</strong> - Don't worry about best practices or perfect code. Just build a simple calculator or to-do list. The goal is to get comfortable with the process of turning ideas into code.</li>
+                        
+                        <li><strong>Day 2-3: Embrace the Mess</strong> - Your first projects will be messy. That's perfect! Now you have specific problems to solve: "Why does my button sometimes not work?" or "How do I make this look better on mobile?"</li>
+                        
+                        <li><strong>Day 4-5: Solve One Specific Problem</strong> - Pick one annoying issue from your messy project and use our documentation to solve it. Maybe it's handling user input errors or making your layout responsive.</li>
+                        
+                        <li><strong>Day 6-7: Refactor and Learn</strong> - Now that you've solved the immediate problem, go back and improve your code. This is where the real learning happens.</li>
+                    </ol>
+                    
+                    <div class="warning-box">
+                        <p><strong>Common Mistake to Avoid:</strong> Don't fall into "tutorial hell" by watching endless videos without building anything. The magic happens when you're actively solving problems, not passively consuming content.</p>
+                    </div>
+                    
+                    <h3>Our Core Learning Paths</h3>
+                    <p>We've organized our content around the actual problems developers face, not abstract programming concepts. Here's how to navigate our learning paths:</p>
+                    
+                    <div class="quick-links">
+                        <h3>Quick Navigation</h3>
+                        <div class="quick-links-grid">
+                            <div class="quick-link-item">
+                                <a href="#project-tutorials">Project-Based Tutorials</a>
+                            </div>
+                            <div class="quick-link-item">
+                                <a href="#debugging">Debugging & Problem Solving</a>
+                            </div>
+                            <div class="quick-link-item">
+                                <a href="#algorithms">Algorithm Visualizations</a>
+                            </div>
+                            <div class="quick-link-item">
+                                <a href="#challenges">Coding Challenges</a>
+                            </div>
+                            <div class="quick-link-item">
+                                <a href="#apis">API Integration</a>
+                            </div>
+                            <div class="quick-link-item">
+                                <a href="#best-practices">Best Practices</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h3 id="project-tutorials">Project-Based Tutorials: Learning by Building</h3>
+                    <p>This is where most beginners should start. Instead of learning abstract concepts, you'll build real projects and encounter real problems along the way.</p>
+                    
+                    <p><strong>How to approach project tutorials:</strong></p>
+                    <ul>
+                        <li><strong>Don't just copy code</strong> - Type everything out yourself. Your fingers need to learn the patterns</li>
+                        <li><strong>Break things on purpose</strong> - What happens if you change this variable? Remove this line? Breaking code teaches you how it works</li>
+                        <li><strong>Add your own features</strong> - Once the basic project works, try adding one small feature we didn't cover</li>
+                    </ul>
+                    
+                    <div class="code-block">
+                        <span class="code-comment">// Example: The moment you realize why functions matter</span><br>
+                        <span class="code-comment">// Without functions - repetitive code</span><br>
+                        <span class="code-keyword">let</span> user1Score = 85;<br>
+                        <span class="code-keyword">let</span> user1Grade = <span class="code-string">""</span>;<br>
+                        <span class="code-keyword">if</span> (user1Score >= 90) user1Grade = <span class="code-string">"A"</span>;<br>
+                        <span class="code-keyword">else if</span> (user1Score >= 80) user1Grade = <span class="code-string">"B"</span>;<br>
+                        <span class="code-comment">// Repeat for user2, user3, user4...</span><br><br>
+                        
+                        <span class="code-comment">// With functions - reusable code</span><br>
+                        <span class="code-keyword">function</span> <span class="code-function">calculateGrade</span>(score) {<br>
+                        &nbsp;&nbsp;<span class="code-keyword">if</span> (score >= 90) <span class="code-keyword">return</span> <span class="code-string">"A"</span>;<br>
+                        &nbsp;&nbsp;<span class="code-keyword">else if</span> (score >= 80) <span class="code-keyword">return</span> <span class="code-string">"B"</span>;<br>
+                        &nbsp;&nbsp;<span class="code-comment">// ... and so on</span><br>
+                        }<br>
+                        <span class="code-keyword">let</span> user1Grade = <span class="code-function">calculateGrade</span>(85);
+                    </div>
+                    
+                    <h3 id="debugging">Debugging & Problem Solving: Becoming a Code Detective</h3>
+                    <p>Professional developers spend most of their time debugging, not writing new code. This section teaches you how to think like a developer when things go wrong.</p>
+                    
+                    <p><strong>The Debugging Mindset:</strong></p>
+                    <ul>
+                        <li><strong>Assume you're wrong, not the computer</strong> - The computer is always doing exactly what you told it to do</li>
+                        <li><strong>Isolate the problem</strong> - Use the "binary search" method to narrow down where the bug is hiding</li>
+                        <li><strong>Read error messages carefully</strong> - They're not random text; they're clues written specifically for you</li>
+                    </ul>
+                    
+                    <h3 id="algorithms">Algorithm Visualizations: Seeing the Invisible</h3>
+                    <p>Algorithms can feel abstract until you see them in action. Our visualizations help you develop intuition for how different algorithms behave.</p>
+                    
+                    <p><strong>How to use algorithm visualizations effectively:</strong></p>
+                    <ol>
+                        <li>Watch the visualization without trying to understand everything</li>
+                        <li>Notice patterns - what's happening to the data at each step?</li>
+                        <li>Try to predict what will happen next</li>
+                        <li>Only then read the technical explanation</li>
+                    </ol>
+                    
+                    <h3 id="challenges">Coding Challenges: Building Your Problem-Solving Muscles</h3>
+                    <p>These aren't academic exercises - they're carefully designed problems that mirror what you'll encounter in real development work.</p>
+                    
+                    <div class="info-box">
+                        <p><strong>Pro Tip:</strong> When you get stuck on a challenge, set a timer for 25 minutes. If you haven't made progress when it goes off, take a 5-minute break. This prevents frustration and often leads to breakthroughs.</p>
+                    </div>
+                    
+                    <h3 id="apis">API Integration: Connecting Your Apps to the World</h3>
+                    <p>Modern apps don't exist in isolation. This section teaches you how to make your applications talk to other services and data sources.</p>
+                    
+                    <p><strong>Common API integration patterns:</strong></p>
+                    <ul>
+                        <li><strong>Fetching data</strong> - Getting information from external services</li>
+                        <li><strong>Error handling</strong> - What to do when APIs are down or return unexpected data</li>
+                        <li><strong>Authentication</strong> - Securely accessing protected resources</li>
+                        <li><strong>Rate limiting</strong> - Working within API usage constraints</li>
+                    </ul>
+                    
+                    <h3 id="best-practices">Best Practices: Writing Code That Doesn't Haunt You</h3>
+                    <p>We don't just teach you how to make code work - we teach you how to write code that you (and others) can understand and maintain months later.</p>
+                    
+                    <p><strong>Code quality principles we emphasize:</strong></p>
+                    <ul>
+                        <li><strong>Readability over cleverness</strong> - Write code that's easy to understand, not code that shows off</li>
+                        <li><strong>Consistent naming</strong> - Your variable and function names should reveal their purpose</li>
+                        <li><strong>Small, focused functions</strong> - Each function should do one thing well</li>
+                        <li><strong>Comment why, not what</strong> - The code shows what it does; comments should explain why</li>
+                    </ul>
+                    
+                    <div class="code-block">
+                        <span class="code-comment">// Bad: What does this even do?</span><br>
+                        <span class="code-keyword">function</span> <span class="code-function">proc</span>(a, b) {<br>
+                        &nbsp;&nbsp;<span class="code-keyword">return</span> a > b ? a : b;<br>
+                        }<br><br>
+                        
+                        <span class="code-comment">// Good: Clear purpose and naming</span><br>
+                        <span class="code-keyword">function</span> <span class="code-function">getHigherScore</span>(currentScore, newScore) {<br>
+                        &nbsp;&nbsp;<span class="code-comment">// Returns the higher of two scores for game progress tracking</span><br>
+                        &nbsp;&nbsp;<span class="code-keyword">return</span> currentScore > newScore ? currentScore : newScore;<br>
+                        }
+                    </div>
+                    
+                    <h3>Getting Help When You're Stuck</h3>
+                    <p>Every developer gets stuck - it's not a sign of failure, it's part of the learning process. Here's our recommended approach:</p>
+                    
+                    <ol>
+                        <li><strong>Try to solve it yourself first</strong> - Struggle for at least 15-30 minutes. This builds problem-solving muscles.</li>
+                        <li><strong>Use the rubber duck method</strong> - Explain your problem out loud to a rubber duck (or patient friend). Often, the act of explaining reveals the solution.</li>
+                        <li><strong>Check our documentation</strong> - Search for the specific error message or problem you're facing.</li>
+                        <li><strong>Take a break</strong> - Sometimes the best solution is to step away and come back with fresh eyes.</li>
+                        <li><strong>Ask for help</strong> - Use our community forums or contact support. Be specific about what you've tried and what's not working.</li>
+                    </ol>
+                    
+                    <div class="info-box">
+                        <p><strong>Remember:</strong> The goal isn't to never get stuck - it's to develop effective strategies for getting unstuck. This is one of the most valuable skills you'll develop as a programmer.</p>
+                    </div>
+                    
+                    <h3>Your Learning Journey Ahead</h3>
+                    <p>Learning to code is a marathon, not a sprint. Some days everything will click, and other days you'll feel like you've forgotten everything. This is completely normal.</p>
+                    
+                    <p>The most successful learners aren't the ones who never struggle - they're the ones who keep going when things get difficult. They understand that confusion is often a sign that real learning is happening.</p>
+                    
+                    <p>Use this documentation as your companion on this journey. Return to it when you encounter specific problems. Bookmark sections that resonate with your current challenges. And most importantly, keep building, keep breaking things, and keep solving problems.</p>
+                    
+                    <p>Welcome to the CodeSkill community. We're excited to see what you'll build!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-title">CodeSkill</h3>
+                    <p>Free hands-on coding tutorials, practical projects, and problem-solving challenges for all skill levels.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3 class="footer-title">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="documentation.html">Documentation</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3 class="footer-title">Legal</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 CodeSkill. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Navigation Toggle
+        const navToggle = document.querySelector('.nav-toggle');
+        const navMenu = document.querySelector('.nav-menu');
+        const navClose = document.querySelector('.nav-close');
+        const menuBackdrop = document.getElementById('menuBackdrop');
+        
+        navToggle.addEventListener('click', () => {
+            navMenu.classList.add('active');
+            menuBackdrop.classList.add('active');
+            navToggle.style.display = 'none'; // Hide the menu icon
+            document.body.style.overflow = 'hidden';
+        });
+        
+        navClose.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+            menuBackdrop.classList.remove('active');
+            navToggle.style.display = 'block'; // Show the menu icon again
+            document.body.style.overflow = '';
+        });
+        
+        menuBackdrop.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+            menuBackdrop.classList.remove('active');
+            navToggle.style.display = 'block'; // Show the menu icon again
+            document.body.style.overflow = '';
+        });
+        
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                menuBackdrop.classList.remove('active');
+                navToggle.style.display = 'block'; // Show the menu icon again
+                document.body.style.overflow = '';
+            });
+        });
+    </script>
+</body>
+</html>
