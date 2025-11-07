@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - CodeSkill</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2e7d32;
+            --primary-light: #4caf50;
+            --primary-dark: #1b5e20;
+            --text-color: #333;
+            --light-bg: #f9f9f9;
+            --white: #ffffff;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--white);
+            box-shadow: var(--box-shadow);
+            padding: 15px 0;
+            position: relative;
+        }
+
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .logo-section {
+            width: 100%;
+        }
+
+        .logo-title-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-right: 12px;
+        }
+
+        .site-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-right: 10px;
+        }
+
+        .site-subtitle {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.4;
+            width: 100%;
+        }
+
+        /* Navigation */
+        .nav-toggle {
+            display: block;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            cursor: pointer;
+            z-index: 1001;
+            position: absolute;
+            top: 15px;
+            right: 15px;
+        }
+
+        .nav-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 85%;
+            max-width: 300px;
+            height: 100vh;
+            background-color: var(--white);
+            flex-direction: column;
+            padding: 70px 20px 20px;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            transition: right 0.3s;
+            z-index: 999;
+            overflow-y: auto;
+        }
+
+        .nav-menu.active {
+            display: flex;
+            right: 0;
+        }
+
+        .nav-menu li {
+            margin: 0 0 15px 0;
+            width: 100%;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            font-size: 1rem;
+            padding: 12px 15px;
+            border-radius: var(--border-radius);
+            background-color: #f5f5f5;
+        }
+
+        .nav-menu a i {
+            margin-right: 10px;
+            font-size: 1.1rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary-color);
+            background-color: #e8f5e9;
+        }
+
+        .nav-close {
+            display: block;
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        /* Main Content */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            margin: 25px 0;
+        }
+
+        .privacy-section {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 20px;
+            width: 100%;
+        }
+
+        .page-title {
+            color: var(--primary-dark);
+            margin-bottom: 12px;
+            font-size: 1.8rem;
+            line-height: 1.3;
+            text-align: center;
+        }
+
+        .page-subtitle {
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            font-size: 1.2rem;
+            font-style: italic;
+            line-height: 1.4;
+            text-align: center;
+        }
+
+        .last-updated {
+            text-align: center;
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .privacy-content {
+            margin-bottom: 20px;
+        }
+
+        .privacy-content h3 {
+            color: var(--primary-dark);
+            margin: 25px 0 15px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--primary-light);
+            font-size: 1.4rem;
+            line-height: 1.3;
+        }
+
+        .privacy-content h4 {
+            color: var(--primary-dark);
+            margin: 20px 0 12px;
+            font-size: 1.2rem;
+            line-height: 1.3;
+        }
+
+        .privacy-content p {
+            margin-bottom: 15px;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .privacy-content ul, .privacy-content ol {
+            margin: 15px 0 15px 25px;
+        }
+
+        .privacy-content li {
+            margin-bottom: 10px;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        .privacy-box {
+            background-color: #f0f7f0;
+            border-left: 4px solid var(--primary-color);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+
+        .highlight-box {
+            background-color: #fff3e0;
+            border: 1px solid #ffb74d;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .cookie-types {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .cookie-type {
+            background-color: #f9f9f9;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            border-left: 4px solid var(--primary-light);
+        }
+
+        .cookie-type h5 {
+            color: var(--primary-dark);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .email-section {
+            background-color: #e3f2fd;
+            border-radius: var(--border-radius);
+            padding: 25px;
+            margin: 25px 0;
+        }
+
+        .contact-info {
+            background-color: #e8f5e9;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin: 25px 0;
+            text-align: center;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-dark);
+            color: white;
+            padding: 30px 0;
+            margin-top: 40px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .footer-section {
+            width: 100%;
+        }
+
+        .footer-title {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #a5d6a7;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 8px;
+        }
+
+        .footer-links a {
+            color: #e8f5e9;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .footer-links a:hover {
+            color: #a5d6a7;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid #4caf50;
+            color: #a5d6a7;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (min-width: 768px) {
+            .container {
+                max-width: 720px;
+                padding: 0 20px;
+            }
+            
+            .header-content {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+            
+            .logo-section {
+                width: auto;
+            }
+            
+            .logo-title-container {
+                margin-bottom: 0;
+            }
+            
+            .site-subtitle {
+                width: 100%;
+            }
+            
+            .nav-toggle {
+                display: none;
+            }
+            
+            .nav-menu {
+                display: flex;
+                position: static;
+                width: auto;
+                height: auto;
+                flex-direction: row;
+                padding: 0;
+                box-shadow: none;
+                background: transparent;
+            }
+            
+            .nav-menu li {
+                margin: 0 0 0 20px;
+                width: auto;
+            }
+            
+            .nav-menu a {
+                padding: 8px 12px;
+                background: transparent;
+                font-size: 0.9rem;
+            }
+            
+            .nav-close {
+                display: none;
+            }
+            
+            .cookie-types {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .footer-content {
+                flex-direction: row;
+            }
+            
+            .footer-section {
+                width: 33.33%;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .container {
+                max-width: 960px;
+            }
+            
+            .cookie-types {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .container {
+                max-width: 1140px;
+            }
+        }
+
+        /* Improve touch targets for mobile */
+        .nav-menu a {
+            min-height: 44px;
+            align-items: center;
+        }
+
+        /* Prevent horizontal scrolling */
+        html, body {
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+        
+        /* Backdrop for mobile menu */
+        .menu-backdrop {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 998;
+        }
+        
+        .menu-backdrop.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Backdrop for mobile menu -->
+    <div class="menu-backdrop" id="menuBackdrop"></div>
+    
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-section">
+                    <div class="logo-title-container">
+                        <i class="fas fa-code logo"></i>
+                        <h1 class="site-title">CodeSkill</h1>
+                    </div>
+                    <p class="site-subtitle">CodeSkill offers free hands-on coding tutorials, practical projects, and problem-solving challenges, guiding beginners and advanced learners alike to master programming languages, build real applications, and develop skills step by step.</p>
+                </div>
+                
+                <button class="nav-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <ul class="nav-menu">
+                    <button class="nav-close">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="about.html"><i class="fas fa-info-circle"></i> About Us</a></li>
+                    <li><a href="#"><i class="fas fa-envelope"></i> Contact Us</a></li>
+                    <li><a href="terms.html"><i class="fas fa-file-contract"></i> Terms of Service</a></li>
+                    <li><a href="privacy.html" class="active"><i class="fas fa-shield-alt"></i> Privacy Policy</a></li>
+                    <li><a href="#"><i class="fas fa-user-edit"></i> Writer</a></li>
+                    <li><a href="#"><i class="fas fa-bell"></i> Subscribe</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="main-content">
+            <div class="privacy-section">
+                <h1 class="page-title">Privacy Policy</h1>
+                <p class="page-subtitle">How we protect your privacy and handle your data</p>
+                <div class="last-updated">Last Updated: December 1, 2023</div>
+                
+                <div class="privacy-content">
+                    <div class="privacy-box">
+                        <p><strong>Your Privacy Matters:</strong> We're committed to protecting your personal information and being transparent about how we use cookies and handle email communications.</p>
+                    </div>
+
+                    <h3>1. Information We Collect</h3>
+                    <p>We collect minimal information necessary to provide and improve our services:</p>
+                    <ul>
+                        <li><strong>Account Information:</strong> Email, username, and encrypted password</li>
+                        <li><strong>Learning Data:</strong> Progress, completed tutorials, and quiz results</li>
+                        <li><strong>Technical Data:</strong> Browser type, device information, and IP address</li>
+                        <li><strong>Communication:</strong> Emails and support requests</li>
+                    </ul>
+
+                    <h3>2. How We Use Cookies</h3>
+                    <p>Cookies help us provide a better experience on CodeSkill. Here's how we use them:</p>
+
+                    <div class="cookie-types">
+                        <div class="cookie-type">
+                            <h5>Essential Cookies</h5>
+                            <p>Required for basic site functionality. These keep you logged in and remember your preferences. Without these, CodeSkill wouldn't work properly.</p>
+                        </div>
+                        <div class="cookie-type">
+                            <h5>Analytics Cookies</h5>
+                            <p>Help us understand how visitors use our site. We use this information to improve content and fix issues. All data is anonymous.</p>
+                        </div>
+                        <div class="cookie-type">
+                            <h5>Preference Cookies</h5>
+                            <p>Remember your settings and choices, like dark mode preference or tutorial progress, so you don't have to set them every visit.</p>
+                        </div>
+                    </div>
+
+                    <h4>Cookie Management</h4>
+                    <p>You can control cookies through your browser settings. Most browsers allow you to:</p>
+                    <ul>
+                        <li>See what cookies are stored</li>
+                        <li>Delete specific cookies or all of them</li>
+                        <li>Block cookies from specific sites</li>
+                        <li>Block all cookies</li>
+                    </ul>
+
+                    <p>However, disabling essential cookies may prevent CodeSkill from functioning correctly.</p>
+
+                    <h3>3. Email Subscriptions & Communications</h3>
+                    <div class="email-section">
+                        <h4>Our Email Philosophy</h4>
+                        <p>We believe in sending emails that are actually helpful, not spammy. Here's what you can expect from our email communications:</p>
+                    </div>
+
+                    <h4>3.1 Types of Emails We Send</h4>
+                    <ul>
+                        <li><strong>Learning Updates:</strong> New tutorials and learning resources relevant to your interests</li>
+                        <li><strong>Progress Reminders:</strong> Gentle nudges to continue your learning journey</li>
+                        <li><strong>Platform Updates:</strong> Important changes or new features on CodeSkill</li>
+                        <li><strong>Weekly Digest:</strong> Curated content and coding tips (optional)</li>
+                    </ul>
+
+                    <h4>3.2 Email Controls</h4>
+                    <p>You have complete control over our email communications:</p>
+                    <ul>
+                        <li><strong>Subscription Management:</strong> Choose exactly which types of emails you want to receive</li>
+                        <li><strong>One-Click Unsubscribe:</strong> Every email includes an easy unsubscribe link</li>
+                        <li><strong>Frequency Control:</strong> Adjust how often you hear from us</li>
+                        <li><strong>Instant Updates:</strong> Changes to your preferences take effect immediately</li>
+                    </ul>
+
+                    <div class="highlight-box">
+                        <h4>Our Email Promise</h4>
+                        <p>We will never:</p>
+                        <ul>
+                            <li>Spam you with irrelevant content</li>
+                            <li>Sell your email address to third parties</li>
+                            <li>Send you more than 2-3 educational emails per week</li>
+                            <li>Make it difficult to unsubscribe</li>
+                        </ul>
+                    </div>
+
+                    <h4>3.3 Email Analytics</h4>
+                    <p>We use basic analytics to improve our email communications:</p>
+                    <ul>
+                        <li><strong>Open Rates:</strong> To understand what content interests our community</li>
+                        <li><strong>Click-through Rates:</strong> To improve the relevance of our links</li>
+                        <li><strong>Unsubscribe Rates:</strong> To ensure we're sending valuable content</li>
+                    </ul>
+                    <p>This data is aggregated and anonymous - we don't track individual user behavior in emails.</p>
+
+                    <h3>4. Data Protection</h3>
+                    <p>We take multiple measures to protect your information:</p>
+                    <ul>
+                        <li><strong>Encryption:</strong> All data is encrypted in transit and at rest</li>
+                        <li><strong>Secure Storage:</strong> Your information is stored on protected servers</li>
+                        <li><strong>Limited Access:</strong> Only authorized team members can access user data</li>
+                        <li><strong>Regular Audits:</strong> We regularly review and update our security practices</li>
+                    </ul>
+
+                    <h3>5. Your Rights</h3>
+                    <p>You have the right to:</p>
+                    <ul>
+                        <li>Access your personal data</li>
+                        <li>Correct inaccurate information</li>
+                        <li>Delete your account and data</li>
+                        <li>Export your learning progress</li>
+                        <li>Object to data processing</li>
+                        <li>Withdraw consent for communications</li>
+                    </ul>
+
+                    <h3>6. Changes to This Policy</h3>
+                    <p>We may update this policy as our services evolve. We'll notify you of significant changes and always display the last updated date at the top of this page.</p>
+
+                    <h3>7. Contact Us</h3>
+                    <div class="contact-info">
+                        <p><strong>Questions about privacy?</strong> We're here to help!</p>
+                        <p>Email: privacy@codeskill.net</p>
+                        <p>We respond to all privacy-related inquiries within 48 hours.</p>
+                    </div>
+
+                    <div class="privacy-box">
+                        <p><strong>Transparency Commitment:</strong> We're committed to being clear about how we handle your data. If anything in this policy isn't clear, please reach out - we're happy to explain!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-title">CodeSkill</h3>
+                    <p>Free hands-on coding tutorials, practical projects, and problem-solving challenges for all skill levels.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3 class="footer-title">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3 class="footer-title">Legal</h3>
+                    <ul class="footer-links">
+                        <li><a href="terms.html">Terms of Service</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 CodeSkill. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Navigation Toggle
+        const navToggle = document.querySelector('.nav-toggle');
+        const navMenu = document.querySelector('.nav-menu');
+        const navClose = document.querySelector('.nav-close');
+        const menuBackdrop = document.getElementById('menuBackdrop');
+        
+        navToggle.addEventListener('click', () => {
+            navMenu.classList.add('active');
+            menuBackdrop.classList.add('active');
+            navToggle.style.display = 'none'; // Hide the menu icon
+            document.body.style.overflow = 'hidden';
+        });
+        
+        navClose.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+            menuBackdrop.classList.remove('active');
+            navToggle.style.display = 'block'; // Show the menu icon again
+            document.body.style.overflow = '';
+        });
+        
+        menuBackdrop.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+            menuBackdrop.classList.remove('active');
+            navToggle.style.display = 'block'; // Show the menu icon again
+            document.body.style.overflow = '';
+        });
+        
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                menuBackdrop.classList.remove('active');
+                navToggle.style.display = 'block'; // Show the menu icon again
+                document.body.style.overflow = '';
+            });
+        });
+    </script>
+</body>
+</html>
