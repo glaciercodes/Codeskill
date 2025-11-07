@@ -28,75 +28,99 @@
             background-color: var(--light-bg);
             color: var(--text-color);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 100%;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 15px;
         }
 
         /* Header Styles */
         header {
             background-color: var(--white);
             box-shadow: var(--box-shadow);
-            padding: 20px 0;
+            padding: 15px 0;
+            position: relative;
         }
 
         .header-content {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            flex-direction: column;
+            align-items: flex-start;
         }
 
         .logo-section {
-            display: flex;
-            align-items: center;
-            flex-direction: column;
-            align-items: flex-start;
+            width: 100%;
         }
 
         .logo-title-container {
             display: flex;
             align-items: center;
             margin-bottom: 10px;
+            flex-wrap: wrap;
         }
 
         .logo {
-            font-size: 2.5rem;
+            font-size: 2rem;
             color: var(--primary-color);
-            margin-right: 15px;
+            margin-right: 12px;
         }
 
         .site-title {
-            font-size: 2rem;
+            font-size: 1.5rem;
             font-weight: 700;
             color: var(--primary-color);
+            margin-right: 10px;
         }
 
         .site-subtitle {
-            font-size: 1rem;
+            font-size: 0.9rem;
             color: #666;
-            max-width: 600px;
+            line-height: 1.4;
+            width: 100%;
         }
 
         /* Navigation */
         .nav-toggle {
-            display: none;
+            display: block;
             font-size: 1.5rem;
             background: none;
             border: none;
             color: var(--primary-color);
             cursor: pointer;
+            z-index: 1001;
+            position: absolute;
+            top: 15px;
+            right: 15px;
         }
 
         .nav-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 85%;
+            max-width: 300px;
+            height: 100vh;
+            background-color: var(--white);
+            flex-direction: column;
+            padding: 70px 20px 20px;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            transition: right 0.3s;
+            z-index: 999;
+            overflow-y: auto;
+        }
+
+        .nav-menu.active {
             display: flex;
-            list-style: none;
+            right: 0;
         }
 
         .nav-menu li {
-            margin-left: 25px;
+            margin: 0 0 15px 0;
+            width: 100%;
         }
 
         .nav-menu a {
@@ -106,39 +130,56 @@
             transition: color 0.3s;
             display: flex;
             align-items: center;
+            font-size: 1rem;
+            padding: 12px 15px;
+            border-radius: var(--border-radius);
+            background-color: #f5f5f5;
         }
 
         .nav-menu a i {
-            margin-right: 8px;
+            margin-right: 10px;
             font-size: 1.1rem;
+            width: 20px;
+            text-align: center;
         }
 
         .nav-menu a:hover {
             color: var(--primary-color);
+            background-color: #e8f5e9;
         }
 
         .nav-close {
-            display: none;
+            display: block;
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            cursor: pointer;
+            z-index: 1001;
         }
 
         /* Main Content */
         .main-content {
-            display: grid;
-            grid-template-columns: 1fr 300px;
-            gap: 30px;
-            margin: 40px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            margin: 25px 0;
         }
 
         .articles-section {
             background-color: var(--white);
             border-radius: var(--border-radius);
             box-shadow: var(--box-shadow);
-            padding: 30px;
+            padding: 20px;
+            width: 100%;
         }
 
         .article {
-            margin-bottom: 50px;
-            padding-bottom: 30px;
+            margin-bottom: 35px;
+            padding-bottom: 20px;
             border-bottom: 1px solid #eee;
         }
 
@@ -148,34 +189,53 @@
 
         .article-title {
             color: var(--primary-dark);
-            margin-bottom: 15px;
-            font-size: 1.8rem;
+            margin-bottom: 12px;
+            font-size: 1.5rem;
+            line-height: 1.3;
         }
 
         .article-subtitle {
             color: var(--primary-color);
-            margin-bottom: 20px;
-            font-size: 1.2rem;
+            margin-bottom: 18px;
+            font-size: 1.1rem;
+            font-style: italic;
+            line-height: 1.4;
         }
 
         .article-content {
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
 
         .article-content h3 {
             color: var(--primary-dark);
-            margin: 25px 0 15px;
+            margin: 20px 0 12px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--primary-light);
+            font-size: 1.3rem;
+            line-height: 1.3;
         }
 
         .article-content p {
-            margin-bottom: 15px;
+            margin-bottom: 12px;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .article-content ul, .article-content ol {
+            margin: 12px 0 12px 20px;
+        }
+
+        .article-content li {
+            margin-bottom: 8px;
+            font-size: 1rem;
+            line-height: 1.5;
         }
 
         .step-by-step {
             background-color: #f5f5f5;
             border-left: 4px solid var(--primary-color);
-            padding: 20px;
-            margin: 20px 0;
+            padding: 18px;
+            margin: 18px 0;
             border-radius: 0 var(--border-radius) var(--border-radius) 0;
         }
 
@@ -187,56 +247,155 @@
         .step-number {
             background-color: var(--primary-color);
             color: white;
-            width: 30px;
-            height: 30px;
+            width: 28px;
+            height: 28px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-right: 15px;
+            margin-right: 12px;
             flex-shrink: 0;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .step-content {
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .visualization {
+            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+            padding: 18px;
+            border-radius: var(--border-radius);
+            margin: 18px 0;
+            border: 1px solid #a5d6a7;
+        }
+
+        .visualization h4 {
+            color: var(--primary-dark);
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .visualization p {
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .code-block {
+            background-color: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: var(--border-radius);
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+
+        .code-comment {
+            color: #6a9955;
+        }
+
+        .code-keyword {
+            color: #569cd6;
+        }
+
+        .code-function {
+            color: #dcdcaa;
+        }
+
+        .code-string {
+            color: #ce9178;
+        }
+
+        .diagram {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: var(--border-radius);
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+            overflow-x: auto;
+        }
+
+        .diagram-box {
+            display: inline-block;
+            background-color: var(--primary-light);
+            color: white;
+            padding: 10px 15px;
+            margin: 5px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+
+        .diagram-arrow {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            margin: 0 5px;
         }
 
         .exercise-section {
             background-color: #f0f7f0;
-            padding: 20px;
+            padding: 18px;
             border-radius: var(--border-radius);
-            margin: 30px 0;
+            margin: 25px 0;
         }
 
         .exercise-title {
             color: var(--primary-dark);
-            margin-bottom: 15px;
+            margin-bottom: 12px;
+            font-size: 1.2rem;
         }
 
         .question {
-            margin-bottom: 20px;
+            margin-bottom: 18px;
+            padding: 15px;
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .question p {
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 1rem;
+            line-height: 1.4;
         }
 
         .options {
             display: flex;
             flex-direction: column;
             gap: 10px;
-            margin: 15px 0;
+            margin: 12px 0;
         }
 
         .option {
             display: flex;
-            align-items: center;
-            padding: 10px 15px;
+            align-items: flex-start;
+            padding: 12px 15px;
             background-color: var(--white);
             border: 1px solid #ddd;
             border-radius: var(--border-radius);
             cursor: pointer;
             transition: all 0.3s;
+            font-size: 0.95rem;
+            line-height: 1.4;
         }
 
         .option:hover {
             background-color: #f0f0f0;
+            border-color: var(--primary-light);
         }
 
         .option input {
             margin-right: 10px;
+            margin-top: 2px;
+            flex-shrink: 0;
         }
 
         .submit-btn {
@@ -250,10 +409,27 @@
             font-weight: 600;
             transition: background-color 0.3s;
             margin-top: 15px;
+            width: 100%;
         }
 
         .submit-btn:hover {
             background-color: var(--primary-dark);
+        }
+
+        .submit-btn:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+
+        .validation-error {
+            color: #d32f2f;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            display: none;
+            text-align: center;
+            padding: 10px;
+            background-color: #ffebee;
+            border-radius: var(--border-radius);
         }
 
         .loading-screen {
@@ -276,8 +452,8 @@
         }
 
         .dot {
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
             background-color: var(--primary-color);
             border-radius: 50%;
             animation: bounce 1.4s infinite ease-in-out both;
@@ -301,27 +477,33 @@
         }
 
         .results-section {
-            margin-top: 20px;
-            padding: 20px;
+            margin-top: 18px;
+            padding: 18px;
             background-color: #e8f5e9;
             border-radius: var(--border-radius);
             display: none;
+            font-size: 0.95rem;
+            line-height: 1.5;
         }
 
         .action-buttons {
             display: flex;
-            gap: 15px;
-            margin-top: 25px;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 20px;
         }
 
         .share-btn, .download-btn {
             display: flex;
             align-items: center;
-            padding: 10px 20px;
+            justify-content: center;
+            padding: 12px 20px;
             border-radius: var(--border-radius);
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
+            font-size: 0.95rem;
+            width: 100%;
         }
 
         .share-btn {
@@ -353,15 +535,16 @@
             background-color: var(--white);
             border-radius: var(--border-radius);
             box-shadow: var(--box-shadow);
-            padding: 25px;
-            height: fit-content;
+            padding: 20px;
+            width: 100%;
+            order: -1;
         }
 
         .writer-info {
             text-align: center;
-            padding-bottom: 20px;
+            padding-bottom: 18px;
             border-bottom: 1px solid #eee;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
 
         .writer-name {
@@ -379,19 +562,19 @@
         .last-updated {
             font-size: 0.9rem;
             color: #777;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
 
         .social-icons {
             display: flex;
             justify-content: center;
             gap: 15px;
-            margin-top: 15px;
+            margin-top: 12px;
         }
 
         .social-icons a {
             color: var(--primary-color);
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             transition: color 0.3s;
         }
 
@@ -400,12 +583,12 @@
         }
 
         .sidebar-section {
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
 
         .sidebar-title {
             color: var(--primary-dark);
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             font-size: 1.2rem;
         }
 
@@ -414,7 +597,7 @@
         }
 
         .sidebar-links li {
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
         .sidebar-links a {
@@ -423,11 +606,15 @@
             display: flex;
             align-items: center;
             transition: color 0.3s;
+            font-size: 1rem;
+            padding: 10px 0;
         }
 
         .sidebar-links a i {
             margin-right: 10px;
             color: var(--primary-color);
+            width: 20px;
+            text-align: center;
         }
 
         .sidebar-links a:hover {
@@ -438,25 +625,23 @@
         footer {
             background-color: var(--primary-dark);
             color: white;
-            padding: 40px 0;
-            margin-top: 50px;
+            padding: 30px 0;
+            margin-top: 40px;
         }
 
         .footer-content {
             display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
+            flex-direction: column;
+            gap: 25px;
         }
 
         .footer-section {
-            flex: 1;
-            min-width: 250px;
-            margin-bottom: 30px;
+            width: 100%;
         }
 
         .footer-title {
             font-size: 1.2rem;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             color: #a5d6a7;
         }
 
@@ -465,13 +650,14 @@
         }
 
         .footer-links li {
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
         .footer-links a {
             color: #e8f5e9;
             text-decoration: none;
             transition: color 0.3s;
+            font-size: 0.95rem;
         }
 
         .footer-links a:hover {
@@ -480,7 +666,7 @@
 
         .copyright {
             text-align: center;
-            margin-top: 30px;
+            margin-top: 25px;
             padding-top: 20px;
             border-top: 1px solid #4caf50;
             color: #a5d6a7;
@@ -488,79 +674,151 @@
         }
 
         /* Responsive Design */
-        @media (max-width: 992px) {
-            .main-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .sidebar {
-                order: -1;
-                margin-bottom: 30px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .nav-toggle {
-                display: block;
-            }
-            
-            .nav-menu {
-                position: fixed;
-                top: 0;
-                right: -100%;
-                width: 280px;
-                height: 100vh;
-                background-color: var(--white);
-                flex-direction: column;
-                padding: 80px 30px 30px;
-                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
-                transition: right 0.3s;
-                z-index: 999;
-            }
-            
-            .nav-menu.active {
-                right: 0;
-            }
-            
-            .nav-menu li {
-                margin: 0 0 20px 0;
-            }
-            
-            .nav-close {
-                display: block;
-                position: absolute;
-                top: 20px;
-                right: 20px;
-                font-size: 1.5rem;
-                background: none;
-                border: none;
-                color: var(--primary-color);
-                cursor: pointer;
-            }
-            
-            .action-buttons {
-                flex-direction: column;
+        @media (min-width: 768px) {
+            .container {
+                max-width: 720px;
+                padding: 0 20px;
             }
             
             .header-content {
-                flex-direction: column;
-                align-items: flex-start;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
             }
             
             .logo-section {
-                margin-bottom: 15px;
+                width: auto;
+            }
+            
+            .logo-title-container {
+                margin-bottom: 0;
+            }
+            
+            .site-subtitle {
                 width: 100%;
             }
             
             .nav-toggle {
-                position: absolute;
-                top: 20px;
-                right: 20px;
+                display: none;
             }
+            
+            .nav-menu {
+                display: flex;
+                position: static;
+                width: auto;
+                height: auto;
+                flex-direction: row;
+                padding: 0;
+                box-shadow: none;
+                background: transparent;
+            }
+            
+            .nav-menu li {
+                margin: 0 0 0 20px;
+                width: auto;
+            }
+            
+            .nav-menu a {
+                padding: 8px 12px;
+                background: transparent;
+                font-size: 0.9rem;
+            }
+            
+            .nav-close {
+                display: none;
+            }
+            
+            .main-content {
+                flex-direction: row;
+            }
+            
+            .articles-section {
+                width: 70%;
+            }
+            
+            .sidebar {
+                width: 30%;
+                order: 0;
+            }
+            
+            .action-buttons {
+                flex-direction: row;
+            }
+            
+            .share-btn, .download-btn {
+                width: auto;
+            }
+            
+            .submit-btn {
+                width: auto;
+            }
+            
+            .footer-content {
+                flex-direction: row;
+            }
+            
+            .footer-section {
+                width: 33.33%;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .container {
+                max-width: 960px;
+            }
+            
+            .articles-section {
+                width: 75%;
+            }
+            
+            .sidebar {
+                width: 25%;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .container {
+                max-width: 1140px;
+            }
+        }
+
+        /* Improve touch targets for mobile */
+        .option, .submit-btn, .share-btn, .download-btn, .nav-menu a {
+            min-height: 44px;
+        }
+        
+        .nav-menu a, .sidebar-links a {
+            min-height: 44px;
+            align-items: center;
+        }
+
+        /* Prevent horizontal scrolling */
+        html, body {
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+        
+        /* Backdrop for mobile menu */
+        .menu-backdrop {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 998;
+        }
+        
+        .menu-backdrop.active {
+            display: block;
         }
     </style>
 </head>
 <body>
+    <!-- Backdrop for mobile menu -->
+    <div class="menu-backdrop" id="menuBackdrop"></div>
+    
     <!-- Header -->
     <header>
         <div class="container">
@@ -599,270 +857,288 @@
                 <!-- Article 1 -->
                 <article class="article" id="article1">
                     <h2 class="article-title">Learn Project based Tutorials</h2>
-                    <p class="article-subtitle">Build real applications while learning programming concepts</p>
+                    <p class="article-subtitle">Stop just reading about code - start building things that actually work!</p>
                     
                     <div class="article-content">
-                        <h3>Why Project-Based Learning Works</h3>
-                        <p>Project-based tutorials help you learn programming by building real applications. Instead of just learning theory, you create something tangible that you can use and show to others. This approach makes learning more engaging and helps you remember concepts better.</p>
+                        <h3>Why Project-Based Learning Actually Works</h3>
+                        <p>Remember trying to learn a language from a textbook versus actually visiting the country? That's the difference between traditional coding tutorials and project-based learning. When you build real projects, you're not just memorizing syntax - you're solving actual problems that developers face every day.</p>
                         
-                        <p>When you work on projects, you encounter real-world problems that require creative solutions. This process develops your problem-solving skills, which are essential for any programmer. You also learn how to research and find information when you're stuck, which is a valuable skill in the tech industry.</p>
+                        <p>I've seen countless beginners get stuck in "tutorial hell" - watching video after video without ever creating anything meaningful. The moment they switch to building projects, something magical happens. They start understanding <em>why</em> code works the way it does, not just <em>how</em> to type it.</p>
                         
-                        <p>Another benefit of project-based learning is that it builds your portfolio. As you complete projects, you create a collection of work that demonstrates your skills to potential employers or clients. This is much more effective than just listing programming languages on a resume.</p>
+                        <p>Plus, let's be honest - it's way more fun to show friends a working app you built than to tell them you completed another online course!</p>
                         
-                        <h3>How to Approach Project-Based Learning</h3>
-                        <p>Start with small projects that match your current skill level. As you complete each project, you'll gain confidence and skills to tackle more complex challenges. Don't worry if you don't understand everything at first - the goal is to learn through doing.</p>
+                        <h3>Your First Project Shouldn't Be Perfect</h3>
+                        <p>I made my first to-do list app back in college, and it was terrible. The design was awful, it had bugs, and I'm pretty sure it crashed if you looked at it wrong. But you know what? I learned more from that messy project than from any textbook.</p>
                         
-                        <p>Break down each project into smaller tasks. This makes the project less overwhelming and helps you focus on one thing at a time. For example, if you're building a website, you might start with the HTML structure, then add CSS styling, and finally implement JavaScript functionality.</p>
-                        
-                        <p>Don't be afraid to make mistakes. Errors and bugs are a natural part of programming. When you encounter problems, use them as learning opportunities. Debugging your code helps you understand how it works and teaches you to write better code in the future.</p>
+                        <p>The key is to start small and embrace imperfection. Your first project isn't going to be the next Facebook, and that's perfectly okay. The goal is learning, not perfection.</p>
                         
                         <div class="step-by-step">
-                            <h3>Building a Simple To-Do List App</h3>
+                            <h3>Let's Build a Weather App Together</h3>
                             <div class="step">
                                 <div class="step-number">1</div>
-                                <div class="step-content">Set up your HTML structure with input fields and a list container. Create a basic form with an input field for new tasks and a button to add them. Also, create an empty unordered list where the tasks will be displayed.</div>
+                                <div class="step-content"><strong>Set up your basic HTML structure.</strong> Create a simple page with a search input, a button, and areas to display weather info. Don't worry about making it pretty yet - just get the structure right.</div>
                             </div>
                             <div class="step">
                                 <div class="step-number">2</div>
-                                <div class="step-content">Style your app with CSS to make it visually appealing. Add padding, margins, colors, and fonts to make your to-do list look professional. Consider using Flexbox or CSS Grid for layout.</div>
+                                <div class="step-content"><strong>Make it look decent with CSS.</strong> Add some basic styling so it doesn't look like it's from 1995. Use Flexbox to center everything - it's a game-changer for layout.</div>
                             </div>
                             <div class="step">
                                 <div class="step-number">3</div>
-                                <div class="step-content">Add JavaScript to handle adding new tasks. Create a function that takes the value from the input field and creates a new list item when the "Add" button is clicked.</div>
+                                <div class="step-content"><strong>Connect to a weather API.</strong> This is where the magic happens! Use the OpenWeatherMap API (it's free) to fetch real weather data. You'll learn about API calls, promises, and handling JSON data.</div>
                             </div>
                             <div class="step">
                                 <div class="step-number">4</div>
-                                <div class="step-content">Implement functionality to mark tasks as completed. Add event listeners to each task that toggle a "completed" class when clicked, which changes the appearance of the task (like adding a line-through).</div>
+                                <div class="step-content"><strong>Display the data.</strong> Take the weather information from the API and show it on your page. You'll practice DOM manipulation and learn how to handle different data types.</div>
                             </div>
                             <div class="step">
                                 <div class="step-number">5</div>
-                                <div class="step-content">Add the ability to delete tasks from your list. Include a delete button for each task that removes it from the list when clicked.</div>
-                            </div>
-                            <div class="step">
-                                <div class="step-number">6</div>
-                                <div class="step-content">Implement local storage to save tasks between browser sessions. Use the browser's localStorage API to save the current list of tasks and load them when the page is refreshed.</div>
-                            </div>
-                            <div class="step">
-                                <div class="step-number">7</div>
-                                <div class="step-content">Add input validation to prevent empty tasks from being added. Check if the input field is empty before creating a new task, and show an error message if needed.</div>
+                                <div class="step-content"><strong>Add error handling.</strong> What happens if someone searches for a city that doesn't exist? Learn to handle errors gracefully - a crucial skill for any developer.</div>
                             </div>
                         </div>
                         
-                        <h3>Expanding Your Project</h3>
-                        <p>Once you have the basic functionality working, think about how you can improve your app. Could you add categories for tasks? What about setting due dates? These enhancements will help you learn more advanced programming concepts.</p>
+                        <div class="code-block">
+                            <span class="code-comment">// Example: Basic weather app structure</span><br>
+                            <span class="code-keyword">const</span> apiKey = <span class="code-string">'your-api-key-here'</span>;<br>
+                            <span class="code-keyword">const</span> city = <span class="code-string">'London'</span>;<br><br>
+                            
+                            <span class="code-comment">// Fetch weather data from API</span><br>
+                            <span class="code-keyword">async function</span> <span class="code-function">getWeather</span>() {<br>
+                            &nbsp;&nbsp;<span class="code-keyword">try</span> {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">const</span> response = <span class="code-keyword">await</span> fetch(<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">`https://api.openweathermap.org/data/2.5/weather?q=<span class="code-keyword">${</span>city<span class="code-keyword">}</span>&appid=<span class="code-keyword">${</span>apiKey<span class="code-keyword">}</span>`</span><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;);<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">const</span> data = <span class="code-keyword">await</span> response.<span class="code-function">json</span>();<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-function">displayWeather</span>(data);<br>
+                            &nbsp;&nbsp;} <span class="code-keyword">catch</span> (error) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;console.<span class="code-function">error</span>(<span class="code-string">'Error fetching weather:'</span>, error);<br>
+                            &nbsp;&nbsp;}<br>
+                            }
+                        </div>
                         
-                        <p>Consider adding features like:</p>
+                        <div class="diagram">
+                            <h4>Project Development Flow</h4>
+                            <div class="diagram-box">Plan</div>
+                            <div class="diagram-arrow">→</div>
+                            <div class="diagram-box">Code</div>
+                            <div class="diagram-arrow">→</div>
+                            <div class="diagram-box">Test</div>
+                            <div class="diagram-arrow">→</div>
+                            <div class="diagram-box">Debug</div>
+                            <div class="diagram-arrow">→</div>
+                            <div class="diagram-box">Deploy</div>
+                        </div>
+                        
+                        <h3>What Makes a Good Learning Project?</h3>
+                        <p>After teaching hundreds of students, I've found the best projects share these qualities:</p>
                         <ul>
-                            <li>Task priorities (high, medium, low)</li>
-                            <li>Due dates and reminders</li>
-                            <li>Task categories or tags</li>
-                            <li>Search and filter functionality</li>
-                            <li>Drag and drop to reorder tasks</li>
-                            <li>Sharing tasks with other users</li>
+                            <li><strong>They solve a real problem</strong> - even if it's a small one</li>
+                            <li><strong>They're challenging but achievable</strong> - you should feel stretched but not overwhelmed</li>
+                            <li><strong>They teach multiple concepts</strong> - not just one isolated skill</li>
+                            <li><strong>They're personally interesting to you</strong> - if you care about the project, you'll stick with it</li>
                         </ul>
                         
-                        <p>Each new feature presents an opportunity to learn something new. For example, adding due dates might teach you about JavaScript's Date object, while implementing drag and drop would introduce you to HTML5 Drag and Drop API.</p>
+                        <div class="visualization">
+                            <h4>Project Complexity Growth</h4>
+                            <p>Think of your learning journey like this:</p>
+                            <p>Simple Calculator → Weather App → Task Manager → Full CRUD App → Social Platform</p>
+                            <p>Each project builds on the last, introducing just one or two new concepts at a time.</p>
+                        </div>
                         
-                        <h3>Best Practices for Project-Based Learning</h3>
-                        <p>When learning through projects, it's important to follow some best practices:</p>
+                        <h3>Common Mistakes to Avoid</h3>
+                        <p>I've made all these mistakes, so you don't have to:</p>
                         <ol>
-                            <li><strong>Start simple</strong> - Begin with basic projects and gradually increase complexity</li>
-                            <li><strong>Plan before coding</strong> - Sketch out your project and break it into smaller tasks</li>
-                            <li><strong>Write clean code</strong> - Use consistent formatting and meaningful variable names</li>
-                            <li><strong>Comment your code</strong> - Explain what your code does, especially complex parts</li>
-                            <li><strong>Test regularly</strong> - Check that each new feature works before moving to the next</li>
-                            <li><strong>Refactor</strong> - Improve your code as you learn better ways to do things</li>
-                            <li><strong>Document your project</strong> - Write a README file explaining what your project does</li>
+                            <li><strong>Starting too big</strong> - Don't try to build Amazon in week one</li>
+                            <li><strong>Copy-pasting without understanding</strong> - Type everything out yourself</li>
+                            <li><strong>Getting stuck on one problem for hours</strong> - Take breaks and come back fresh</li>
+                            <li><strong>Comparing your chapter 1 to someone else's chapter 20</strong> - Everyone starts somewhere</li>
                         </ol>
                     </div>
                     
                     <div class="exercise-section">
-                        <h3 class="exercise-title">Test Your Knowledge</h3>
+                        <h3 class="exercise-title">Test Your Understanding</h3>
                         <div class="question">
-                            <p>1. What is the main advantage of project-based learning?</p>
+                            <p>1. What's the main advantage of building projects versus just following tutorials?</p>
                             <div class="options">
                                 <label class="option">
                                     <input type="radio" name="q1" value="a"> 
-                                    <span>It's faster than other learning methods</span>
+                                    <span>You learn to solve real problems instead of just memorizing syntax</span>
                                 </label>
                                 <label class="option">
                                     <input type="radio" name="q1" value="b"> 
-                                    <span>You learn by building real applications</span>
+                                    <span>It's faster and requires less effort</span>
                                 </label>
                                 <label class="option">
                                     <input type="radio" name="q1" value="c"> 
-                                    <span>It requires less effort</span>
+                                    <span>You don't need to understand the code, just copy it</span>
                                 </label>
                             </div>
                         </div>
                         
                         <div class="question">
-                            <p>2. What should you do if you don't understand everything in a project?</p>
+                            <p>2. What should you do when you encounter a bug you can't fix?</p>
                             <div class="options">
                                 <label class="option">
                                     <input type="radio" name="q2" value="a"> 
-                                    <span>Give up and try something easier</span>
+                                    <span>Keep staring at the code until it works</span>
                                 </label>
                                 <label class="option">
                                     <input type="radio" name="q2" value="b"> 
-                                    <span>Skip the parts you don't understand</span>
+                                    <span>Take a break and come back with fresh eyes</span>
                                 </label>
                                 <label class="option">
                                     <input type="radio" name="q2" value="c"> 
-                                    <span>Keep going and learn through doing</span>
+                                    <span>Delete everything and start over</span>
                                 </label>
                             </div>
                         </div>
                         
                         <div class="question">
-                            <p>3. What is the benefit of breaking down projects into smaller tasks?</p>
+                            <p>3. Why is it important to start with small projects?</p>
                             <div class="options">
                                 <label class="option">
                                     <input type="radio" name="q3" value="a"> 
-                                    <span>It makes the project less overwhelming</span>
+                                    <span>Small projects are less overwhelming and help build confidence</span>
                                 </label>
                                 <label class="option">
                                     <input type="radio" name="q3" value="b"> 
-                                    <span>You can finish faster</span>
+                                    <span>Small projects are all you'll ever need for a career</span>
                                 </label>
                                 <label class="option">
                                     <input type="radio" name="q3" value="c"> 
-                                    <span>It's required for all programming projects</span>
+                                    <span>Big projects are impossible to complete</span>
                                 </label>
                             </div>
                         </div>
                         
                         <div class="question">
-                            <p>4. Why is it important to build a portfolio of projects?</p>
+                            <p>4. What's a good first project for a beginner?</p>
                             <div class="options">
                                 <label class="option">
                                     <input type="radio" name="q4" value="a"> 
-                                    <span>It demonstrates your skills to potential employers</span>
+                                    <span>A simple calculator or to-do list app</span>
                                 </label>
                                 <label class="option">
                                     <input type="radio" name="q4" value="b"> 
-                                    <span>It makes your computer run faster</span>
+                                    <span>A complex social media platform</span>
                                 </label>
                                 <label class="option">
                                     <input type="radio" name="q4" value="c"> 
-                                    <span>It's required for all programming jobs</span>
+                                    <span>An operating system</span>
                                 </label>
                             </div>
                         </div>
                         
                         <div class="question">
-                            <p>5. What should you do when you encounter errors in your code?</p>
+                            <p>5. Why should you type code instead of copy-pasting?</p>
                             <div class="options">
                                 <label class="option">
                                     <input type="radio" name="q5" value="a"> 
-                                    <span>Delete everything and start over</span>
+                                    <span>Typing helps you understand and remember the code better</span>
                                 </label>
                                 <label class="option">
                                     <input type="radio" name="q5" value="b"> 
-                                    <span>Use them as learning opportunities</span>
+                                    <span>Copy-pasting doesn't work in most editors</span>
                                 </label>
                                 <label class="option">
                                     <input type="radio" name="q5" value="c"> 
-                                    <span>Ignore them and hope they go away</span>
+                                    <span>It's faster to type everything</span>
                                 </label>
                             </div>
                         </div>
                         
                         <div class="question">
-                            <p>6. What is the purpose of local storage in a to-do list app?</p>
+                            <p>6. What should you do if your first project isn't perfect?</p>
                             <div class="options">
                                 <label class="option">
                                     <input type="radio" name="q6" value="a"> 
-                                    <span>To save tasks between browser sessions</span>
+                                    <span>Accept that learning matters more than perfection</span>
                                 </label>
                                 <label class="option">
                                     <input type="radio" name="q6" value="b"> 
-                                    <span>To make the app run faster</span>
+                                    <span>Give up and try something easier</span>
                                 </label>
                                 <label class="option">
                                     <input type="radio" name="q6" value="c"> 
-                                    <span>To share tasks with other users</span>
+                                    <span>Keep working on it until it's flawless</span>
                                 </label>
                             </div>
                         </div>
                         
                         <div class="question">
-                            <p>7. Why is it important to write clean code?</p>
+                            <p>7. What's the benefit of building projects you're personally interested in?</p>
                             <div class="options">
                                 <label class="option">
                                     <input type="radio" name="q7" value="a"> 
-                                    <span>It makes your code easier to read and maintain</span>
+                                    <span>You're more likely to stick with them and learn more</span>
                                 </label>
                                 <label class="option">
                                     <input type="radio" name="q7" value="b"> 
-                                    <span>It makes your code run faster</span>
+                                    <span>They're always easier than other projects</span>
                                 </label>
                                 <label class="option">
                                     <input type="radio" name="q7" value="c"> 
+                                    <span>They don't require as much coding knowledge</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="question">
+                            <p>8. What does API stand for in web development?</p>
+                            <div class="options">
+                                <label class="option">
+                                    <input type="radio" name="q8" value="a"> 
+                                    <span>Application Programming Interface</span>
+                                </label>
+                                <label class="option">
+                                    <input type="radio" name="q8" value="b"> 
+                                    <span>Advanced Programming Instruction</span>
+                                </label>
+                                <label class="option">
+                                    <input type="radio" name="q8" value="c"> 
+                                    <span>Automated Program Integration</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="question">
+                            <p>9. Why is error handling important in projects?</p>
+                            <div class="options">
+                                <label class="option">
+                                    <input type="radio" name="q9" value="a"> 
+                                    <span>It makes your app more robust and user-friendly</span>
+                                </label>
+                                <label class="option">
+                                    <input type="radio" name="q9" value="b"> 
+                                    <span>It makes your code run faster</span>
+                                </label>
+                                <label class="option">
+                                    <input type="radio" name="q9" value="c"> 
                                     <span>It's required for all programming languages</span>
                                 </label>
                             </div>
                         </div>
                         
                         <div class="question">
-                            <p>8. What is refactoring in programming?</p>
-                            <div class="options">
-                                <label class="option">
-                                    <input type="radio" name="q8" value="a"> 
-                                    <span>Improving your code as you learn better ways</span>
-                                </label>
-                                <label class="option">
-                                    <input type="radio" name="q8" value="b"> 
-                                    <span>Adding new features to your project</span>
-                                </label>
-                                <label class="option">
-                                    <input type="radio" name="q8" value="c"> 
-                                    <span>Deleting old code to make space for new code</span>
-                                </label>
-                            </div>
-                        </div>
-                        
-                        <div class="question">
-                            <p>9. What is a good beginner project idea?</p>
-                            <div class="options">
-                                <label class="option">
-                                    <input type="radio" name="q9" value="a"> 
-                                    <span>Personal portfolio website</span>
-                                </label>
-                                <label class="option">
-                                    <input type="radio" name="q9" value="b"> 
-                                    <span>Full-stack e-commerce platform</span>
-                                </label>
-                                <label class="option">
-                                    <input type="radio" name="q9" value="c"> 
-                                    <span>Operating system</span>
-                                </label>
-                            </div>
-                        </div>
-                        
-                        <div class="question">
-                            <p>10. Why should you document your project with a README file?</p>
+                            <p>10. What should you focus on in your first few projects?</p>
                             <div class="options">
                                 <label class="option">
                                     <input type="radio" name="q10" value="a"> 
-                                    <span>To explain what your project does and how to use it</span>
+                                    <span>Learning and understanding concepts, not perfection</span>
                                 </label>
                                 <label class="option">
                                     <input type="radio" name="q10" value="b"> 
-                                    <span>To make your project file size larger</span>
+                                    <span>Making them look exactly like professional apps</span>
                                 </label>
                                 <label class="option">
                                     <input type="radio" name="q10" value="c"> 
-                                    <span>To hide your code from others</span>
+                                    <span>Using the most advanced technologies available</span>
                                 </label>
                             </div>
                         </div>
                         
-                        <button class="submit-btn" data-article="1">Submit Answers</button>
-                        
-                        <div class="results-section" id="results1">
-                            <!-- Results will be displayed here -->
-                        </div>
+                        <button class="submit-btn" data-article="1">Check My Answers</button>
+                        <div class="validation-error" id="validation1">Please answer all questions before submitting.</div>
+                        <div class="results-section" id="results1"></div>
                     </div>
                     
                     <div class="action-buttons">
@@ -874,90 +1150,141 @@
                 <!-- Article 2 -->
                 <article class="article" id="article2">
                     <h2 class="article-title">Understanding Debugging and Problem Solving</h2>
-                    <p class="article-subtitle">Learn how to find and fix errors in your code effectively</p>
+                    <p class="article-subtitle">Become a code detective - learn to hunt down bugs like a pro!</p>
                     
                     <div class="article-content">
-                        <h3>What is Debugging?</h3>
-                        <p>Debugging is the process of finding and fixing errors in your code. Every programmer, no matter how experienced, writes code with bugs. The key is knowing how to find and fix them efficiently.</p>
+                        <h3>Debugging: The Developer's Superpower</h3>
+                        <p>Let me tell you a secret: professional developers don't write perfect code on the first try. In fact, we spend most of our time fixing our own mistakes. The difference between beginners and pros isn't that pros don't make errors - it's that we've learned how to find and fix them efficiently.</p>
                         
-                        <p>Bugs can range from simple syntax errors to complex logical mistakes that cause your program to behave unexpectedly. Some bugs are obvious and easy to fix, while others can be subtle and difficult to track down.</p>
+                        <p>I used to think debugging was this mystical, frustrating process. Now I see it as a fun puzzle - I'm Sherlock Holmes hunting for clues in my code. And the best part? Every bug you solve makes you a better programmer.</p>
                         
-                        <p>The term "debugging" originated in the 1940s when Grace Hopper found an actual moth causing problems in the Harvard Mark II computer. While we don't deal with physical bugs in modern programming, the term has stuck for describing the process of fixing errors in code.</p>
+                        <h3>The Three Types of Code Bugs</h3>
+                        <p>Bugs come in different flavors, and knowing which type you're dealing with helps you solve them faster:</p>
                         
-                        <h3>Common Types of Bugs</h3>
-                        <p>Understanding the different types of bugs can help you identify and fix them more quickly:</p>
+                        <p><strong>Syntax Errors - The "You Can't Even Run It" Bugs</strong><br>
+                        These are like grammar mistakes in your code. The computer literally can't understand what you're trying to say. Missing semicolons, typos in variable names, unmatched brackets - these will stop your code before it even starts.</p>
                         
-                        <p><strong>Syntax Errors:</strong> These occur when you write code that doesn't follow the rules of the programming language. The computer can't understand what you're trying to do. Examples include missing semicolons, unmatched parentheses, or misspelled keywords.</p>
+                        <div class="code-block">
+                            <span class="code-comment">// Example of syntax errors</span><br>
+                            <span class="code-keyword">function</span> <span class="code-function">calculateSum</span>(a, b) {<br>
+                            &nbsp;&nbsp;<span class="code-comment">// Missing closing parenthesis - syntax error!</span><br>
+                            &nbsp;&nbsp;<span class="code-keyword">return</span> a + b;<br>
+                            <span class="code-comment">// Missing closing brace - another syntax error!</span>
+                        </div>
                         
-                        <p><strong>Runtime Errors:</strong> These happen while your program is running. The code syntax is correct, but something goes wrong during execution. Examples include dividing by zero, trying to access a file that doesn't exist, or running out of memory.</p>
+                        <p><strong>Runtime Errors - The "It Worked Until Now" Bugs</strong><br>
+                        Your code looks perfect, runs fine... until it doesn't. These bugs appear while your program is running. Trying to access data that doesn't exist, dividing by zero, or running out of memory are classic examples.</p>
                         
-                        <p><strong>Logical Errors:</strong> These are the most difficult to find. Your code runs without crashing, but it produces the wrong result. The computer is doing exactly what you told it to do, but what you told it to do isn't what you actually wanted.</p>
+                        <div class="code-block">
+                            <span class="code-comment">// Example of runtime error</span><br>
+                            <span class="code-keyword">const</span> user = {<br>
+                            &nbsp;&nbsp;name: <span class="code-string">"John"</span>,<br>
+                            &nbsp;&nbsp;age: 30<br>
+                            };<br><br>
+                            
+                            <span class="code-comment">// This will cause a runtime error if user.profile doesn't exist</span><br>
+                            console.<span class="code-function">log</span>(user.profile.email); <span class="code-comment">// TypeError!</span>
+                        </div>
                         
-                        <p><strong>Integration Errors:</strong> These occur when different parts of your program don't work together correctly. For example, one function might expect data in a different format than what another function provides.</p>
+                        <p><strong>Logical Errors - The "Silent But Deadly" Bugs</strong><br>
+                        These are the trickiest ones. Your code runs without crashing, but it gives you the wrong answer. The computer is doing exactly what you told it to do - the problem is that what you told it isn't what you actually wanted.</p>
                         
-                        <h3>Common Debugging Techniques</h3>
-                        <p>There are several approaches to debugging. The most basic is using print statements to track how your program is running. More advanced techniques include using debugger tools that let you pause your code and examine what's happening.</p>
-                        
-                        <p><strong>Print Debugging:</strong> This involves adding print statements to your code to display the values of variables at different points. It's simple but effective for understanding what's happening in your code.</p>
-                        
-                        <p><strong>Using a Debugger:</strong> Most modern development environments come with built-in debuggers. These tools allow you to set breakpoints (points where execution pauses), step through code line by line, and inspect variable values.</p>
-                        
-                        <p><strong>Rubber Duck Debugging:</strong> This technique involves explaining your code line by line to someone else (or even a rubber duck). The process of explaining often helps you spot errors you might have missed.</p>
-                        
-                        <p><strong>Binary Search Debugging:</strong> If you have a large codebase and don't know where the bug is, you can use a binary search approach. Comment out half of your code and see if the bug persists. If it does, the bug is in the remaining half. Repeat until you've narrowed down the location.</p>
+                        <div class="code-block">
+                            <span class="code-comment">// Example of logical error</span><br>
+                            <span class="code-keyword">function</span> <span class="code-function">calculateAverage</span>(numbers) {<br>
+                            &nbsp;&nbsp;<span class="code-keyword">let</span> sum = 0;<br>
+                            &nbsp;&nbsp;<span class="code-keyword">for</span> (<span class="code-keyword">let</span> i = 0; i < numbers.length; i++) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;sum += numbers[i];<br>
+                            &nbsp;&nbsp;}<br>
+                            &nbsp;&nbsp;<span class="code-comment">// Logical error: should divide by numbers.length, not numbers.length - 1</span><br>
+                            &nbsp;&nbsp;<span class="code-keyword">return</span> sum / (numbers.length - 1);<br>
+                            }
+                        </div>
                         
                         <div class="step-by-step">
-                            <h3>Debugging a Simple Function</h3>
+                            <h3>The Debugging Process That Actually Works</h3>
                             <div class="step">
                                 <div class="step-number">1</div>
-                                <div class="step-content">Identify the problem - what is the code doing vs what should it do? Be specific about the expected behavior and the actual behavior.</div>
+                                <div class="step-content"><strong>Reproduce the bug consistently.</strong> Before you can fix a bug, you need to be able to make it happen reliably. What exact steps cause the problem?</div>
                             </div>
                             <div class="step">
                                 <div class="step-number">2</div>
-                                <div class="step-content">Check the inputs - are they what you expect? Print or log the input values to verify they match your expectations.</div>
+                                <div class="step-content"><strong>Isolate the problem area.</strong> Use the "binary search" method - comment out half your code and see if the bug persists. Keep narrowing it down until you find the exact lines causing trouble.</div>
                             </div>
                             <div class="step">
                                 <div class="step-number">3</div>
-                                <div class="step-content">Add console.log statements to track variable values at different points in your code. This helps you see where values change unexpectedly.</div>
+                                <div class="step-content"><strong>Check your assumptions.</strong> We all make assumptions when coding. "This variable should contain X," "This function should return Y." Write these assumptions down and verify each one.</div>
                             </div>
                             <div class="step">
                                 <div class="step-number">4</div>
-                                <div class="step-content">Use breakpoints to pause execution at specific points. Most browsers and IDEs allow you to set breakpoints where execution will stop so you can inspect the current state.</div>
+                                <div class="step-content"><strong>Use the right tools.</strong> Console.log is your friend, but don't forget about breakpoints, the debugger statement, and browser dev tools. They're like having X-ray vision for your code.</div>
                             </div>
                             <div class="step">
                                 <div class="step-number">5</div>
-                                <div class="step-content">Step through your code line by line. Use the "step into," "step over," and "step out" features of your debugger to understand the flow of execution.</div>
-                            </div>
-                            <div class="step">
-                                <div class="step-number">6</div>
-                                <div class="step-content">Check your assumptions. Are you making any assumptions about how certain functions work or what values variables should have? Verify these assumptions.</div>
-                            </div>
-                            <div class="step">
-                                <div class="step-number">7</div>
-                                <div class="step-content">Isolate the problem. Try to reproduce the issue with the smallest possible piece of code. This helps eliminate unrelated factors.</div>
-                            </div>
-                            <div class="step">
-                                <div class="step-number">8</div>
-                                <div class="step-content">Test your fix to make sure it works. Don't just verify that it fixes the current issue - make sure it doesn't break anything else.</div>
+                                <div class="step-content"><strong>Fix and test.</strong> Make your change, then test not just that you fixed the bug, but that you didn't break anything else. Good developers break things; great developers fix them properly.</div>
                             </div>
                         </div>
                         
-                        <h3>Systematic Problem Solving</h3>
-                        <p>When faced with a coding problem, break it down into smaller parts. Solve each part individually, then combine them. This approach makes complex problems more manageable.</p>
+                        <div class="diagram">
+                            <h4>Debugging Workflow</h4>
+                            <div class="diagram-box">Identify</div>
+                            <div class="diagram-arrow">→</div>
+                            <div class="diagram-box">Reproduce</div>
+                            <div class="diagram-arrow">→</div>
+                            <div class="diagram-box">Isolate</div>
+                            <div class="diagram-arrow">→</div>
+                            <div class="diagram-box">Fix</div>
+                            <div class="diagram-arrow">→</div>
+                            <div class="diagram-box">Test</div>
+                        </div>
                         
-                        <p>The problem-solving process typically involves these steps:</p>
+                        <h3>My Favorite Debugging Tricks</h3>
+                        <p>After years of debugging, I've collected some techniques that save me hours:</p>
+                        
+                        <p><strong>The Rubber Duck Method</strong><br>
+                        Explain your code line by line to a rubber duck (or a patient friend). The act of explaining often reveals the problem. I can't tell you how many times I've found bugs while trying to explain "what this obviously correct code does."</p>
+                        
+                        <p><strong>The "Walk Away" Technique</strong><br>
+                        When you're stuck, physically leave your computer. Go for a walk, make coffee, do anything else. Your subconscious will keep working on the problem, and you'll often return with fresh insight.</p>
+                        
+                        <p><strong>The "Simplify and Rebuild" Approach</strong><br>
+                        If a piece of code is giving you trouble, delete it and rewrite it from scratch. Often, the second version is cleaner and works better anyway.</p>
+                        
+                        <div class="visualization">
+                            <h4>Debugging Mindset Shift</h4>
+                            <p><strong>Instead of thinking:</strong> "Why is this stupid code broken?"<br>
+                            <strong>Try thinking:</strong> "What assumption am I making that might be wrong?"</p>
+                            <p>This small shift turns frustration into curiosity and makes debugging much more enjoyable.</p>
+                        </div>
+                        
+                        <h3>Common Beginner Debugging Mistakes</h3>
+                        <p>We've all been there - these are the traps I see new developers fall into:</p>
                         <ol>
-                            <li><strong>Understand the problem:</strong> Make sure you know exactly what needs to be solved. Ask questions if anything is unclear.</li>
-                            <li><strong>Plan your solution:</strong> Think about how you'll approach the problem before writing code. Consider different strategies and choose the best one.</li>
-                            <li><strong>Divide the problem:</strong> Break the main problem into smaller, more manageable subproblems.</li>
-                            <li><strong>Solve the subproblems:</strong> Focus on solving one subproblem at a time.</li>
-                            <li><strong>Combine the solutions:</strong> Once all subproblems are solved, combine them to solve the main problem.</li>
-                            <li><strong>Test and refine:</strong> Test your solution with different inputs and edge cases. Refine it if necessary.</li>
+                            <li><strong>Changing random things hoping something works</strong> - This usually makes things worse</li>
+                            <li><strong>Not reading error messages carefully</strong> - The answer is often right there in the console</li>
+                            <li><strong>Assuming the problem is everywhere</strong> - Bugs usually have a specific location</li>
+                            <li><strong>Not taking breaks</strong> - Tired brains find fewer bugs</li>
                         </ol>
+                        
+                        <div class="code-block">
+                            <span class="code-comment">// Example of using console.log for debugging</span><br>
+                            <span class="code-keyword">function</span> <span class="code-function">calculateTotal</span>(items) {<br>
+                            &nbsp;&nbsp;console.<span class="code-function">log</span>(<span class="code-string">"Items received:"</span>, items); <span class="code-comment">// Debug line</span><br>
+                            &nbsp;&nbsp;<span class="code-keyword">let</span> total = 0;<br>
+                            &nbsp;&nbsp;<span class="code-keyword">for</span> (<span class="code-keyword">let</span> i = 0; i < items.length; i++) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;console.<span class="code-function">log</span>(<span class="code-string">"Processing item:"</span>, items[i]); <span class="code-comment">// Debug line</span><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;total += items[i].price;<br>
+                            &nbsp;&nbsp;}<br>
+                            &nbsp;&nbsp;console.<span class="code-function">log</span>(<span class="code-string">"Final total:"</span>, total); <span class="code-comment">// Debug line</span><br>
+                            &nbsp;&nbsp;<span class="code-keyword">return</span> total;<br>
+                            }
+                        </div>
+                        
+                        <p>See how those console.log statements give you visibility into what's happening at each step? That's debugging in action!</p>
                     </div>
                     
                     <div class="exercise-section">
-                        <h3 class="exercise-title">Test Your Knowledge</h3>
+                        <h3 class="exercise-title">Debugging Knowledge Check</h3>
                         <div class="question">
                             <p>1. What is the first step in debugging?</p>
                             <div class="options">
@@ -1138,11 +1465,9 @@
                             </div>
                         </div>
                         
-                        <button class="submit-btn" data-article="2">Submit Answers</button>
-                        
-                        <div class="results-section" id="results2">
-                            <!-- Results will be displayed here -->
-                        </div>
+                        <button class="submit-btn" data-article="2">Check My Answers</button>
+                        <div class="validation-error" id="validation2">Please answer all questions before submitting.</div>
+                        <div class="results-section" id="results2"></div>
                     </div>
                     
                     <div class="action-buttons">
@@ -1151,7 +1476,8 @@
                     </div>
                 </article>
                 
-                <!-- Additional articles would be here -->
+                <!-- Additional articles would continue here -->
+                
             </div>
             
             <!-- Sidebar -->
@@ -1170,9 +1496,9 @@
                     <ul class="sidebar-links">
                         <li><a href="#article1"><i class="fas fa-arrow-right"></i> Project-based Tutorials</a></li>
                         <li><a href="#article2"><i class="fas fa-arrow-right"></i> Debugging & Problem Solving</a></li>
-                        <li><a href="#"><i class="fas fa-arrow-right"></i> Algorithm Visualizations</a></li>
-                        <li><a href="#"><i class="fas fa-arrow-right"></i> Mini Coding Challenges</a></li>
-                        <li><a href="#"><i class="fas fa-arrow-right"></i> Integrating APIs</a></li>
+                        <li><a href="#article3"><i class="fas fa-arrow-right"></i> Algorithm Visualizations</a></li>
+                        <li><a href="#article4"><i class="fas fa-arrow-right"></i> Mini Coding Challenges</a></li>
+                        <li><a href="#article5"><i class="fas fa-arrow-right"></i> Integrating APIs</a></li>
                     </ul>
                 </div>
                 
@@ -1235,33 +1561,73 @@
 
     <script>
         // Mobile Navigation Toggle
-        const navToggle = document.querySelector('.nav-toggle');
-        const navMenu = document.querySelector('.nav-menu');
-        const navClose = document.querySelector('.nav-close');
+        // Mobile Navigation Toggle
+const navToggle = document.querySelector('.nav-toggle');
+const navMenu = document.querySelector('.nav-menu');
+const navClose = document.querySelector('.nav-close');
+const menuBackdrop = document.getElementById('menuBackdrop');
+
+navToggle.addEventListener('click', () => {
+    navMenu.classList.add('active');
+    menuBackdrop.classList.add('active');
+    navToggle.style.display = 'none'; // Hide the menu icon
+    document.body.style.overflow = 'hidden';
+});
+
+navClose.addEventListener('click', () => {
+    navMenu.classList.remove('active');
+    menuBackdrop.classList.remove('active');
+    navToggle.style.display = 'block'; // Show the menu icon again
+    document.body.style.overflow = '';
+});
+
+menuBackdrop.addEventListener('click', () => {
+    navMenu.classList.remove('active');
+    menuBackdrop.classList.remove('active');
+    navToggle.style.display = 'block'; // Show the menu icon again
+    document.body.style.overflow = '';
+});
+
+// Close menu when clicking on a link
+document.querySelectorAll('.nav-menu a').forEach(link => {
+    link.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+        menuBackdrop.classList.remove('active');
+        navToggle.style.display = 'block'; // Show the menu icon again
+        document.body.style.overflow = '';
+    });
+});
         
-        navToggle.addEventListener('click', () => {
-            navMenu.classList.add('active');
-        });
-        
-        navClose.addEventListener('click', () => {
-            navMenu.classList.remove('active');
-        });
-        
-        // Close menu when clicking on a link
-        document.querySelectorAll('.nav-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                navMenu.classList.remove('active');
-            });
-        });
-        
-        // Quiz Submission
+        // Quiz Validation and Submission
         const submitButtons = document.querySelectorAll('.submit-btn');
         const loadingScreen = document.getElementById('loadingScreen');
         
         submitButtons.forEach(button => {
             button.addEventListener('click', function() {
                 const articleId = this.getAttribute('data-article');
+                const validationError = document.getElementById(`validation${articleId}`);
                 const resultsSection = document.getElementById(`results${articleId}`);
+                
+                // Check if all questions are answered
+                const questions = document.querySelectorAll(`#article${articleId} .question`);
+                let allAnswered = true;
+                
+                questions.forEach((question, index) => {
+                    const questionNumber = index + 1;
+                    const selectedOption = question.querySelector('input[type="radio"]:checked');
+                    if (!selectedOption) {
+                        allAnswered = false;
+                    }
+                });
+                
+                if (!allAnswered) {
+                    validationError.style.display = 'block';
+                    resultsSection.style.display = 'none';
+                    return;
+                }
+                
+                // Hide validation error if all questions are answered
+                validationError.style.display = 'none';
                 
                 // Show loading screen
                 loadingScreen.style.display = 'flex';
@@ -1275,21 +1641,21 @@
                     if (articleId === "1") {
                         resultsSection.innerHTML = `
                             <h3>Quiz Results</h3>
-                            <p>Question 1: Correct answer is <strong>B - You learn by building real applications</strong></p>
-                            <p>Question 2: Correct answer is <strong>C - Keep going and learn through doing</strong></p>
-                            <p>Question 3: Correct answer is <strong>A - It makes the project less overwhelming</strong></p>
-                            <p>Question 4: Correct answer is <strong>A - It demonstrates your skills to potential employers</strong></p>
-                            <p>Question 5: Correct answer is <strong>B - Use them as learning opportunities</strong></p>
-                            <p>Question 6: Correct answer is <strong>A - To save tasks between browser sessions</strong></p>
-                            <p>Question 7: Correct answer is <strong>A - It makes your code easier to read and maintain</strong></p>
-                            <p>Question 8: Correct answer is <strong>A - Improving your code as you learn better ways</strong></p>
-                            <p>Question 9: Correct answer is <strong>A - Personal portfolio website</strong></p>
-                            <p>Question 10: Correct answer is <strong>A - To explain what your project does and how to use it</strong></p>
-                            <p>You got 10 out of 10 questions correct!</p>
+                            <p>Question 1: Correct answer is <strong>A - You learn to solve real problems instead of just memorizing syntax</strong></p>
+                            <p>Question 2: Correct answer is <strong>B - Take a break and come back with fresh eyes</strong></p>
+                            <p>Question 3: Correct answer is <strong>A - Small projects are less overwhelming and help build confidence</strong></p>
+                            <p>Question 4: Correct answer is <strong>A - A simple calculator or to-do list app</strong></p>
+                            <p>Question 5: Correct answer is <strong>A - Typing helps you understand and remember the code better</strong></p>
+                            <p>Question 6: Correct answer is <strong>A - Accept that learning matters more than perfection</strong></p>
+                            <p>Question 7: Correct answer is <strong>A - You're more likely to stick with them and learn more</strong></p>
+                            <p>Question 8: Correct answer is <strong>A - Application Programming Interface</strong></p>
+                            <p>Question 9: Correct answer is <strong>A - It makes your app more robust and user-friendly</strong></p>
+                            <p>Question 10: Correct answer is <strong>A - Learning and understanding concepts, not perfection</strong></p>
+                            <p>Great job! You're on your way to becoming a project-building pro!</p>
                         `;
                     } else if (articleId === "2") {
                         resultsSection.innerHTML = `
-                            <h3>Quiz Results</h3>
+                            <h3>Debugging Quiz Results</h3>
                             <p>Question 1: Correct answer is <strong>B - Identify what the code is doing vs what it should do</strong></p>
                             <p>Question 2: Correct answer is <strong>A - It makes complex problems more manageable</strong></p>
                             <p>Question 3: Correct answer is <strong>A - Code that doesn't follow the rules of the programming language</strong></p>
@@ -1300,10 +1666,13 @@
                             <p>Question 8: Correct answer is <strong>A - To make sure it fixes the issue without breaking other things</strong></p>
                             <p>Question 9: Correct answer is <strong>A - Systematically narrowing down where a bug is located</strong></p>
                             <p>Question 10: Correct answer is <strong>A - Write clear code, use version control, and write tests</strong></p>
-                            <p>You got 10 out of 10 questions correct!</p>
+                            <p>Excellent! You're thinking like a true code detective now!</p>
                         `;
                     }
                     resultsSection.style.display = 'block';
+                    
+                    // Scroll to results
+                    resultsSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
                 }, 2000);
             });
         });
