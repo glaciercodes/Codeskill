@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debugging Mastery - CodeSkill</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2e7d32;
+            --primary-light: #4caf50;
+            --primary-dark: #1b5e20;
+            --text-color: #333;
+            --light-bg: #f9f9f9;
+            --white: #ffffff;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--white);
+            box-shadow: var(--box-shadow);
+            padding: 15px 0;
+            position: relative;
+        }
+
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .logo-section {
+            width: 100%;
+        }
+
+        .logo-title-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-right: 12px;
+        }
+
+        .site-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-right: 10px;
+        }
+
+        .site-subtitle {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.4;
+            width: 100%;
+        }
+
+        /* Navigation */
+        .nav-toggle {
+            display: block;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            cursor: pointer;
+            z-index: 1001;
+            position: absolute;
+            top: 15px;
+            right: 15px;
+        }
+
+        .nav-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 85%;
+            max-width: 300px;
+            height: 100vh;
+            background-color: var(--white);
+            flex-direction: column;
+            padding: 70px 20px 20px;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            transition: right 0.3s;
+            z-index: 999;
+            overflow-y: auto;
+        }
+
+        .nav-menu.active {
+            display: flex;
+            right: 0;
+        }
+
+        .nav-menu li {
+            margin: 0 0 15px 0;
+            width: 100%;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            font-size: 1rem;
+            padding: 12px 15px;
+            border-radius: var(--border-radius);
+            background-color: #f5f5f5;
+        }
+
+        .nav-menu a i {
+            margin-right: 10px;
+            font-size: 1.1rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary-color);
+            background-color: #e8f5e9;
+        }
+
+        .nav-close {
+            display: block;
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        /* Main Content */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            margin: 25px 0;
+        }
+
+        .articles-section {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 20px;
+            width: 100%;
+        }
+
+        .article {
+            margin-bottom: 35px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .article:last-child {
+            border-bottom: none;
+        }
+
+        .article-title {
+            color: var(--primary-dark);
+            margin-bottom: 12px;
+            font-size: 1.5rem;
+            line-height: 1.3;
+        }
+
+        .article-subtitle {
+            color: var(--primary-color);
+            margin-bottom: 18px;
+            font-size: 1.1rem;
+            font-style: italic;
+            line-height: 1.4;
+        }
+
+        .article-content {
+            margin-bottom: 20px;
+        }
+
+        .article-content h3 {
+            color: var(--primary-dark);
+            margin: 20px 0 12px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--primary-light);
+            font-size: 1.3rem;
+            line-height: 1.3;
+        }
+
+        .article-content p {
+            margin-bottom: 12px;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .article-content ul, .article-content ol {
+            margin: 12px 0 12px 20px;
+        }
+
+        .article-content li {
+            margin-bottom: 8px;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        .step-by-step {
+            background-color: #f5f5f5;
+            border-left: 4px solid var(--primary-color);
+            padding: 18px;
+            margin: 18px 0;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+
+        .step {
+            margin-bottom: 15px;
+            display: flex;
+        }
+
+        .step-number {
+            background-color: var(--primary-color);
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            flex-shrink: 0;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .step-content {
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .visualization {
+            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+            padding: 18px;
+            border-radius: var(--border-radius);
+            margin: 18px 0;
+            border: 1px solid #a5d6a7;
+        }
+
+        .visualization h4 {
+            color: var(--primary-dark);
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .visualization p {
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .code-block {
+            background-color: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: var(--border-radius);
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+
+        .code-comment {
+            color: #6a9955;
+        }
+
+        .code-keyword {
+            color: #569cd6;
+        }
+
+        .code-function {
+            color: #dcdcaa;
+        }
+
+        .code-string {
+            color: #ce9178;
+        }
+
+        .code-variable {
+            color: #9cdcfe;
+        }
+
+        .debug-tip {
+            background-color: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+
+        .debug-tip h4 {
+            color: #e65100;
+            margin-bottom: 8px;
+        }
+
+        .exercise-section {
+            background-color: #f0f7f0;
+            padding: 18px;
+            border-radius: var(--border-radius);
+            margin: 25px 0;
+        }
+
+        .exercise-title {
+            color: var(--primary-dark);
+            margin-bottom: 12px;
+            font-size: 1.2rem;
+        }
+
+        .question {
+            margin-bottom: 18px;
+            padding: 15px;
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .question p {
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 12px 0;
+        }
+
+        .option {
+            display: flex;
+            align-items: flex-start;
+            padding: 12px 15px;
+            background-color: var(--white);
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        .option:hover {
+            background-color: #f0f0f0;
+            border-color: var(--primary-light);
+        }
+
+        .option input {
+            margin-right: 10px;
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+
+        .submit-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            margin-top: 15px;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .submit-btn:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+
+        .validation-error {
+            color: #d32f2f;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            display: none;
+            text-align: center;
+            padding: 10px;
+            background-color: #ffebee;
+            border-radius: var(--border-radius);
+        }
+
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            display: none;
+        }
+
+        .loading-dots {
+            display: flex;
+            gap: 10px;
+        }
+
+        .dot {
+            width: 18px;
+            height: 18px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            animation: bounce 1.4s infinite ease-in-out both;
+        }
+
+        .dot:nth-child(1) {
+            animation-delay: -0.32s;
+        }
+
+        .dot:nth-child(2) {
+            animation-delay: -0.16s;
+        }
+
+        @keyframes bounce {
+            0%, 80%, 100% {
+                transform: scale(0);
+            }
+            40% {
+                transform: scale(1);
+            }
+        }
+
+        .results-section {
+            margin-top: 18px;
+            padding: 18px;
+            background-color: #e8f5e9;
+            border-radius: var(--border-radius);
+            display: none;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .action-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .share-btn, .download-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 20px;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+            width: 100%;
+        }
+
+        .share-btn {
+            background-color: #e3f2fd;
+            color: #1976d2;
+            border: 1px solid #bbdefb;
+        }
+
+        .download-btn {
+            background-color: #e8f5e9;
+            color: var(--primary-color);
+            border: 1px solid #c8e6c9;
+        }
+
+        .share-btn:hover {
+            background-color: #bbdefb;
+        }
+
+        .download-btn:hover {
+            background-color: #c8e6c9;
+        }
+
+        .action-buttons i {
+            margin-right: 8px;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 20px;
+            width: 100%;
+            order: -1;
+        }
+
+        .writer-info {
+            text-align: center;
+            padding-bottom: 18px;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 18px;
+        }
+
+        .writer-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary-dark);
+            margin-bottom: 5px;
+        }
+
+        .writer-link {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .last-updated {
+            font-size: 0.9rem;
+            color: #777;
+            margin-bottom: 12px;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 12px;
+        }
+
+        .social-icons a {
+            color: var(--primary-color);
+            font-size: 1.3rem;
+            transition: color 0.3s;
+        }
+
+        .social-icons a:hover {
+            color: var(--primary-dark);
+        }
+
+        .sidebar-section {
+            margin-bottom: 25px;
+        }
+
+        .sidebar-title {
+            color: var(--primary-dark);
+            margin-bottom: 12px;
+            font-size: 1.2rem;
+        }
+
+        .sidebar-links {
+            list-style: none;
+        }
+
+        .sidebar-links li {
+            margin-bottom: 10px;
+        }
+
+        .sidebar-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+            transition: color 0.3s;
+            font-size: 1rem;
+            padding: 10px 0;
+        }
+
+        .sidebar-links a i {
+            margin-right: 10px;
+            color: var(--primary-color);
+            width: 20px;
+            text-align: center;
+        }
+
+        .sidebar-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-dark);
+            color: white;
+            padding: 30px 0;
+            margin-top: 40px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .footer-section {
+            width: 100%;
+        }
+
+        .footer-title {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #a5d6a7;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 8px;
+        }
+
+        .footer-links a {
+            color: #e8f5e9;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .footer-links a:hover {
+            color: #a5d6a7;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid #4caf50;
+            color: #a5d6a7;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (min-width: 768px) {
+            .container {
+                max-width: 720px;
+                padding: 0 20px;
+            }
+            
+            .header-content {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+            
+            .logo-section {
+                width: auto;
+            }
+            
+            .logo-title-container {
+                margin-bottom: 0;
+            }
+            
+            .site-subtitle {
+                width: 100%;
+            }
+            
+            .nav-toggle {
+                display: none;
+            }
+            
+            .nav-menu {
+                display: flex;
+                position: static;
+                width: auto;
+                height: auto;
+                flex-direction: row;
+                padding: 0;
+                box-shadow: none;
+                background: transparent;
+            }
+            
+            .nav-menu li {
+                margin: 0 0 0 20px;
+                width: auto;
+            }
+            
+            .nav-menu a {
+                padding: 8px 12px;
+                background: transparent;
+                font-size: 0.9rem;
+            }
+            
+            .nav-close {
+                display: none;
+            }
+            
+            .main-content {
+                flex-direction: row;
+            }
+            
+            .articles-section {
+                width: 70%;
+            }
+            
+            .sidebar {
+                width: 30%;
+                order: 0;
+            }
+            
+            .action-buttons {
+                flex-direction: row;
+            }
+            
+            .share-btn, .download-btn {
+                width: auto;
+            }
+            
+            .submit-btn {
+                width: auto;
+            }
+            
+            .footer-content {
+                flex-direction: row;
+            }
+            
+            .footer-section {
+                width: 33.33%;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .container {
+                max-width: 960px;
+            }
+            
+            .articles-section {
+                width: 75%;
+            }
+            
+            .sidebar {
+                width: 25%;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .container {
+                max-width: 1140px;
+            }
+        }
+
+        /* Improve touch targets for mobile */
+        .option, .submit-btn, .share-btn, .download-btn, .nav-menu a {
+            min-height: 44px;
+        }
+        
+        .nav-menu a, .sidebar-links a {
+            min-height: 44px;
+            align-items: center;
+        }
+
+        /* Prevent horizontal scrolling */
+        html, body {
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+        
+        /* Backdrop for mobile menu */
+        .menu-backdrop {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 998;
+        }
+        
+        .menu-backdrop.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Backdrop for mobile menu -->
+    <div class="menu-backdrop" id="menuBackdrop"></div>
+    
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-section">
+                    <div class="logo-title-container">
+                        <i class="fas fa-code logo"></i>
+                        <h1 class="site-title">CodeSkill</h1>
+                    </div>
+                    <p class="site-subtitle">CodeSkill offers free hands-on coding tutorials, practical projects, and problem-solving challenges, guiding beginners and advanced learners alike to master programming languages, build real applications, and develop skills step by step.</p>
+                </div>
+                
+                <button class="nav-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <ul class="nav-menu">
+                    <button class="nav-close">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="about.html"><i class="fas fa-info-circle"></i> About Us</a></li>
+                    <li><a href="#"><i class="fas fa-envelope"></i> Contact Us</a></li>
+                    <li><a href="#"><i class="fas fa-file-contract"></i> Terms of Service</a></li>
+                    <li><a href="#"><i class="fas fa-shield-alt"></i> Privacy Policy</a></li>
+                    <li><a href="#"><i class="fas fa-user-edit"></i> Writer</a></li>
+                    <li><a href="#"><i class="fas fa-bell"></i> Subscribe</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="main-content">
+            <div class="articles-section">
+                <!-- Main Article -->
+                <article class="article" id="debugging-mastery">
+                    <h2 class="article-title">Debugging Mastery - Fix Errors Like a Pro Developer</h2>
+                    <p class="article-subtitle">Stop fearing bugs and start hunting them down with confidence!</p>
+                    
+                    <div class="article-content">
+                        <h3>The Day I Realized Debugging Was a Superpower</h3>
+                        <p>I'll never forget my first major bug as a junior developer. It was 2 AM, I was on my fifth cup of coffee, and I'd been staring at the same 50 lines of code for six hours straight. The application kept crashing, and I had no idea why.</p>
+                        
+                        <p>That's when my senior developer sat down next to me. In 15 minutes, she found the problem - a simple off-by-one error that I'd looked at a dozen times without seeing. She didn't have magical powers; she had a systematic approach to debugging.</p>
+                        
+                        <p>That night changed everything for me. I realized debugging isn't about being "smart" - it's about having the right process. And today, I'm going to teach you that process.</p>
+                        
+                        <div class="visualization">
+                            <h4>Debugging Mindset Shift</h4>
+                            <p><strong>Beginner Thinking:</strong> "Why is my code broken? I'm terrible at this!"<br>
+                            <strong>Pro Thinking:</strong> "My code isn't doing what I expect. What assumption am I making that might be wrong?"</p>
+                            <p>This small shift turns panic into curiosity and frustration into problem-solving.</p>
+                        </div>
+                        
+                        <h3>The Three Types of Bugs You'll Actually Encounter</h3>
+                        <p>Before we dive into fixing bugs, let's understand what we're dealing with. Bugs come in three main flavors:</p>
+                        
+                        <p><strong>Syntax Errors - The "Can't Even Run" Bugs</strong><br>
+                        These are like spelling mistakes in your code. The computer literally can't understand what you're trying to say because you broke the language rules.</p>
+                        
+                        <div class="code-block">
+                            <span class="code-comment">// Common syntax errors examples</span><br>
+                            <span class="code-keyword">let</span> <span class="code-variable">userName</span> = <span class="code-string">"John"</span>  <span class="code-comment">// Missing semicolon</span><br>
+                            <span class="code-keyword">if</span> (x = 5) { <span class="code-comment">// Single equals instead of double or triple</span><br>
+                            &nbsp;&nbsp;console.log(<span class="code-string">"x is 5"</span>)<br>
+                            <span class="code-comment">// Missing closing brace</span>
+                        </div>
+                        
+                        <p><strong>Runtime Errors - The "Worked Until Now" Bugs</strong><br>
+                        Your code looks perfect but crashes when you run it. These happen when your code tries to do something impossible, like accessing data that doesn't exist.</p>
+                        
+                        <div class="code-block">
+                            <span class="code-comment">// Runtime error example</span><br>
+                            <span class="code-keyword">const</span> <span class="code-variable">users</span> = [];<br>
+                            <span class="code-comment">// This will crash because users[0] doesn't exist</span><br>
+                            console.log(<span class="code-variable">users</span>[0].name); <span class="code-comment">// TypeError!</span>
+                        </div>
+                        
+                        <p><strong>Logical Errors - The "Silent But Wrong" Bugs</strong><br>
+                        These are the trickiest. Your code runs without crashing but gives you the wrong answer. The computer is doing exactly what you told it - the problem is what you told it isn't what you wanted.</p>
+                        
+                        <div class="code-block">
+                            <span class="code-comment">// Logical error example</span><br>
+                            <span class="code-keyword">function</span> <span class="code-function">calculateDiscount</span>(price, discountPercent) {<br>
+                            &nbsp;&nbsp;<span class="code-comment">// Logical error: should be price * (discountPercent / 100)</span><br>
+                            &nbsp;&nbsp;<span class="code-keyword">return</span> price * discountPercent;<br>
+                            }<br>
+                            <span class="code-comment">// This will give $2000 instead of $20 for a 20% discount on $100</span><br>
+                            <span class="code-function">calculateDiscount</span>(100, 20);
+                        </div>
+                        
+                        <div class="step-by-step">
+                            <h3>The 5-Step Debugging Process That Never Fails</h3>
+                            <div class="step">
+                                <div class="step-number">1</div>
+                                <div class="step-content"><strong>Reproduce the Bug Consistently</strong><br>Before you can fix a bug, you need to be able to make it happen reliably. What exact steps cause the problem? Write them down. If you can't reproduce it, you can't fix it.</div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">2</div>
+                                <div class="step-content"><strong>Isolate the Problem Area</strong><br>Use the "binary search" method - comment out half your code and see if the bug persists. Keep narrowing it down until you find the exact lines causing trouble.</div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">3</div>
+                                <div class="step-content"><strong>Check Your Assumptions</strong><br>We all make assumptions when coding. "This variable should contain X," "This function should return Y." Write these assumptions down and verify each one.</div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">4</div>
+                                <div class="step-content"><strong>Use the Right Tools</strong><br>Console.log is your friend, but don't forget about breakpoints, the debugger statement, and browser dev tools. They're like having X-ray vision for your code.</div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">5</div>
+                                <div class="step-content"><strong>Fix and Test</strong><br>Make your change, then test not just that you fixed the bug, but that you didn't break anything else. Good developers break things; great developers fix them properly.</div>
+                            </div>
+                        </div>
+                        
+                        <h3>My Favorite Debugging Tricks That Save Hours</h3>
+                        <p>After years of debugging, I've collected techniques that consistently save me time and frustration:</p>
+                        
+                        <div class="debug-tip">
+                            <h4>The Rubber Duck Method</h4>
+                            <p>Explain your code line by line to a rubber duck (or a patient friend). The act of explaining often reveals the problem. I can't tell you how many times I've found bugs while trying to explain "what this obviously correct code does."</p>
+                        </div>
+                        
+                        <div class="debug-tip">
+                            <h4>The "Walk Away" Technique</h4>
+                            <p>When you're stuck, physically leave your computer. Go for a walk, make coffee, do anything else. Your subconscious will keep working on the problem, and you'll often return with fresh insight.</p>
+                        </div>
+                        
+                        <div class="debug-tip">
+                            <h4>Console.log Like a Pro</h4>
+                            <p>Don't just log variables - log with context and use different styles to make outputs easier to read:</p>
+                            <div class="code-block">
+                                <span class="code-comment">// Better console.log usage</span><br>
+                                console.log(<span class="code-string">'🟢 User data received:'</span>, user);<br>
+                                console.log(<span class="code-string">'🔴 ERROR in calculateTotal:'</span>, error);<br>
+                                console.table(users); <span class="code-comment">// For arrays/objects</span><br>
+                                console.group(<span class="code-string">'API Call Details'</span>);<br>
+                                &nbsp;&nbsp;console.log(<span class="code-string">'URL:'</span>, url);<br>
+                                &nbsp;&nbsp;console.log(<span class="code-string">'Method:'</span>, method);<br>
+                                console.groupEnd();
+                            </div>
+                        </div>
+                        
+                        <h3>Common Beginner Debugging Mistakes to Avoid</h3>
+                        <p>We've all been there - these are the traps I see new developers fall into repeatedly:</p>
+                        
+                        <ol>
+                            <li><strong>Changing random things hoping something works</strong> - This usually makes things worse and harder to debug</li>
+                            <li><strong>Not reading error messages carefully</strong> - The answer is often right there in the console</li>
+                            <li><strong>Assuming the problem is everywhere</strong> - Bugs usually have a specific location</li>
+                            <li><strong>Not taking breaks</strong> - Tired brains find fewer bugs</li>
+                            <li><strong>Forgetting to check the simplest things first</strong> - Is the file saved? Is the server running?</li>
+                        </ol>
+                        
+                        <div class="visualization">
+                            <h4>Debugging Workflow Visualization</h4>
+                            <p><strong>Identify → Reproduce → Isolate → Hypothesize → Test → Fix → Verify</strong></p>
+                            <p>Each step builds on the previous one. Skipping steps usually means more time debugging.</p>
+                        </div>
+                        
+                        <h3>Browser Dev Tools: Your New Best Friend</h3>
+                        <p>Modern browsers come with incredible debugging tools built right in. Here's what you should master:</p>
+                        
+                        <p><strong>Breakpoints</strong> - Pause your code at specific lines to inspect what's happening</p>
+                        <p><strong>Step Through</strong> - Execute your code line by line to see exactly what happens</p>
+                        <p><strong>Watch Expressions</strong> - Monitor specific variables as your code runs</p>
+                        <p><strong>Network Tab</strong> - See exactly what data is being sent and received</p>
+                        
+                        <div class="code-block">
+                            <span class="code-comment">// Using the debugger statement</span><br>
+                            <span class="code-keyword">function</span> <span class="code-function">complexCalculation</span>(data) {<br>
+                            &nbsp;&nbsp;<span class="code-keyword">debugger</span>; <span class="code-comment">// Execution will pause here</span><br>
+                            &nbsp;&nbsp;<span class="code-comment">// Your complex code here</span><br>
+                            &nbsp;&nbsp;<span class="code-keyword">return</span> result;<br>
+                            }
+                        </div>
+                        
+                        <h3>When to Ask for Help (And How to Do It Right)</h3>
+                        <p>Even the best developers get stuck sometimes. Here's how to ask for help effectively:</p>
+                        
+                        <ul>
+                            <li><strong>Try for at least 30 minutes first</strong> - You'll learn more by struggling a bit</li>
+                            <li><strong>Prepare your question</strong> - What have you tried? What did you expect to happen? What actually happened?</li>
+                            <li><strong>Include relevant code</strong> - But not your entire project</li>
+                            <li><strong>Show your error messages</strong> - Copy the exact text, don't paraphrase</li>
+                        </ul>
+                        
+                        <div class="debug-tip">
+                            <h4>Pro Tip: The 15-Minute Rule</h4>
+                            <p>If you've been stuck on the same bug for 15 minutes without making progress, try a different approach or take a break. Staring at the same code for hours rarely helps.</p>
+                        </div>
+                        
+                        <h3>Debugging in the Real World</h3>
+                        <p>Professional developers don't write perfect code - we just get really good at finding and fixing our mistakes quickly. The difference between beginners and pros isn't that pros don't make errors; it's that we've developed efficient debugging habits.</p>
+                        
+                        <p>Remember: Every bug you solve makes you a better programmer. The struggle is where the learning happens.</p>
+                        
+                        <div class="visualization">
+                            <h4>Your Debugging Journey</h4>
+                            <p><strong>Beginner:</strong> "My code is broken and I don't know why!"<br>
+                            <strong>Intermediate:</strong> "I can find and fix most bugs with console.log"<br>
+                            <strong>Advanced:</strong> "I systematically track down even the trickiest bugs"<br>
+                            <strong>Expert:</strong> "I anticipate potential bugs before they happen"</p>
+                            <p>You're on your way from beginner to expert. Keep going!</p>
+                        </div>
+                    </div>
+                    
+                    <div class="exercise-section">
+                        <h3 class="exercise-title">Test Your Debugging Knowledge</h3>
+                        <div class="question">
+                            <p>1. What's the first thing you should do when you encounter a bug?</p>
+                            <div class="options">
+                                <label class="option">
+                                    <input type="radio" name="q1" value="a"> 
+                                    <span>Start changing random parts of the code to see what happens</span>
+                                </label>
+                                <label class="option">
+                                    <input type="radio" name="q1" value="b"> 
+                                    <span>Reproduce the bug consistently so you understand when it happens</span>
+                                </label>
+                                <label class="option">
+                                    <input type="radio" name="q1" value="c"> 
+                                    <span>Immediately ask someone else for help</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="question">
+                            <p>2. What is the "rubber duck" debugging method?</p>
+                            <div class="options">
+                                <label class="option">
+                                    <input type="radio" name="q2" value="a"> 
+                                    <span>Using a special debugging tool shaped like a duck</span>
+                                </label>
+                                <label class="option">
+                                    <input type="radio" name="q2" value="b"> 
+                                    <span>Explaining your code line by line to someone (or something) else</span>
+                                </label>
+                                <label class="option">
+                                    <input type="radio" name="q2" value="c"> 
+                                    <span>Taking a break and going for a walk</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="question">
+                            <p>3. Which type of bug causes your code to crash while running?</p>
+                            <div class="options">
+                                <label class="option">
+                                    <input type="radio" name="q3" value="a"> 
+                                    <span>Syntax error</span>
+                                </label>
+                                <label class="option">
+                                    <input type="radio" name="q3" value="b"> 
+                                    <span>Runtime error</span>
+                                </label>
+                                <label class="option">
+                                    <input type="radio" name="q3" value="c"> 
+                                    <span>Logical error</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="question">
+                            <p>4. What does the "binary search" method in debugging involve?</p>
+                            <div class="options">
+                                <label class="option">
+                                    <input type="radio" name="q4" value="a"> 
+                                    <span>Searching for bugs in binary files</span>
+                                </label>
+                                <label class="option">
+                                    <input type="radio" name="q4" value="b"> 
+                                    <span>Systematically narrowing down where the bug is located</span>
+                                </label>
+                                <label class="option">
+                                    <input type="radio" name="q4" value="c"> 
+                                    <span>Debugging code that uses binary numbers</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="question">
+                            <p>5. Why is it important to take breaks when debugging?</p>
+                            <div class="options">
+                                <label class="option">
+                                    <input type="radio" name="q5" value="a"> 
+                                    <span>Tired brains are less effective at finding patterns and solutions</span>
+                                </label>
+                                <label class="option">
+                                    <input type="radio" name="q5" value="b"> 
+                                    <span>It gives you an excuse to stop working</span>
+                                </label>
+                                <label class="option">
+                                    <input type="radio" name="q5" value="c"> 
+                                    <span>Bugs sometimes fix themselves if you wait long enough</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <button class="submit-btn" data-article="debugging">Check My Answers</button>
+                        <div class="validation-error" id="validation-debugging">Please answer all questions before submitting.</div>
+                        <div class="results-section" id="results-debugging"></div>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button class="share-btn"><i class="fas fa-share-alt"></i> Share This Article</button>
+                        <button class="download-btn"><i class="fas fa-download"></i> Download Article</button>
+                    </div>
+                </article>
+            </div>
+            
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div class="writer-info">
+                    <h3 class="writer-name"><a href="#" class="writer-link">Mike Adenuga</a></h3>
+                    <p class="last-updated">Last updated: June 15, 2023</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title">Quick Links</h3>
+                    <ul class="sidebar-links">
+                        <li><a href="index.html"><i class="fas fa-arrow-right"></i> Project-based Tutorials</a></li>
+                        <li><a href="#"><i class="fas fa-arrow-right"></i> Debugging Mastery</a></li>
+                        <li><a href="#"><i class="fas fa-arrow-right"></i> Algorithm Visualizations</a></li>
+                        <li><a href="#"><i class="fas fa-arrow-right"></i> Mini Coding Challenges</a></li>
+                        <li><a href="#"><i class="fas fa-arrow-right"></i> Integrating APIs</a></li>
+                    </ul>
+                </div>
+                
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title">Debugging Resources</h3>
+                    <ul class="sidebar-links">
+                        <li><a href="#"><i class="fas fa-book"></i> Common Error Patterns</a></li>
+                        <li><a href="#"><i class="fas fa-code"></i> Debugging Code Examples</a></li>
+                        <li><a href="#"><i class="fas fa-video"></i> Browser Dev Tools Guide</a></li>
+                        <li><a href="#"><i class="fas fa-project-diagram"></i> Debugging Workflows</a></li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-title">CodeSkill</h3>
+                    <p>Free hands-on coding tutorials, practical projects, and problem-solving challenges for all skill levels.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3 class="footer-title">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3 class="footer-title">Legal</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 CodeSkill. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-dots">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile Navigation Toggle
+        const navToggle = document.querySelector('.nav-toggle');
+        const navMenu = document.querySelector('.nav-menu');
+        const navClose = document.querySelector('.nav-close');
+        const menuBackdrop = document.getElementById('menuBackdrop');
+        
+        navToggle.addEventListener('click', () => {
+            navMenu.classList.add('active');
+            menuBackdrop.classList.add('active');
+            navToggle.style.display = 'none'; // Hide the menu icon
+            document.body.style.overflow = 'hidden';
+        });
+        
+        navClose.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+            menuBackdrop.classList.remove('active');
+            navToggle.style.display = 'block'; // Show the menu icon again
+            document.body.style.overflow = '';
+        });
+        
+        menuBackdrop.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+            menuBackdrop.classList.remove('active');
+            navToggle.style.display = 'block'; // Show the menu icon again
+            document.body.style.overflow = '';
+        });
+        
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                menuBackdrop.classList.remove('active');
+                navToggle.style.display = 'block'; // Show the menu icon again
+                document.body.style.overflow = '';
+            });
+        });
+        
+        // Quiz Validation and Submission
+        const submitButtons = document.querySelectorAll('.submit-btn');
+        const loadingScreen = document.getElementById('loadingScreen');
+        
+        submitButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const articleId = this.getAttribute('data-article');
+                const validationError = document.getElementById(`validation-${articleId}`);
+                const resultsSection = document.getElementById(`results-${articleId}`);
+                
+                // Check if all questions are answered
+                const questions = document.querySelectorAll(`#${articleId}-mastery .question`);
+                let allAnswered = true;
+                
+                questions.forEach((question, index) => {
+                    const questionNumber = index + 1;
+                    const selectedOption = question.querySelector('input[type="radio"]:checked');
+                    if (!selectedOption) {
+                        allAnswered = false;
+                    }
+                });
+                
+                if (!allAnswered) {
+                    validationError.style.display = 'block';
+                    resultsSection.style.display = 'none';
+                    return;
+                }
+                
+                // Hide validation error if all questions are answered
+                validationError.style.display = 'none';
+                
+                // Show loading screen
+                loadingScreen.style.display = 'flex';
+                
+                // Simulate processing time
+                setTimeout(() => {
+                    // Hide loading screen
+                    loadingScreen.style.display = 'none';
+                    
+                    // Show results
+                    if (articleId === "debugging") {
+                        resultsSection.innerHTML = `
+                            <h3>Debugging Quiz Results</h3>
+                            <p>Question 1: Correct answer is <strong>B - Reproduce the bug consistently so you understand when it happens</strong></p>
+                            <p>Question 2: Correct answer is <strong>B - Explaining your code line by line to someone (or something) else</strong></p>
+                            <p>Question 3: Correct answer is <strong>B - Runtime error</strong></p>
+                            <p>Question 4: Correct answer is <strong>B - Systematically narrowing down where the bug is located</strong></p>
+                            <p>Question 5: Correct answer is <strong>A - Tired brains are less effective at finding patterns and solutions</strong></p>
+                            <p>Great job! You're on your way to becoming a debugging master!</p>
+                        `;
+                    }
+                    resultsSection.style.display = 'block';
+                    
+                    // Scroll to results
+                    resultsSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }, 2000);
+            });
+        });
+        
+        // Share button functionality
+        const shareButtons = document.querySelectorAll('.share-btn');
+        shareButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                if (navigator.share) {
+                    navigator.share({
+                        title: 'Debugging Mastery - CodeSkill',
+                        text: 'Check out this debugging tutorial on CodeSkill!',
+                        url: window.location.href,
+                    })
+                    .catch(error => console.log('Error sharing:', error));
+                } else {
+                    alert('Share functionality not available in your browser. Copy the URL to share.');
+                }
+            });
+        });
+        
+        // Download button functionality
+        const downloadButtons = document.querySelectorAll('.download-btn');
+        downloadButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                alert('Article download feature would be implemented here. In a real application, this would generate a PDF or text file of the article content.');
+            });
+        });
+    </script>
+</body>
+</html>
