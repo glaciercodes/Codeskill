@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Team - CodeSkill</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2e7d32;
+            --primary-light: #4caf50;
+            --primary-dark: #1b5e20;
+            --text-color: #333;
+            --light-bg: #f9f9f9;
+            --white: #ffffff;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--white);
+            box-shadow: var(--box-shadow);
+            padding: 15px 0;
+            position: relative;
+        }
+
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .logo-section {
+            width: 100%;
+        }
+
+        .logo-title-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-right: 12px;
+        }
+
+        .site-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-right: 10px;
+        }
+
+        .site-subtitle {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.4;
+            width: 100%;
+        }
+
+        /* Navigation */
+        .nav-toggle {
+            display: block;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            cursor: pointer;
+            z-index: 1001;
+            position: absolute;
+            top: 15px;
+            right: 15px;
+        }
+
+        .nav-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 85%;
+            max-width: 300px;
+            height: 100vh;
+            background-color: var(--white);
+            flex-direction: column;
+            padding: 70px 20px 20px;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            transition: right 0.3s;
+            z-index: 999;
+            overflow-y: auto;
+        }
+
+        .nav-menu.active {
+            display: flex;
+            right: 0;
+        }
+
+        .nav-menu li {
+            margin: 0 0 15px 0;
+            width: 100%;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            font-size: 1rem;
+            padding: 12px 15px;
+            border-radius: var(--border-radius);
+            background-color: #f5f5f5;
+        }
+
+        .nav-menu a i {
+            margin-right: 10px;
+            font-size: 1.1rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary-color);
+            background-color: #e8f5e9;
+        }
+
+        .nav-close {
+            display: block;
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        /* Main Content */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            margin: 25px 0;
+        }
+
+        .team-section {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 20px;
+            width: 100%;
+        }
+
+        .page-title {
+            color: var(--primary-dark);
+            margin-bottom: 12px;
+            font-size: 1.8rem;
+            line-height: 1.3;
+            text-align: center;
+        }
+
+        .page-subtitle {
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            font-size: 1.2rem;
+            font-style: italic;
+            line-height: 1.4;
+            text-align: center;
+        }
+
+        .team-content {
+            margin-bottom: 20px;
+        }
+
+        .team-content h3 {
+            color: var(--primary-dark);
+            margin: 25px 0 15px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--primary-light);
+            font-size: 1.4rem;
+            line-height: 1.3;
+        }
+
+        .team-content p {
+            margin-bottom: 15px;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .team-member {
+            background-color: #f9f9f9;
+            border-radius: var(--border-radius);
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .team-member:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .member-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            background-color: var(--primary-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            overflow: hidden;
+            border: 4px solid var(--primary-color);
+        }
+
+        .member-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .member-name {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--primary-dark);
+            margin-bottom: 5px;
+        }
+
+        .member-role {
+            color: var(--primary-color);
+            font-style: italic;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .member-bio {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .member-social {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .member-social a {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+
+        .member-social a:hover {
+            color: var(--primary-dark);
+        }
+
+        .mission-box {
+            background-color: #f0f7f0;
+            border-left: 4px solid var(--primary-color);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+
+        .values-section {
+            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+            padding: 25px;
+            border-radius: var(--border-radius);
+            margin: 25px 0;
+            border: 1px solid #a5d6a7;
+        }
+
+        .values-section h3 {
+            color: var(--primary-dark);
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .story-section {
+            background-color: #fff3e0;
+            border-radius: var(--border-radius);
+            padding: 25px;
+            margin: 25px 0;
+            border: 1px solid #ffb74d;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-dark);
+            color: white;
+            padding: 30px 0;
+            margin-top: 40px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .footer-section {
+            width: 100%;
+        }
+
+        .footer-title {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #a5d6a7;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 8px;
+        }
+
+        .footer-links a {
+            color: #e8f5e9;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .footer-links a:hover {
+            color: #a5d6a7;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid #4caf50;
+            color: #a5d6a7;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (min-width: 768px) {
+            .container {
+                max-width: 720px;
+                padding: 0 20px;
+            }
+            
+            .header-content {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+            
+            .logo-section {
+                width: auto;
+            }
+            
+            .logo-title-container {
+                margin-bottom: 0;
+            }
+            
+            .site-subtitle {
+                width: 100%;
+            }
+            
+            .nav-toggle {
+                display: none;
+            }
+            
+            .nav-menu {
+                display: flex;
+                position: static;
+                width: auto;
+                height: auto;
+                flex-direction: row;
+                padding: 0;
+                box-shadow: none;
+                background: transparent;
+            }
+            
+            .nav-menu li {
+                margin: 0 0 0 20px;
+                width: auto;
+            }
+            
+            .nav-menu a {
+                padding: 8px 12px;
+                background: transparent;
+                font-size: 0.9rem;
+            }
+            
+            .nav-close {
+                display: none;
+            }
+            
+            .team-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .footer-content {
+                flex-direction: row;
+            }
+            
+            .footer-section {
+                width: 33.33%;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .container {
+                max-width: 960px;
+            }
+            
+            .team-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .container {
+                max-width: 1140px;
+            }
+        }
+
+        /* Improve touch targets for mobile */
+        .nav-menu a {
+            min-height: 44px;
+            align-items: center;
+        }
+
+        /* Prevent horizontal scrolling */
+        html, body {
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+        
+        /* Backdrop for mobile menu */
+        .menu-backdrop {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 998;
+        }
+        
+        .menu-backdrop.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Backdrop for mobile menu -->
+    <div class="menu-backdrop" id="menuBackdrop"></div>
+    
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-section">
+                    <div class="logo-title-container">
+                        <i class="fas fa-code logo"></i>
+                        <h1 class="site-title">CodeSkill</h1>
+                    </div>
+                    <p class="site-subtitle">CodeSkill offers free hands-on coding tutorials, practical projects, and problem-solving challenges, guiding beginners and advanced learners alike to master programming languages, build real applications, and develop skills step by step.</p>
+                </div>
+                
+                <button class="nav-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <ul class="nav-menu">
+                    <button class="nav-close">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="about.html"><i class="fas fa-info-circle"></i> About Us</a></li>
+                    <li><a href="#"><i class="fas fa-envelope"></i> Contact Us</a></li>
+                    <li><a href="#"><i class="fas fa-file-contract"></i> Terms of Service</a></li>
+                    <li><a href="#"><i class="fas fa-shield-alt"></i> Privacy Policy</a></li>
+                    <li><a href="team.html" class="active"><i class="fas fa-user-edit"></i> Writer</a></li>
+                    <li><a href="#"><i class="fas fa-bell"></i> Subscribe</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="main-content">
+            <div class="team-section">
+                <h1 class="page-title">Meet Our Team</h1>
+                <p class="page-subtitle">The passionate educators behind CodeSkill's mission to make coding accessible to everyone</p>
+                
+                <div class="team-content">
+                    <div class="mission-box">
+                        <p><strong>Our Philosophy:</strong> We believe that the best way to learn programming is by solving real problems, not just memorizing abstract concepts. Every member of our team is committed to creating learning experiences that bridge the gap between theory and practice.</p>
+                    </div>
+
+                    <h3>The Minds Behind the Mission</h3>
+                    <p>At CodeSkill, we're not just building another coding tutorial site. We're creating a learning ecosystem where every lesson, every project, and every line of code serves a specific purpose in helping you become a better developer. Our team brings together decades of combined experience in software development, education, and curriculum design.</p>
+
+                    <div class="team-grid">
+                        <!-- Mike Adenuga -->
+                        <div class="team-member">
+                            <div class="member-photo">
+                                <img src="images/001.png" alt="Mike Adenuga" onerror="this.style.display='none'; this.parentNode.innerHTML='<i class=\"fas fa-user\"></i>';">
+                            </div>
+                            <div class="member-name">Mike Adenuga</div>
+                            <div class="member-role">Founder & Lead Instructor</div>
+                            <div class="member-bio">
+                                <p>Mike's journey with CodeSkill began from a place of frustration. After 8 years as a full-stack developer and tech lead at several startups, he noticed a consistent pattern: new developers could recite algorithms but couldn't debug simple functions or translate business requirements into working code.</p>
+                                
+                                <p>His breaking point came when mentoring a bright computer science graduate who could explain binary search trees in detail but struggled to connect to a simple API. "That's when I realized the problem wasn't with the students - it was with how we teach programming," Mike recalls.</p>
+                                
+                                <p>With CodeSkill, Mike has channeled his passion for practical education into creating a learning platform that mirrors how developers actually work. "We don't just teach concepts - we teach problem-solving. Every tutorial starts with a real-world challenge that the concept will solve."</p>
+                                
+                                <p>When he's not coding or teaching, Mike contributes to open-source projects and mentors aspiring developers through local coding bootcamps. His teaching philosophy is simple: "If you can't use it to build something real, you haven't really learned it."</p>
+                            </div>
+                            <div class="member-social">
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fab fa-github"></i></a>
+                                <a href="#"><i class="fab fa-linkedin"></i></a>
+                            </div>
+                        </div>
+
+                        <!-- Sarah Chen -->
+                        <div class="team-member">
+                            <div class="member-photo">
+                                <img src="images/002.png" alt="Sarah Chen" onerror="this.style.display='none'; this.parentNode.innerHTML='<i class=\"fas fa-user\"></i>';">
+                            </div>
+                            <div class="member-name">Sarah Chen</div>
+                            <div class="member-role">Curriculum Developer</div>
+                            <div class="member-bio">
+                                <p>Sarah brings a unique blend of software development expertise and educational psychology to the CodeSkill team. With 6 years of experience spanning both classroom teaching and professional software engineering, she understands exactly how to structure learning materials that stick.</p>
+                                
+                                <p>"The biggest mistake in coding education is assuming that understanding a concept means you can apply it," Sarah explains. "At CodeSkill, we build lessons around application from day one. You don't just learn what a function is - you learn how to use functions to solve specific problems you'll encounter in real projects."</p>
+                                
+                                <p>Sarah's background includes developing curriculum for coding bootcamps and creating internal training programs for tech companies. She's particularly passionate about making advanced concepts accessible to beginners through carefully scaffolded learning experiences.</p>
+                                
+                                <p>Her approach to curriculum design focuses on what she calls "the learning moment" - that point where a concept clicks because you've used it to solve an actual problem. "That moment of realization, when you see how a piece of code solves a real challenge - that's what keeps me motivated."</p>
+                                
+                                <p>Outside of work, Sarah volunteers with organizations that introduce coding to underrepresented communities in tech.</p>
+                            </div>
+                            <div class="member-social">
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fab fa-github"></i></a>
+                                <a href="#"><i class="fab fa-linkedin"></i></a>
+                            </div>
+                        </div>
+
+                        <!-- David Rodriguez -->
+                        <div class="team-member">
+                            <div class="member-photo">
+                                <img src="images/003.png" alt="David Rodriguez" onerror="this.style.display='none'; this.parentNode.innerHTML='<i class=\"fas fa-user\"></i>';">
+                            </div>
+                            <div class="member-name">David Rodriguez</div>
+                            <div class="member-role">Community Manager</div>
+                            <div class="member-bio">
+                                <p>David is the heart of CodeSkill's community, ensuring that every learner feels supported throughout their coding journey. With a background that spans both software development and education, he understands the specific emotional and technical challenges that beginners face.</p>
+                                
+                                <p>"Learning to code can be intimidating," David says. "Many people come in with imposter syndrome, convinced they're not 'technical enough.' My job is to create an environment where it's safe to struggle, ask questions, and make mistakes - because that's how real learning happens."</p>
+                                
+                                <p>Before joining CodeSkill, David managed developer communities for several tech companies and taught programming at community colleges. He's particularly skilled at identifying the "sticking points" where learners typically get frustrated and creating resources to help them push through.</p>
+                                
+                                <p>David's philosophy is that community is what transforms learning from a solitary activity into a collaborative journey. "When you're stuck on a bug at 2 AM, knowing there's a community of people who've been exactly where you are makes all the difference."</p>
+                                
+                                <p>He's passionate about creating inclusive learning spaces and ensuring that CodeSkill remains accessible to people from all backgrounds. "Coding shouldn't be an exclusive club. It's a skill that anyone can learn with the right support and resources."</p>
+                            </div>
+                            <div class="member-social">
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fab fa-github"></i></a>
+                                <a href="#"><i class="fab fa-linkedin"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="story-section">
+                        <h3>Our Story: From Classroom Frustration to Educational Innovation</h3>
+                        <p>The seed for CodeSkill was planted during Mike's early teaching experiences, where he watched bright students struggle to connect textbook concepts with real-world programming. "I'd teach a perfect lesson on functions, complete with diagrams and examples, and students would ace the test. Then I'd give them a simple programming challenge, and they'd have no idea where to start."</p>
+                        
+                        <p>This disconnect between theoretical knowledge and practical application became the driving force behind CodeSkill. "We realized that traditional education was teaching the pieces but not showing how they fit together to solve actual problems," Mike explains.</p>
+                        
+                        <p>Sarah joined the team after experiencing similar frustrations in her own teaching. "I saw students who could explain inheritance in object-oriented programming but couldn't design a simple class structure for a real application. The problem wasn't their intelligence - it was the teaching method."</p>
+                        
+                        <p>David's perspective from community management highlighted another crucial element: "Learning to code isn't just about understanding concepts. It's about developing problem-solving intuition, and that happens through practice, feedback, and community support."</p>
+                        
+                        <p>Together, the team has built CodeSkill around a simple but powerful principle: <strong>start with the problem, not the concept.</strong> "Instead of teaching 'what is a variable,' we teach 'how do I store user input so I can use it later?'" Sarah explains. "The concept becomes meaningful because it's tied to an immediate need."</p>
+                    </div>
+
+                    <div class="values-section">
+                        <h3>Our Shared Commitment</h3>
+                        <p>Despite our different roles, every member of the CodeSkill team shares the same core commitments:</p>
+                        
+                        <div class="mission-box">
+                            <p><strong>Practicality Over Theory:</strong> We prioritize skills you'll actually use in real development work over concepts that look impressive in a syllabus.</p>
+                            <p><strong>Problem-First Learning:</strong> Every lesson starts with a real-world challenge that makes the concept immediately relevant and memorable.</p>
+                            <p><strong>Community Support:</strong> We believe learning happens best in a supportive environment where questions are encouraged and struggles are normalized.</p>
+                            <p><strong>Continuous Improvement:</strong> We constantly refine our content based on learner feedback and evolving industry practices.</p>
+                        </div>
+                        
+                        <p>"We're not just building a platform," Mike summarizes. "We're building a learning experience that reflects how programming actually works in the real world. Every tutorial, every project, every line of code on CodeSkill exists to solve a specific problem that developers face every day."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-title">CodeSkill</h3>
+                    <p>Free hands-on coding tutorials, practical projects, and problem-solving challenges for all skill levels.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3 class="footer-title">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="team.html">Our Team</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3 class="footer-title">Legal</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 CodeSkill. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Navigation Toggle
+        const navToggle = document.querySelector('.nav-toggle');
+        const navMenu = document.querySelector('.nav-menu');
+        const navClose = document.querySelector('.nav-close');
+        const menuBackdrop = document.getElementById('menuBackdrop');
+        
+        navToggle.addEventListener('click', () => {
+            navMenu.classList.add('active');
+            menuBackdrop.classList.add('active');
+            navToggle.style.display = 'none'; // Hide the menu icon
+            document.body.style.overflow = 'hidden';
+        });
+        
+        navClose.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+            menuBackdrop.classList.remove('active');
+            navToggle.style.display = 'block'; // Show the menu icon again
+            document.body.style.overflow = '';
+        });
+        
+        menuBackdrop.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+            menuBackdrop.classList.remove('active');
+            navToggle.style.display = 'block'; // Show the menu icon again
+            document.body.style.overflow = '';
+        });
+        
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                menuBackdrop.classList.remove('active');
+                navToggle.style.display = 'block'; // Show the menu icon again
+                document.body.style.overflow = '';
+            });
+        });
+    </script>
+</body>
+</html>
