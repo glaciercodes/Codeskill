@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscribe - CodeSkill</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <style>
+        :root {
+            --primary-color: #2e7d32;
+            --primary-light: #4caf50;
+            --primary-dark: #1b5e20;
+            --text-color: #333;
+            --light-bg: #f9f9f9;
+            --white: #ffffff;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--white);
+            box-shadow: var(--box-shadow);
+            padding: 15px 0;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo-section {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-right: 15px;
+        }
+        
+        .site-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .site-subtitle {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        .nav-toggle {
+            display: none;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            cursor: pointer;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-menu li {
+            margin-left: 25px;
+        }
+        
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-menu a i {
+            margin-right: 8px;
+            font-size: 1.1rem;
+        }
+        
+        .nav-menu a:hover {
+            color: var(--primary-color);
+        }
+        
+        .nav-close {
+            display: none;
+        }
+        
+        /* Main Content */
+        main {
+            flex: 1;
+            padding: 40px 0;
+        }
+        
+        .page-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .page-title h1 {
+            font-size: 2.5rem;
+            color: var(--primary-dark);
+            margin-bottom: 15px;
+        }
+        
+        .page-title p {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            max-width: 600px;
+            margin: 0 auto;
+            font-style: italic;
+        }
+        
+        /* Content Section */
+        .content-section {
+            max-width: 800px;
+            margin: 0 auto 50px;
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 40px;
+            box-shadow: var(--box-shadow);
+        }
+        
+        .content-section h2 {
+            color: var(--primary-dark);
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary-light);
+        }
+        
+        .content-section p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+        
+        .benefits-list {
+            list-style: none;
+            margin: 25px 0;
+        }
+        
+        .benefits-list li {
+            margin-bottom: 15px;
+            padding-left: 30px;
+            position: relative;
+            font-size: 1.1rem;
+        }
+        
+        .benefits-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .highlight {
+            background-color: rgba(46, 125, 50, 0.1);
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: 600;
+            color: var(--primary-dark);
+        }
+        
+        /* Subscribe Card */
+        .subscribe-section {
+            margin-top: 50px;
+        }
+        
+        .subscribe-card {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            border-radius: var(--border-radius);
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            border: 2px solid var(--primary-color);
+            position: relative;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 10px 30px rgba(46, 125, 50, 0.2);
+            }
+            50% {
+                box-shadow: 0 10px 40px rgba(46, 125, 50, 0.4);
+            }
+            100% {
+                box-shadow: 0 10px 30px rgba(46, 125, 50, 0.2);
+            }
+        }
+        
+        .subscribe-card h2 {
+            color: var(--primary-dark);
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+        }
+        
+        .subscribe-card p {
+            color: var(--text-color);
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+        }
+        
+        .subscribe-form {
+            display: flex;
+            gap: 10px;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        
+        .subscribe-form input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .subscribe-form input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(46, 125, 50, 0.2);
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 12px 25px;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            font-size: 1rem;
+        }
+        
+        .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(46, 125, 50, 0.3);
+        }
+        
+        .message {
+            padding: 15px;
+            border-radius: var(--border-radius);
+            margin-top: 20px;
+            text-align: center;
+            display: none;
+            font-weight: 500;
+        }
+        
+        .message.success {
+            background: rgba(76, 175, 80, 0.1);
+            color: var(--primary-dark);
+            border: 1px solid var(--primary-light);
+        }
+        
+        .message.error {
+            background: rgba(244, 67, 54, 0.1);
+            color: #c62828;
+            border: 1px solid #f44336;
+        }
+        
+        /* Footer Styles */
+        footer {
+            background-color: var(--primary-dark);
+            color: white;
+            padding: 40px 0;
+            margin-top: 50px;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-title {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: #a5d6a7;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #e8f5e9;
+            text-decoration: none;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+        }
+        
+        .footer-links a i {
+            margin-right: 8px;
+        }
+        
+        .footer-links a:hover {
+            color: #a5d6a7;
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #4caf50;
+            color: #a5d6a7;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-toggle {
+                display: block;
+            }
+            
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 280px;
+                height: 100vh;
+                background-color: var(--white);
+                flex-direction: column;
+                padding: 80px 30px 30px;
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+                transition: right 0.3s;
+                z-index: 999;
+            }
+            
+            .nav-menu.active {
+                right: 0;
+            }
+            
+            .nav-menu li {
+                margin: 0 0 20px 0;
+            }
+            
+            .nav-close {
+                display: block;
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                font-size: 1.5rem;
+                background: none;
+                border: none;
+                color: var(--primary-color);
+                cursor: pointer;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .logo-section {
+                margin-bottom: 15px;
+            }
+            
+            .subscribe-form {
+                flex-direction: column;
+            }
+            
+            .content-section {
+                padding: 25px;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+            }
+            
+            .footer-section {
+                min-width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 10px;
+            }
+            
+            .content-section {
+                padding: 20px;
+            }
+            
+            .subscribe-card {
+                padding: 25px;
+            }
+        }
+
+        /* Improve touch targets for mobile */
+        @media (max-width: 768px) {
+            .option, .submit-btn, .share-btn, .download-btn {
+                min-height: 44px;
+            }
+            
+            .nav-menu a {
+                min-height: 44px;
+                align-items: center;
+            }
+        }
+
+        /* Prevent horizontal scrolling */
+        html, body {
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+        
+        /* Backdrop for mobile menu */
+        .menu-backdrop {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 998;
+        }
+        
+        .menu-backdrop.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Backdrop for mobile menu -->
+    <div class="menu-backdrop" id="menuBackdrop"></div>
+    
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-section">
+                    <i class="fas fa-code logo"></i>
+                    <div>
+                        <h1 class="site-title">CodeSkill</h1>
+                        <p class="site-subtitle">Master programming through hands-on projects and real-world challenges</p>
+                    </div>
+                </div>
+                
+                <button class="nav-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <ul class="nav-menu">
+                    <button class="nav-close">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="about.html"><i class="fas fa-info-circle"></i> About Us</a></li>
+                    <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact Us</a></li>
+                    <li><a href="termsofservice.html"><i class="fas fa-file-contract"></i> Terms of Service</a></li>
+                    <li><a href="privacy.html"><i class="fas fa-shield-alt"></i> Privacy Policy</a></li>
+                    <li><a href="writer.html"><i class="fas fa-user-edit"></i> Writer</a></li>
+                    <li><a href="subscribe.html" class="active"><i class="fas fa-bell"></i> Subscribe</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="page-title">
+                <h1>Join Our Coding Community</h1>
+                <p>Subscribe to receive premium tutorials and exclusive learning benefits</p>
+            </div>
+
+            <div class="content-section">
+                <h2>Why Subscribe to CodeSkill?</h2>
+                <p>When you join our exclusive subscriber community, you'll gain access to premium coding tutorials and special benefits that aren't available to regular visitors. Our subscribers are the first to receive new project tutorials, coding challenges, and expert insights that can help you accelerate your programming journey.</p>
+                
+                <p>We're committed to rewarding our loyal subscribers with tangible benefits. Each week, we randomly select subscribers to receive <span class="highlight">exclusive coding resources and premium tutorials</span> as our way of saying thank you for being part of our community. These resources include advanced project templates, cheat sheets, and video walkthroughs that give you additional value beyond our free content.</p>
+                
+                <p>Our subscribers receive early access to all our new tutorials, special coding challenges, and personalized learning path recommendations based on your skill level and interests. You'll also be invited to exclusive webinars with our expert instructors and get opportunities to participate in private coding challenges that help shape our future content.</p>
+                
+                <ul class="benefits-list">
+                    <li><strong>Weekly exclusive resources</strong> with premium tutorials for active subscribers</li>
+                    <li><strong>Early access</strong> to all new coding tutorials and projects</li>
+                    <li><strong>Exclusive coding challenges</strong> not available to the public</li>
+                    <li><strong>Personalized learning paths</strong> based on your skill level and interests</li>
+                    <li><strong>Invitations to subscriber-only webinars</strong> with our expert instructors</li>
+                    <li><strong>Priority access</strong> to new features and beta programs</li>
+                </ul>
+                
+                <p>Don't miss this opportunity to join a community of passionate coders who value practical, project-based learning. Subscribe today and start receiving these exclusive benefits immediately!</p>
+            </div>
+            
+            <div class="subscribe-section" id="subscribe-section">
+                <div class="subscribe-card">
+                    <h2>Subscribe Now</h2>
+                    <p>Enter your email to join our coding community and start receiving special learning benefits.</p>
+                    <form id="subscribe-form" class="subscribe-form">
+                        <input type="email" id="subscribe-email" placeholder="Enter your email address" required>
+                        <button type="submit" class="btn">Subscribe</button>
+                    </form>
+                    <div id="subscribe-message" class="message"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-title">CodeSkill</h3>
+                    <p>Free hands-on coding tutorials, practical projects, and problem-solving challenges for all skill levels.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3 class="footer-title">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                        <li><a href="about.html"><i class="fas fa-info-circle"></i> About Us</a></li>
+                        <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+                        <li><a href="blog.html"><i class="fas fa-blog"></i> Blog</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3 class="footer-title">Legal</h3>
+                    <ul class="footer-links">
+                        <li><a href="termsofservice.html"><i class="fas fa-file-contract"></i> Terms of Service</a></li>
+                        <li><a href="privacy.html"><i class="fas fa-shield-alt"></i> Privacy Policy</a></li>
+                        <li><a href="cookies.html"><i class="fas fa-cookie"></i> Cookie Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 CodeSkill. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyCXqNe_BDdh9WIJ9lyrFPeQ_-733qbXW4s",
+            authDomain: "realinsightreport.firebaseapp.com",
+            projectId: "realinsightreport",
+            storageBucket: "realinsightreport.firebasestorage.app",
+            messagingSenderId: "1083096764833",
+            appId: "1:1083096764833:web:4b526f278471212ba43be0",
+            measurementId: "G-6LHBN68HMH"
+        };
+
+        // Initialize Firebase
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+        }
+        const db = firebase.firestore();
+
+        // DOM elements
+        const subscribeForm = document.getElementById('subscribe-form');
+        const subscribeEmail = document.getElementById('subscribe-email');
+        const subscribeMessage = document.getElementById('subscribe-message');
+        const subscribeSection = document.getElementById('subscribe-section');
+        const navToggle = document.querySelector('.nav-toggle');
+        const navMenu = document.querySelector('.nav-menu');
+        const navClose = document.querySelector('.nav-close');
+        const menuBackdrop = document.getElementById('menuBackdrop');
+        
+        // User data
+        let userCountry = "Unknown";
+        
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Detect user's country
+            detectCountry();
+            
+            // Set up event listeners
+            subscribeForm.addEventListener('submit', handleSubscription);
+            
+            // Mobile navigation
+            navToggle.addEventListener('click', () => {
+                navMenu.classList.add('active');
+                menuBackdrop.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+            
+            navClose.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                menuBackdrop.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+            
+            menuBackdrop.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                menuBackdrop.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+            
+            // Close menu when clicking on a link
+            document.querySelectorAll('.nav-menu a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navMenu.classList.remove('active');
+                    menuBackdrop.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            });
+            
+            // Auto-scroll to subscribe section after a short delay
+            setTimeout(() => {
+                scrollToSubscribeSection();
+            }, 800);
+        });
+        
+        // Auto-scroll to subscribe section
+        function scrollToSubscribeSection() {
+            subscribeSection.scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'center'
+            });
+            
+            // Add a visual highlight effect
+            subscribeSection.style.transition = 'all 0.5s ease';
+            subscribeSection.style.transform = 'scale(1.02)';
+            
+            setTimeout(() => {
+                subscribeSection.style.transform = 'scale(1)';
+            }, 500);
+        }
+        
+        // Detect user's country using IP
+        function detectCountry() {
+            fetch('https://ipapi.co/json/')
+                .then(response => response.json())
+                .then(data => {
+                    userCountry = data.country_name;
+                })
+                .catch(error => {
+                    console.error('Error detecting country:', error);
+                    // Fallback to a free API if the first one fails
+                    fetch('https://api.country.is/')
+                        .then(response => response.json())
+                        .then(data => {
+                            userCountry = data.country;
+                        })
+                        .catch(error2 => {
+                            console.error('Error detecting country with fallback:', error2);
+                        });
+                });
+        }
+        
+        // Handle email subscription
+        function handleSubscription(e) {
+            e.preventDefault();
+            
+            const email = subscribeEmail.value.trim();
+            
+            if (!email) {
+                showSubscribeMessage("Please enter a valid email address.", "error");
+                return;
+            }
+            
+            if (!validateEmail(email)) {
+                showSubscribeMessage("Please enter a valid email address.", "error");
+                return;
+            }
+            
+            // Check if email already exists
+            db.collection("subscribers")
+                .where("email", "==", email)
+                .get()
+                .then((querySnapshot) => {
+                    if (!querySnapshot.empty) {
+                        showSubscribeMessage("This email is already subscribed. Thank you for your interest!", "error");
+                        return;
+                    }
+                    
+                    // Save to Firebase
+                    return db.collection("subscribers").add({
+                        email: email,
+                        country: userCountry,
+                        subscribedAt: new Date().toISOString(),
+                        subscriptionType: "premium",
+                        resourceEligible: true
+                    });
+                })
+                .then(() => {
+                    showSubscribeMessage("🎉 Welcome to our coding community! You've been successfully subscribed and are now eligible for our weekly exclusive resources. Check your email for a confirmation message.", "success");
+                    subscribeEmail.value = "";
+                })
+                .catch((error) => {
+                    console.error("Error subscribing: ", error);
+                    showSubscribeMessage("There was an error processing your subscription. Please try again.", "error");
+                });
+        }
+        
+        // Email validation
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+        
+        // Show subscription message
+        function showSubscribeMessage(message, type) {
+            subscribeMessage.textContent = message;
+            subscribeMessage.className = `message ${type}`;
+            subscribeMessage.style.display = 'block';
+            
+            // Scroll to message
+            subscribeMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            
+            // Hide message after 8 seconds for success, 5 for error
+            setTimeout(() => {
+                subscribeMessage.style.display = 'none';
+            }, type === 'success' ? 8000 : 5000);
+        }
+    </script>
+</body>
+</html>
