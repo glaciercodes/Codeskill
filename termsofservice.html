@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service - CodeSkill</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2e7d32;
+            --primary-light: #4caf50;
+            --primary-dark: #1b5e20;
+            --text-color: #333;
+            --light-bg: #f9f9f9;
+            --white: #ffffff;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--white);
+            box-shadow: var(--box-shadow);
+            padding: 15px 0;
+            position: relative;
+        }
+
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .logo-section {
+            width: 100%;
+        }
+
+        .logo-title-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-right: 12px;
+        }
+
+        .site-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-right: 10px;
+        }
+
+        .site-subtitle {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.4;
+            width: 100%;
+        }
+
+        /* Navigation */
+        .nav-toggle {
+            display: block;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            cursor: pointer;
+            z-index: 1001;
+            position: absolute;
+            top: 15px;
+            right: 15px;
+        }
+
+        .nav-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 85%;
+            max-width: 300px;
+            height: 100vh;
+            background-color: var(--white);
+            flex-direction: column;
+            padding: 70px 20px 20px;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            transition: right 0.3s;
+            z-index: 999;
+            overflow-y: auto;
+        }
+
+        .nav-menu.active {
+            display: flex;
+            right: 0;
+        }
+
+        .nav-menu li {
+            margin: 0 0 15px 0;
+            width: 100%;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            font-size: 1rem;
+            padding: 12px 15px;
+            border-radius: var(--border-radius);
+            background-color: #f5f5f5;
+        }
+
+        .nav-menu a i {
+            margin-right: 10px;
+            font-size: 1.1rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary-color);
+            background-color: #e8f5e9;
+        }
+
+        .nav-close {
+            display: block;
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        /* Main Content */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            margin: 25px 0;
+        }
+
+        .tos-section {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 20px;
+            width: 100%;
+        }
+
+        .page-title {
+            color: var(--primary-dark);
+            margin-bottom: 12px;
+            font-size: 1.8rem;
+            line-height: 1.3;
+            text-align: center;
+        }
+
+        .page-subtitle {
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            font-size: 1.2rem;
+            font-style: italic;
+            line-height: 1.4;
+            text-align: center;
+        }
+
+        .last-updated {
+            text-align: center;
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .tos-content {
+            margin-bottom: 20px;
+        }
+
+        .tos-content h3 {
+            color: var(--primary-dark);
+            margin: 25px 0 15px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--primary-light);
+            font-size: 1.4rem;
+            line-height: 1.3;
+        }
+
+        .tos-content h4 {
+            color: var(--primary-dark);
+            margin: 20px 0 12px;
+            font-size: 1.2rem;
+            line-height: 1.3;
+        }
+
+        .tos-content p {
+            margin-bottom: 15px;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .tos-content ul, .tos-content ol {
+            margin: 15px 0 15px 25px;
+        }
+
+        .tos-content li {
+            margin-bottom: 10px;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        .privacy-box {
+            background-color: #f0f7f0;
+            border-left: 4px solid var(--primary-color);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.95rem;
+        }
+
+        .data-table th {
+            background-color: var(--primary-light);
+            color: white;
+            text-align: left;
+            padding: 12px 15px;
+            font-weight: 600;
+        }
+
+        .data-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .data-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .data-table tr:hover {
+            background-color: #f0f0f0;
+        }
+
+        .highlight-box {
+            background-color: #fff3e0;
+            border: 1px solid #ffb74d;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .contact-info {
+            background-color: #e3f2fd;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin: 25px 0;
+            text-align: center;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-dark);
+            color: white;
+            padding: 30px 0;
+            margin-top: 40px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .footer-section {
+            width: 100%;
+        }
+
+        .footer-title {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #a5d6a7;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 8px;
+        }
+
+        .footer-links a {
+            color: #e8f5e9;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .footer-links a:hover {
+            color: #a5d6a7;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid #4caf50;
+            color: #a5d6a7;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (min-width: 768px) {
+            .container {
+                max-width: 720px;
+                padding: 0 20px;
+            }
+            
+            .header-content {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+            
+            .logo-section {
+                width: auto;
+            }
+            
+            .logo-title-container {
+                margin-bottom: 0;
+            }
+            
+            .site-subtitle {
+                width: 100%;
+            }
+            
+            .nav-toggle {
+                display: none;
+            }
+            
+            .nav-menu {
+                display: flex;
+                position: static;
+                width: auto;
+                height: auto;
+                flex-direction: row;
+                padding: 0;
+                box-shadow: none;
+                background: transparent;
+            }
+            
+            .nav-menu li {
+                margin: 0 0 0 20px;
+                width: auto;
+            }
+            
+            .nav-menu a {
+                padding: 8px 12px;
+                background: transparent;
+                font-size: 0.9rem;
+            }
+            
+            .nav-close {
+                display: none;
+            }
+            
+            .footer-content {
+                flex-direction: row;
+            }
+            
+            .footer-section {
+                width: 33.33%;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .container {
+                max-width: 960px;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .container {
+                max-width: 1140px;
+            }
+        }
+
+        /* Improve touch targets for mobile */
+        .nav-menu a {
+            min-height: 44px;
+            align-items: center;
+        }
+
+        /* Prevent horizontal scrolling */
+        html, body {
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+        
+        /* Backdrop for mobile menu */
+        .menu-backdrop {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 998;
+        }
+        
+        .menu-backdrop.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Backdrop for mobile menu -->
+    <div class="menu-backdrop" id="menuBackdrop"></div>
+    
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-section">
+                    <div class="logo-title-container">
+                        <i class="fas fa-code logo"></i>
+                        <h1 class="site-title">CodeSkill</h1>
+                    </div>
+                    <p class="site-subtitle">CodeSkill offers free hands-on coding tutorials, practical projects, and problem-solving challenges, guiding beginners and advanced learners alike to master programming languages, build real applications, and develop skills step by step.</p>
+                </div>
+                
+                <button class="nav-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <ul class="nav-menu">
+                    <button class="nav-close">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="about.html"><i class="fas fa-info-circle"></i> About Us</a></li>
+                    <li><a href="#"><i class="fas fa-envelope"></i> Contact Us</a></li>
+                    <li><a href="terms.html" class="active"><i class="fas fa-file-contract"></i> Terms of Service</a></li>
+                    <li><a href="#"><i class="fas fa-shield-alt"></i> Privacy Policy</a></li>
+                    <li><a href="#"><i class="fas fa-user-edit"></i> Writer</a></li>
+                    <li><a href="#"><i class="fas fa-bell"></i> Subscribe</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="main-content">
+            <div class="tos-section">
+                <h1 class="page-title">Terms of Service</h1>
+                <p class="page-subtitle">Understanding how we protect and use your information</p>
+                <div class="last-updated">Last Updated: December 1, 2023</div>
+                
+                <div class="tos-content">
+                    <div class="privacy-box">
+                        <p><strong>Transparency Matters:</strong> We believe you should know exactly what data we collect and how we use it. This document explains our practices in plain language - no legal jargon required.</p>
+                    </div>
+
+                    <h3>1. Introduction</h3>
+                    <p>Welcome to CodeSkill! We're committed to being transparent about how we handle your information. This Terms of Service agreement explains what data we collect, why we collect it, and how we use it to improve your learning experience.</p>
+                    
+                    <p>By using CodeSkill, you're agreeing to these terms. We've tried to make this document as clear and understandable as possible because we believe privacy policies shouldn't require a law degree to comprehend.</p>
+
+                    <h3>2. Information We Collect</h3>
+                    <p>We collect different types of information depending on how you interact with our platform:</p>
+
+                    <h4>2.1 Information You Provide Directly</h4>
+                    <p>When you create an account or use our services, you might give us:</p>
+                    <ul>
+                        <li><strong>Account Information:</strong> Email address, username, and password (encrypted, of course)</li>
+                        <li><strong>Profile Details:</strong> Optional information like your learning goals, skill level, or programming interests</li>
+                        <li><strong>Learning Progress:</strong> Which tutorials you've completed, quiz scores, and projects you're working on</li>
+                        <li><strong>Communication:</strong> Messages you send through our contact forms or support system</li>
+                    </ul>
+
+                    <h4>2.2 Information Collected Automatically</h4>
+                    <p>Like most websites, we automatically collect some technical information:</p>
+                    <ul>
+                        <li><strong>Usage Data:</strong> Which pages you visit, how long you spend on them, and what features you use most</li>
+                        <li><strong>Device Information:</strong> Browser type, operating system, and device type (so we can optimize for your setup)</li>
+                        <li><strong>Location Data:</strong> General location (city/country level) to provide relevant content and comply with regional laws</li>
+                        <li><strong>Cookies & Similar Tech:</strong> Small data files that help remember your preferences and login status</li>
+                    </ul>
+
+                    <h4>2.3 Information from Third Parties</h4>
+                    <p>If you sign up using social media accounts (like Google or GitHub), we may receive basic profile information from those services, but only what you've agreed to share with them.</p>
+
+                    <div class="highlight-box">
+                        <h4>What We Don't Collect</h4>
+                        <p>We want to be clear about what we <strong>don't</strong> collect:</p>
+                        <ul>
+                            <li>We don't collect sensitive personal information like government IDs or financial data</li>
+                            <li>We don't track your activity on other websites</li>
+                            <li>We don't sell your personal information to third parties</li>
+                            <li>We don't read your code or project files unless you explicitly share them for support</li>
+                        </ul>
+                    </div>
+
+                    <h3>3. How We Use Your Information</h3>
+                    <p>We use your data to make CodeSkill better for you. Here's the breakdown:</p>
+
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Purpose</th>
+                                <th>What We Use</th>
+                                <th>Why It Matters</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Personalize Learning</td>
+                                <td>Your progress, quiz results, interests</td>
+                                <td>Suggest relevant tutorials and track your learning journey</td>
+                            </tr>
+                            <tr>
+                                <td>Improve Content</td>
+                                <td>Page views, time spent, feature usage</td>
+                                <td>Understand what content works and what needs improvement</td>
+                            </tr>
+                            <tr>
+                                <td>Platform Functionality</td>
+                                <td>Account info, device data, cookies</td>
+                                <td>Keep you logged in, remember preferences, fix technical issues</td>
+                            </tr>
+                            <tr>
+                                <td>Communication</td>
+                                <td>Email address, usage patterns</td>
+                                <td>Send important updates, learning recommendations, and support responses</td>
+                            </tr>
+                            <tr>
+                                <td>Security & Safety</td>
+                                <td>IP address, login attempts</td>
+                                <td>Protect against spam, abuse, and unauthorized access</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3>4. Data Sharing and Disclosure</h3>
+                    <p>We're not in the business of selling your data. Here are the limited circumstances where we might share information:</p>
+
+                    <h4>4.1 Service Providers</h4>
+                    <p>We work with trusted companies that help us run CodeSkill:</p>
+                    <ul>
+                        <li><strong>Hosting Services:</strong> Companies that store our data securely</li>
+                        <li><strong>Analytics Tools:</strong> Services that help us understand how people use our platform (in aggregated, anonymous form)</li>
+                        <li><strong>Email Services:</strong> Providers that help us send important notifications</li>
+                    </ul>
+
+                    <h4>4.2 Legal Requirements</h4>
+                    <p>We may disclose information if required by law, such as in response to a valid court order or legal process.</p>
+
+                    <h4>4.3 Business Transfers</h4>
+                    <p>If CodeSkill is involved in a merger, acquisition, or sale of assets, your information may be transferred, but we'll notify you and ensure the same privacy protections remain in place.</p>
+
+                    <div class="privacy-box">
+                        <p><strong>Our Promise:</strong> We never share your personal information with third parties for their marketing purposes. Your data stays with us and our essential service providers only.</p>
+                    </div>
+
+                    <h3>5. Data Security</h3>
+                    <p>We take security seriously. Here's how we protect your information:</p>
+                    <ul>
+                        <li><strong>Encryption:</strong> Your data is encrypted in transit (using HTTPS) and at rest</li>
+                        <li><strong>Access Controls:</strong> Only authorized team members can access user data, and only when necessary</li>
+                        <li><strong>Regular Audits:</strong> We regularly review our security practices and update them as needed</li>
+                        <li><strong>Password Protection:</strong> We store passwords using industry-standard hashing techniques</li>
+                    </ul>
+
+                    <h3>6. Your Rights and Choices</h3>
+                    <p>You have control over your information:</p>
+
+                    <h4>6.1 Access and Correction</h4>
+                    <p>You can view and update most of your personal information through your account settings. If you need help accessing something, just ask!</p>
+
+                    <h4>6.2 Data Export</h4>
+                    <p>Want to take your data with you? You can export your learning progress and account information at any time.</p>
+
+                    <h4>6.3 Account Deletion</h4>
+                    <p>You can delete your account at any time. When you do, we'll remove your personal information from our active systems, though we may retain some data for legal or legitimate business purposes.</p>
+
+                    <h4>6.4 Communication Preferences</h4>
+                    <p>You can control what emails you receive from us. Every email includes an unsubscribe link, and you can adjust notifications in your account settings.</p>
+
+                    <h3>7. Cookies and Tracking</h3>
+                    <p>We use cookies and similar technologies to:</p>
+                    <ul>
+                        <li>Keep you logged in during your session</li>
+                        <li>Remember your preferences and settings</li>
+                        <li>Understand how people use CodeSkill so we can improve it</li>
+                        <li>Provide basic analytics about site traffic</li>
+                    </ul>
+
+                    <p>Most browsers allow you to control cookies through their settings. However, disabling cookies may affect some CodeSkill features.</p>
+
+                    <h3>8. Children's Privacy</h3>
+                    <p>CodeSkill is not intended for children under 13. We don't knowingly collect personal information from children under 13. If we learn we've collected such information, we'll delete it promptly.</p>
+
+                    <h3>9. International Data Transfers</h3>
+                    <p>CodeSkill operates globally, which means your information may be processed in countries other than your own. We ensure appropriate safeguards are in place to protect your data regardless of where it's processed.</p>
+
+                    <h3>10. Changes to This Policy</h3>
+                    <p>We may update this Terms of Service as CodeSkill grows and evolves. When we make changes, we'll update the "Last Updated" date at the top of this page. For significant changes, we'll notify you through email or a prominent notice on our website.</p>
+
+                    <h3>11. Contact Us</h3>
+                    <div class="contact-info">
+                        <p>Have questions about these terms or our data practices? We're here to help!</p>
+                        <p><strong>Email:</strong> privacy@codeskill.net</p>
+                        <p><strong>Response Time:</strong> We aim to respond to all privacy-related inquiries within 48 hours</p>
+                    </div>
+
+                    <p>We believe that trust is built through transparency. If anything in this document isn't clear, or if you have suggestions for how we can be more transparent about our practices, please reach out. We're committed to being good stewards of your data while providing you with the best possible learning experience.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-title">CodeSkill</h3>
+                    <p>Free hands-on coding tutorials, practical projects, and problem-solving challenges for all skill levels.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3 class="footer-title">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3 class="footer-title">Legal</h3>
+                    <ul class="footer-links">
+                        <li><a href="terms.html">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 CodeSkill. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Navigation Toggle
+        const navToggle = document.querySelector('.nav-toggle');
+        const navMenu = document.querySelector('.nav-menu');
+        const navClose = document.querySelector('.nav-close');
+        const menuBackdrop = document.getElementById('menuBackdrop');
+        
+        navToggle.addEventListener('click', () => {
+            navMenu.classList.add('active');
+            menuBackdrop.classList.add('active');
+            navToggle.style.display = 'none'; // Hide the menu icon
+            document.body.style.overflow = 'hidden';
+        });
+        
+        navClose.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+            menuBackdrop.classList.remove('active');
+            navToggle.style.display = 'block'; // Show the menu icon again
+            document.body.style.overflow = '';
+        });
+        
+        menuBackdrop.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+            menuBackdrop.classList.remove('active');
+            navToggle.style.display = 'block'; // Show the menu icon again
+            document.body.style.overflow = '';
+        });
+        
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                menuBackdrop.classList.remove('active');
+                navToggle.style.display = 'block'; // Show the menu icon again
+                document.body.style.overflow = '';
+            });
+        });
+    </script>
+</body>
+</html>
