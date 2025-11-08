@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coding Examples - CodeSkill</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2e7d32;
+            --primary-light: #4caf50;
+            --primary-dark: #1b5e20;
+            --text-color: #333;
+            --light-bg: #f9f9f9;
+            --white: #ffffff;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--white);
+            box-shadow: var(--box-shadow);
+            padding: 15px 0;
+            position: relative;
+        }
+
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .logo-section {
+            width: 100%;
+        }
+
+        .logo-title-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-right: 12px;
+        }
+
+        .site-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-right: 10px;
+        }
+
+        .site-subtitle {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.4;
+            width: 100%;
+        }
+
+        /* Navigation */
+        .nav-toggle {
+            display: block;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            cursor: pointer;
+            z-index: 1001;
+            position: absolute;
+            top: 15px;
+            right: 15px;
+        }
+
+        .nav-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 85%;
+            max-width: 300px;
+            height: 100vh;
+            background-color: var(--white);
+            flex-direction: column;
+            padding: 70px 20px 20px;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            transition: right 0.3s;
+            z-index: 999;
+            overflow-y: auto;
+        }
+
+        .nav-menu.active {
+            display: flex;
+            right: 0;
+        }
+
+        .nav-menu li {
+            margin: 0 0 15px 0;
+            width: 100%;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            font-size: 1rem;
+            padding: 12px 15px;
+            border-radius: var(--border-radius);
+            background-color: #f5f5f5;
+        }
+
+        .nav-menu a i {
+            margin-right: 10px;
+            font-size: 1.1rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary-color);
+            background-color: #e8f5e9;
+        }
+
+        .nav-close {
+            display: block;
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        /* Main Content */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            margin: 25px 0;
+        }
+
+        .coding-section {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 20px;
+            width: 100%;
+        }
+
+        .page-title {
+            color: var(--primary-dark);
+            margin-bottom: 12px;
+            font-size: 1.8rem;
+            line-height: 1.3;
+            text-align: center;
+        }
+
+        .page-subtitle {
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            font-size: 1.2rem;
+            font-style: italic;
+            line-height: 1.4;
+            text-align: center;
+        }
+
+        .coding-content {
+            margin-bottom: 20px;
+        }
+
+        .coding-content h3 {
+            color: var(--primary-dark);
+            margin: 25px 0 15px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--primary-light);
+            font-size: 1.4rem;
+            line-height: 1.3;
+        }
+
+        .coding-content p {
+            margin-bottom: 15px;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .example-container {
+            margin: 25px 0;
+            border: 1px solid #e0e0e0;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+        }
+
+        .example-header {
+            background-color: var(--primary-dark);
+            color: white;
+            padding: 12px 15px;
+            font-weight: 600;
+        }
+
+        .code-block {
+            background-color: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .code-comment {
+            color: #6a9955;
+        }
+
+        .code-keyword {
+            color: #569cd6;
+        }
+
+        .code-function {
+            color: #dcdcaa;
+        }
+
+        .code-string {
+            color: #ce9178;
+        }
+
+        .code-number {
+            color: #b5cea8;
+        }
+
+        .code-operator {
+            color: #d4d4d4;
+        }
+
+        .visual-output {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .output-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--primary-dark);
+        }
+
+        .output-box {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            padding: 15px;
+            min-height: 100px;
+        }
+
+        .explanation-box {
+            background-color: #f0f7f0;
+            border-left: 4px solid var(--primary-color);
+            padding: 18px;
+            margin: 18px 0;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+
+        .concept-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .concept-card {
+            background-color: #f9f9f9;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .concept-icon {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .concept-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary-dark);
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-dark);
+            color: white;
+            padding: 30px 0;
+            margin-top: 40px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .footer-section {
+            width: 100%;
+        }
+
+        .footer-title {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #a5d6a7;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 8px;
+        }
+
+        .footer-links a {
+            color: #e8f5e9;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .footer-links a:hover {
+            color: #a5d6a7;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid #4caf50;
+            color: #a5d6a7;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (min-width: 768px) {
+            .container {
+                max-width: 720px;
+                padding: 0 20px;
+            }
+            
+            .header-content {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+            
+            .logo-section {
+                width: auto;
+            }
+            
+            .logo-title-container {
+                margin-bottom: 0;
+            }
+            
+            .site-subtitle {
+                width: 100%;
+            }
+            
+            .nav-toggle {
+                display: none;
+            }
+            
+            .nav-menu {
+                display: flex;
+                position: static;
+                width: auto;
+                height: auto;
+                flex-direction: row;
+                padding: 0;
+                box-shadow: none;
+                background: transparent;
+            }
+            
+            .nav-menu li {
+                margin: 0 0 0 20px;
+                width: auto;
+            }
+            
+            .nav-menu a {
+                padding: 8px 12px;
+                background: transparent;
+                font-size: 0.9rem;
+            }
+            
+            .nav-close {
+                display: none;
+            }
+            
+            .concept-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .footer-content {
+                flex-direction: row;
+            }
+            
+            .footer-section {
+                width: 33.33%;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .container {
+                max-width: 960px;
+            }
+            
+            .concept-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .container {
+                max-width: 1140px;
+            }
+        }
+
+        /* Improve touch targets for mobile */
+        .nav-menu a {
+            min-height: 44px;
+            align-items: center;
+        }
+
+        /* Prevent horizontal scrolling */
+        html, body {
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+        
+        /* Backdrop for mobile menu */
+        .menu-backdrop {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 998;
+        }
+        
+        .menu-backdrop.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Backdrop for mobile menu -->
+    <div class="menu-backdrop" id="menuBackdrop"></div>
+    
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-section">
+                    <div class="logo-title-container">
+                        <i class="fas fa-code logo"></i>
+                        <h1 class="site-title">CodeSkill</h1>
+                    </div>
+                    <p class="site-subtitle">CodeSkill offers free hands-on coding tutorials, practical projects, and problem-solving challenges, guiding beginners and advanced learners alike to master programming languages, build real applications, and develop skills step by step.</p>
+                </div>
+                
+                <button class="nav-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <ul class="nav-menu">
+                    <button class="nav-close">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="about.html"><i class="fas fa-info-circle"></i> About Us</a></li>
+                    <li><a href="coding-examples.html" class="active"><i class="fas fa-code"></i> Coding Examples</a></li>
+                    <li><a href="#"><i class="fas fa-envelope"></i> Contact Us</a></li>
+                    <li><a href="#"><i class="fas fa-file-contract"></i> Terms of Service</a></li>
+                    <li><a href="#"><i class="fas fa-shield-alt"></i> Privacy Policy</a></li>
+                    <li><a href="#"><i class="fas fa-user-edit"></i> Writer</a></li>
+                    <li><a href="#"><i class="fas fa-bell"></i> Subscribe</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="main-content">
+            <div class="coding-section">
+                <h1 class="page-title">Coding Examples That Actually Make Sense</h1>
+                <p class="page-subtitle">See the code, understand the logic, and watch it come to life</p>
+                
+                <div class="coding-content">
+                    <h3>Why Seeing Code in Action Matters</h3>
+                    <p>I remember when I first started learning to code. I could read about variables and functions all day, but it wasn't until I saw actual code running and changing things on screen that everything clicked. That "aha!" moment is what we're trying to create with every example on this page.</p>
+                    
+                    <p>Too many coding tutorials show you syntax without showing you the results. It's like learning to cook by reading recipes but never tasting the food. Here, we'll not only show you the code but also what that code actually does.</p>
+
+                    <div class="concept-grid">
+                        <div class="concept-card">
+                            <div class="concept-icon">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                            <div class="concept-title">Visual Learning</div>
+                            <p>See exactly how your code affects the output. No more guessing what a function does - watch it work in real-time.</p>
+                        </div>
+                        <div class="concept-card">
+                            <div class="concept-icon">
+                                <i class="fas fa-puzzle-piece"></i>
+                            </div>
+                            <div class="concept-title">Problem-Solving Focus</div>
+                            <p>Each example solves a specific, real-world problem you'll encounter in actual development work.</p>
+                        </div>
+                        <div class="concept-card">
+                            <div class="concept-icon">
+                                <i class="fas fa-code-branch"></i>
+                            </div>
+                            <div class="concept-title">Progressive Complexity</div>
+                            <p>Start with simple examples and gradually build up to more complex, real-world applications.</p>
+                        </div>
+                    </div>
+
+                    <h3>Example 1: Variables in Action</h3>
+                    <p>Variables are like labeled boxes where you store information. But what does that actually look like in code?</p>
+                    
+                    <div class="example-container">
+                        <div class="example-header">JavaScript Code</div>
+                        <div class="code-block">
+                            <span class="code-comment">// Creating variables to store user information</span><br>
+                            <span class="code-keyword">let</span> userName = <span class="code-string">"Sarah"</span>;<br>
+                            <span class="code-keyword">const</span> userAge = <span class="code-number">28</span>;<br>
+                            <span class="code-keyword">let</span> isOnline = <span class="code-keyword">true</span>;<br><br>
+                            
+                            <span class="code-comment">// Using the variables to create a message</span><br>
+                            <span class="code-keyword">let</span> welcomeMessage = <span class="code-string">"Hello "</span> + userName + <span class="code-string">"! You are "</span> + userAge + <span class="code-string">" years old."</span>;<br>
+                            console.<span class="code-function">log</span>(welcomeMessage);<br><br>
+                            
+                            <span class="code-comment">// Changing a variable value</span><br>
+                            userName = <span class="code-string">"Alex"</span>;<br>
+                            welcomeMessage = <span class="code-string">"Hello "</span> + userName + <span class="code-string">"! Welcome back."</span>;<br>
+                            console.<span class="code-function">log</span>(welcomeMessage);
+                        </div>
+                        <div class="visual-output">
+                            <div class="output-title">What You'd See in the Console:</div>
+                            <div class="output-box">
+                                <p>Hello Sarah! You are 28 years old.</p>
+                                <p>Hello Alex! Welcome back.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="explanation-box">
+                        <p><strong>What's happening here?</strong> We create containers (variables) to hold different types of information - text, numbers, and true/false values. Then we use these containers to build messages. Notice how we can change what's inside the <code>userName</code> container, and our message updates automatically!</p>
+                    </div>
+
+                    <h3>Example 2: Functions That Actually Do Something</h3>
+                    <p>Functions are like mini-programs within your program. They bundle up code so you can reuse it. Let's look at a function that solves a real problem.</p>
+                    
+                    <div class="example-container">
+                        <div class="example-header">JavaScript Code</div>
+                        <div class="code-block">
+                            <span class="code-comment">// A function to calculate the total price with tax</span><br>
+                            <span class="code-keyword">function</span> <span class="code-function">calculateTotal</span>(price, taxRate) {<br>
+                            &nbsp;&nbsp;<span class="code-keyword">let</span> taxAmount = price * taxRate;<br>
+                            &nbsp;&nbsp;<span class="code-keyword">let</span> total = price + taxAmount;<br>
+                            &nbsp;&nbsp;<span class="code-keyword">return</span> total;<br>
+                            }<br><br>
+                            
+                            <span class="code-comment">// Using our function for different purchases</span><br>
+                            <span class="code-keyword">let</span> bookPrice = calculateTotal(<span class="code-number">25</span>, <span class="code-number">0.08</span>);<br>
+                            <span class="code-keyword">let</span> laptopPrice = calculateTotal(<span class="code-number">1200</span>, <span class="code-number">0.1</span>);<br>
+                            <span class="code-keyword">let</span> coffeePrice = calculateTotal(<span class="code-number">4.5</span>, <span class="code-number">0.07</span>);<br><br>
+                            
+                            console.<span class="code-function">log</span>(<span class="code-string">"Book: $"</span> + bookPrice.<span class="code-function">toFixed</span>(<span class="code-number">2</span>));<br>
+                            console.<span class="code-function">log</span>(<span class="code-string">"Laptop: $"</span> + laptopPrice.<span class="code-function">toFixed</span>(<span class="code-number">2</span>));<br>
+                            console.<span class="code-function">log</span>(<span class="code-string">"Coffee: $"</span> + coffeePrice.<span class="code-function">toFixed</span>(<span class="code-number">2</span>));
+                        </div>
+                        <div class="visual-output">
+                            <div class="output-title">What You'd See in the Console:</div>
+                            <div class="output-box">
+                                <p>Book: $27.00</p>
+                                <p>Laptop: $1320.00</p>
+                                <p>Coffee: $4.82</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="explanation-box">
+                        <p><strong>Why this matters:</strong> Instead of writing the tax calculation code three times, we wrote it once in a function and reused it. This is the power of functions - they save time, reduce errors, and make your code cleaner. If tax laws change, we only need to update one function instead of hunting through our entire codebase.</p>
+                    </div>
+
+                    <h3>Example 3: Making Decisions with Conditionals</h3>
+                    <p>Real programs need to make decisions. Should I show this button? Is the user logged in? Conditionals help your code think.</p>
+                    
+                    <div class="example-container">
+                        <div class="example-header">JavaScript Code</div>
+                        <div class="code-block">
+                            <span class="code-comment">// Function to determine user access level</span><br>
+                            <span class="code-keyword">function</span> <span class="code-function">checkUserAccess</span>(userRole, isLoggedIn) {<br>
+                            &nbsp;&nbsp;<span class="code-keyword">if</span> (!isLoggedIn) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">return</span> <span class="code-string">"Please log in to continue"</span>;<br>
+                            &nbsp;&nbsp;} <span class="code-keyword">else</span> <span class="code-keyword">if</span> (userRole === <span class="code-string">"admin"</span>) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">return</span> <span class="code-string">"Full access granted"</span>;<br>
+                            &nbsp;&nbsp;} <span class="code-keyword">else</span> <span class="code-keyword">if</span> (userRole === <span class="code-string">"editor"</span>) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">return</span> <span class="code-string">"Content editing access"</span>;<br>
+                            &nbsp;&nbsp;} <span class="code-keyword">else</span> {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">return</span> <span class="code-string">"Basic user access"</span>;<br>
+                            &nbsp;&nbsp;}<br>
+                            }<br><br>
+                            
+                            <span class="code-comment">// Testing our function with different users</span><br>
+                            console.<span class="code-function">log</span>(checkUserAccess(<span class="code-string">"admin"</span>, <span class="code-keyword">true</span>));<br>
+                            console.<span class="code-function">log</span>(checkUserAccess(<span class="code-string">"user"</span>, <span class="code-keyword">true</span>));<br>
+                            console.<span class="code-function">log</span>(checkUserAccess(<span class="code-string">"editor"</span>, <span class="code-keyword">false</span>));
+                        </div>
+                        <div class="visual-output">
+                            <div class="output-title">What You'd See in the Console:</div>
+                            <div class="output-box">
+                                <p>Full access granted</p>
+                                <p>Basic user access</p>
+                                <p>Please log in to continue</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="explanation-box">
+                        <p><strong>Understanding the flow:</strong> The code makes decisions like a security guard checking IDs. First, it asks "Is this person logged in?" If not, it stops right there. If they are logged in, it checks their role and gives appropriate access. This is exactly how real websites and apps manage user permissions!</p>
+                    </div>
+
+                    <h3>Example 4: Working with Lists of Data</h3>
+                    <p>In real applications, you rarely work with just one piece of data. You work with lists - users, products, tasks. Arrays help you manage these lists.</p>
+                    
+                    <div class="example-container">
+                        <div class="example-header">JavaScript Code</div>
+                        <div class="code-block">
+                            <span class="code-comment">// An array of shopping cart items</span><br>
+                            <span class="code-keyword">let</span> cartItems = [<span class="code-string">"Laptop"</span>, <span class="code-string">"Mouse"</span>, <span class="code-string">"Keyboard"</span>];<br><br>
+                            
+                            <span class="code-comment">// Function to display cart contents</span><br>
+                            <span class="code-keyword">function</span> <span class="code-function">showCart</span>(items) {<br>
+                            &nbsp;&nbsp;console.<span class="code-function">log</span>(<span class="code-string">"Your cart contains:"</span>);<br>
+                            &nbsp;&nbsp;<span class="code-keyword">for</span> (<span class="code-keyword">let</span> i = <span class="code-number">0</span>; i < items.length; i++) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;console.<span class="code-function">log</span>(<span class="code-string">"- "</span> + items[i]);<br>
+                            &nbsp;&nbsp;}<br>
+                            &nbsp;&nbsp;console.<span class="code-function">log</span>(<span class="code-string">"Total items: "</span> + items.length);<br>
+                            }<br><br>
+                            
+                            <span class="code-comment">// Using our array and function</span><br>
+                            showCart(cartItems);<br>
+                            console.<span class="code-function">log</span>(<span class="code-string">"---"</span>);<br><br>
+                            
+                            <span class="code-comment">// Adding a new item to the cart</span><br>
+                            cartItems.<span class="code-function">push</span>(<span class="code-string">"Headphones"</span>);<br>
+                            showCart(cartItems);
+                        </div>
+                        <div class="visual-output">
+                            <div class="output-title">What You'd See in the Console:</div>
+                            <div class="output-box">
+                                <p>Your cart contains:</p>
+                                <p>- Laptop</p>
+                                <p>- Mouse</p>
+                                <p>- Keyboard</p>
+                                <p>Total items: 3</p>
+                                <p>---</p>
+                                <p>Your cart contains:</p>
+                                <p>- Laptop</p>
+                                <p>- Mouse</p>
+                                <p>- Keyboard</p>
+                                <p>- Headphones</p>
+                                <p>Total items: 4</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="explanation-box">
+                        <p><strong>Why arrays are powerful:</strong> Instead of creating separate variables for each cart item (<code>item1</code>, <code>item2</code>, <code>item3</code>), we use one array that can grow or shrink as needed. The loop automatically handles any number of items - whether we have 3 or 300!</p>
+                    </div>
+
+                    <h3>Putting It All Together: A Simple Task Manager</h3>
+                    <p>Now let's combine everything we've learned into a mini-application that actually does something useful.</p>
+                    
+                    <div class="example-container">
+                        <div class="example-header">JavaScript Code</div>
+                        <div class="code-block">
+                            <span class="code-comment">// Simple task manager application</span><br>
+                            <span class="code-keyword">let</span> tasks = [];<br><br>
+                            
+                            <span class="code-keyword">function</span> <span class="code-function">addTask</span>(taskName) {<br>
+                            &nbsp;&nbsp;tasks.<span class="code-function">push</span>({<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;name: taskName,<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;completed: <span class="code-keyword">false</span>,<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;id: <span class="code-function">Date</span>().<span class="code-function">now</span>()<br>
+                            &nbsp;&nbsp;});<br>
+                            &nbsp;&nbsp;console.<span class="code-function">log</span>(<span class="code-string">'Added: "'</span> + taskName + <span class="code-string">'"'</span>);<br>
+                            }<br><br>
+                            
+                            <span class="code-keyword">function</span> <span class="code-function">completeTask</span>(taskId) {<br>
+                            &nbsp;&nbsp;<span class="code-keyword">for</span> (<span class="code-keyword">let</span> i = <span class="code-number">0</span>; i < tasks.length; i++) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">if</span> (tasks[i].id === taskId) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tasks[i].completed = <span class="code-keyword">true</span>;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;console.<span class="code-function">log</span>(<span class="code-string">'Completed: "'</span> + tasks[i].name + <span class="code-string">'"'</span>);<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">return</span>;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                            &nbsp;&nbsp;}<br>
+                            &nbsp;&nbsp;console.<span class="code-function">log</span>(<span class="code-string">"Task not found"</span>);<br>
+                            }<br><br>
+                            
+                            <span class="code-keyword">function</span> <span class="code-function">showTasks</span>() {<br>
+                            &nbsp;&nbsp;console.<span class="code-function">log</span>(<span class="code-string">"--- Your Tasks ---"</span>);<br>
+                            &nbsp;&nbsp;<span class="code-keyword">for</span> (<span class="code-keyword">let</span> i = <span class="code-number">0</span>; i < tasks.length; i++) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">let</span> status = tasks[i].completed ? <span class="code-string">"✓"</span> : <span class="code-string">"□"</span>;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;console.<span class="code-function">log</span>(status + <span class="code-string">" "</span> + tasks[i].name);<br>
+                            &nbsp;&nbsp;}<br>
+                            }<br><br>
+                            
+                            <span class="code-comment">// Using our task manager</span><br>
+                            addTask(<span class="code-string">"Learn JavaScript"</span>);<br>
+                            addTask(<span class="code-string">"Build a project"</span>);<br>
+                            addTask(<span class="code-string">"Practice coding"</span>);<br>
+                            showTasks();<br>
+                            console.<span class="code-function">log</span>(<span class="code-string">"---"</span>);<br>
+                            completeTask(tasks[<span class="code-number">0</span>].id);<br>
+                            showTasks();
+                        </div>
+                        <div class="visual-output">
+                            <div class="output-title">What You'd See in the Console:</div>
+                            <div class="output-box">
+                                <p>Added: "Learn JavaScript"</p>
+                                <p>Added: "Build a project"</p>
+                                <p>Added: "Practice coding"</p>
+                                <p>--- Your Tasks ---</p>
+                                <p>□ Learn JavaScript</p>
+                                <p>□ Build a project</p>
+                                <p>□ Practice coding</p>
+                                <p>---</p>
+                                <p>Completed: "Learn JavaScript"</p>
+                                <p>--- Your Tasks ---</p>
+                                <p>✓ Learn JavaScript</p>
+                                <p>□ Build a project</p>
+                                <p>□ Practice coding</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="explanation-box">
+                        <p><strong>This is real programming!</strong> Look at how we've combined variables, functions, arrays, conditionals, and loops to create something actually useful. This simple task manager demonstrates the core concepts that power much more complex applications. Every big app you use is just many small pieces like this working together.</p>
+                    </div>
+
+                    <h3>Keep Exploring</h3>
+                    <p>The examples on this page show you the building blocks of programming. Each one solves a specific problem you'll encounter in real development work. The key is to understand not just what the code does, but why it works that way.</p>
+                    
+                    <p>Remember, every expert programmer started exactly where you are now - looking at simple examples and gradually building up to more complex applications. The concepts you've seen here are the same ones that power websites, mobile apps, and software used by millions of people.</p>
+                    
+                    <p>Ready to try these examples yourself? Open your browser's developer tools (F12) and try typing them in the console. Change the values, break things, and see what happens. That's how you'll really learn!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-title">CodeSkill</h3>
+                    <p>Free hands-on coding tutorials, practical projects, and problem-solving challenges for all skill levels.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3 class="footer-title">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="coding-examples.html">Coding Examples</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3 class="footer-title">Legal</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 CodeSkill. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Navigation Toggle
+        const navToggle = document.querySelector('.nav-toggle');
+        const navMenu = document.querySelector('.nav-menu');
+        const navClose = document.querySelector('.nav-close');
+        const menuBackdrop = document.getElementById('menuBackdrop');
+        
+        navToggle.addEventListener('click', () => {
+            navMenu.classList.add('active');
+            menuBackdrop.classList.add('active');
+            navToggle.style.display = 'none'; // Hide the menu icon
+            document.body.style.overflow = 'hidden';
+        });
+        
+        navClose.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+            menuBackdrop.classList.remove('active');
+            navToggle.style.display = 'block'; // Show the menu icon again
+            document.body.style.overflow = '';
+        });
+        
+        menuBackdrop.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+            menuBackdrop.classList.remove('active');
+            navToggle.style.display = 'block'; // Show the menu icon again
+            document.body.style.overflow = '';
+        });
+        
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                menuBackdrop.classList.remove('active');
+                navToggle.style.display = 'block'; // Show the menu icon again
+                document.body.style.overflow = '';
+            });
+        });
+    </script>
+</body>
+</html>
