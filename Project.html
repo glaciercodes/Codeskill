@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Ideas - CodeSkill</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2e7d32;
+            --primary-light: #4caf50;
+            --primary-dark: #1b5e20;
+            --text-color: #333;
+            --light-bg: #f9f9f9;
+            --white: #ffffff;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--white);
+            box-shadow: var(--box-shadow);
+            padding: 15px 0;
+            position: relative;
+        }
+
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .logo-section {
+            width: 100%;
+        }
+
+        .logo-title-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-right: 12px;
+        }
+
+        .site-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-right: 10px;
+        }
+
+        .site-subtitle {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.4;
+            width: 100%;
+        }
+
+        /* Navigation */
+        .nav-toggle {
+            display: block;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            cursor: pointer;
+            z-index: 1001;
+            position: absolute;
+            top: 15px;
+            right: 15px;
+        }
+
+        .nav-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 85%;
+            max-width: 300px;
+            height: 100vh;
+            background-color: var(--white);
+            flex-direction: column;
+            padding: 70px 20px 20px;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            transition: right 0.3s;
+            z-index: 999;
+            overflow-y: auto;
+        }
+
+        .nav-menu.active {
+            display: flex;
+            right: 0;
+        }
+
+        .nav-menu li {
+            margin: 0 0 15px 0;
+            width: 100%;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            font-size: 1rem;
+            padding: 12px 15px;
+            border-radius: var(--border-radius);
+            background-color: #f5f5f5;
+        }
+
+        .nav-menu a i {
+            margin-right: 10px;
+            font-size: 1.1rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary-color);
+            background-color: #e8f5e9;
+        }
+
+        .nav-close {
+            display: block;
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        /* Main Content */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            margin: 25px 0;
+        }
+
+        .projects-section {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 20px;
+            width: 100%;
+        }
+
+        .page-title {
+            color: var(--primary-dark);
+            margin-bottom: 12px;
+            font-size: 1.8rem;
+            line-height: 1.3;
+            text-align: center;
+        }
+
+        .page-subtitle {
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            font-size: 1.2rem;
+            font-style: italic;
+            line-height: 1.4;
+            text-align: center;
+        }
+
+        .projects-content {
+            margin-bottom: 20px;
+        }
+
+        .projects-content h3 {
+            color: var(--primary-dark);
+            margin: 25px 0 15px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--primary-light);
+            font-size: 1.4rem;
+            line-height: 1.3;
+        }
+
+        .projects-content p {
+            margin-bottom: 15px;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .projects-content ul, .projects-content ol {
+            margin: 15px 0 15px 25px;
+        }
+
+        .projects-content li {
+            margin-bottom: 10px;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        .difficulty-level {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        .beginner {
+            background-color: #e8f5e9;
+            color: var(--primary-dark);
+        }
+
+        .intermediate {
+            background-color: #fff3e0;
+            color: #e65100;
+        }
+
+        .advanced {
+            background-color: #ffebee;
+            color: #c62828;
+        }
+
+        .project-category {
+            background-color: #f5f5f5;
+            border-left: 4px solid var(--primary-color);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+
+        .project-idea {
+            background-color: #f9f9f9;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin: 15px 0;
+            border: 1px solid #e0e0e0;
+        }
+
+        .project-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--primary-dark);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 10px 0;
+        }
+
+        .skill-tag {
+            background-color: #e3f2fd;
+            color: #1976d2;
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .guide-section {
+            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+            padding: 25px;
+            border-radius: var(--border-radius);
+            margin: 25px 0;
+            border: 1px solid #a5d6a7;
+        }
+
+        .step-by-step {
+            background-color: #f5f5f5;
+            border-left: 4px solid var(--primary-color);
+            padding: 18px;
+            margin: 18px 0;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+
+        .step {
+            margin-bottom: 15px;
+            display: flex;
+        }
+
+        .step-number {
+            background-color: var(--primary-color);
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            flex-shrink: 0;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .step-content {
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .code-block {
+            background-color: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: var(--border-radius);
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+
+        .code-comment {
+            color: #6a9955;
+        }
+
+        .code-keyword {
+            color: #569cd6;
+        }
+
+        .code-function {
+            color: #dcdcaa;
+        }
+
+        .code-string {
+            color: #ce9178;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-dark);
+            color: white;
+            padding: 30px 0;
+            margin-top: 40px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .footer-section {
+            width: 100%;
+        }
+
+        .footer-title {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #a5d6a7;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 8px;
+        }
+
+        .footer-links a {
+            color: #e8f5e9;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .footer-links a:hover {
+            color: #a5d6a7;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid #4caf50;
+            color: #a5d6a7;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (min-width: 768px) {
+            .container {
+                max-width: 720px;
+                padding: 0 20px;
+            }
+            
+            .header-content {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+            
+            .logo-section {
+                width: auto;
+            }
+            
+            .logo-title-container {
+                margin-bottom: 0;
+            }
+            
+            .site-subtitle {
+                width: 100%;
+            }
+            
+            .nav-toggle {
+                display: none;
+            }
+            
+            .nav-menu {
+                display: flex;
+                position: static;
+                width: auto;
+                height: auto;
+                flex-direction: row;
+                padding: 0;
+                box-shadow: none;
+                background: transparent;
+            }
+            
+            .nav-menu li {
+                margin: 0 0 0 20px;
+                width: auto;
+            }
+            
+            .nav-menu a {
+                padding: 8px 12px;
+                background: transparent;
+                font-size: 0.9rem;
+            }
+            
+            .nav-close {
+                display: none;
+            }
+            
+            .footer-content {
+                flex-direction: row;
+            }
+            
+            .footer-section {
+                width: 33.33%;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .container {
+                max-width: 960px;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .container {
+                max-width: 1140px;
+            }
+        }
+
+        /* Improve touch targets for mobile */
+        .nav-menu a {
+            min-height: 44px;
+            align-items: center;
+        }
+
+        /* Prevent horizontal scrolling */
+        html, body {
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+        
+        /* Backdrop for mobile menu */
+        .menu-backdrop {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 998;
+        }
+        
+        .menu-backdrop.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Backdrop for mobile menu -->
+    <div class="menu-backdrop" id="menuBackdrop"></div>
+    
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-section">
+                    <div class="logo-title-container">
+                        <i class="fas fa-code logo"></i>
+                        <h1 class="site-title">CodeSkill</h1>
+                    </div>
+                    <p class="site-subtitle">CodeSkill offers free hands-on coding tutorials, practical projects, and problem-solving challenges, guiding beginners and advanced learners alike to master programming languages, build real applications, and develop skills step by step.</p>
+                </div>
+                
+                <button class="nav-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <ul class="nav-menu">
+                    <button class="nav-close">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="about.html"><i class="fas fa-info-circle"></i> About Us</a></li>
+                    <li><a href="projects.html" class="active"><i class="fas fa-lightbulb"></i> Project Ideas</a></li>
+                    <li><a href="#"><i class="fas fa-envelope"></i> Contact Us</a></li>
+                    <li><a href="#"><i class="fas fa-file-contract"></i> Terms of Service</a></li>
+                    <li><a href="#"><i class="fas fa-shield-alt"></i> Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="main-content">
+            <div class="projects-section">
+                <h1 class="page-title">Project Ideas & Building Guide</h1>
+                <p class="page-subtitle">Stop wondering what to build next - here's your roadmap from beginner to advanced projects</p>
+                
+                <div class="projects-content">
+                    <h3>Why Building Projects is Your Fast Track to Learning</h3>
+                    <p>I remember when I first learned to code - I spent months going through tutorials, understanding concepts, but feeling completely lost when it came to building something from scratch. Sound familiar?</p>
+                    
+                    <p>The secret I wish someone had told me earlier: <strong>You don't learn to code by studying - you learn by building things that solve real problems.</strong> Each project you complete teaches you more than a dozen tutorials because you're encountering and solving the exact problems real developers face.</p>
+
+                    <div class="guide-section">
+                        <h3>How to Choose Your Next Project</h3>
+                        <p>Picking the right project is crucial. Here's my simple framework:</p>
+                        <ol>
+                            <li><strong>Match your skill level</strong> - Don't try to build Facebook in week one</li>
+                            <li><strong>Solve a problem you care about</strong> - You'll stick with projects you're passionate about</li>
+                            <li><strong>Learn one new thing at a time</strong> - Each project should introduce 1-2 new concepts</li>
+                            <li><strong>Start small, then expand</strong> - Build a basic version first, then add features</li>
+                        </ol>
+                    </div>
+
+                    <h3>Beginner Projects: Your Coding Foundation</h3>
+                    <p>These projects are perfect if you're just starting out. They focus on fundamental concepts without overwhelming you.</p>
+
+                    <div class="project-idea">
+                        <div class="project-title">
+                            Personal Portfolio Website
+                            <span class="difficulty-level beginner">Beginner</span>
+                        </div>
+                        <div class="skills-list">
+                            <span class="skill-tag">HTML</span>
+                            <span class="skill-tag">CSS</span>
+                            <span class="skill-tag">JavaScript</span>
+                            <span class="skill-tag">Responsive Design</span>
+                        </div>
+                        <p><strong>Why build this?</strong> Every developer needs a portfolio, and this teaches you the core web technologies while creating something useful.</p>
+                        <p><strong>What you'll learn:</strong> HTML structure, CSS styling, responsive design principles, basic JavaScript interactions.</p>
+                        <div class="step-by-step">
+                            <h4>Building Steps:</h4>
+                            <div class="step">
+                                <div class="step-number">1</div>
+                                <div class="step-content">Create the basic HTML structure with sections for about, projects, and contact</div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">2</div>
+                                <div class="step-content">Style it with CSS - practice Flexbox or CSS Grid for layout</div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">3</div>
+                                <div class="step-content">Make it responsive so it looks good on phones and desktops</div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">4</div>
+                                <div class="step-content">Add simple JavaScript for interactive elements like a mobile menu</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-idea">
+                        <div class="project-title">
+                            Weather App
+                            <span class="difficulty-level beginner">Beginner</span>
+                        </div>
+                        <div class="skills-list">
+                            <span class="skill-tag">API Integration</span>
+                            <span class="skill-tag">Async JavaScript</span>
+                            <span class="skill-tag">DOM Manipulation</span>
+                            <span class="skill-tag">Error Handling</span>
+                        </div>
+                        <p><strong>Why build this?</strong> This is your introduction to working with external data - a crucial skill for modern web development.</p>
+                        <p><strong>What you'll learn:</strong> API calls, asynchronous JavaScript, handling JSON data, error handling when things go wrong.</p>
+                        <div class="code-block">
+                            <span class="code-comment">// Example API call structure</span><br>
+                            <span class="code-keyword">async function</span> <span class="code-function">getWeather</span>(city) {<br>
+                            &nbsp;&nbsp;<span class="code-keyword">try</span> {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">const</span> response = <span class="code-keyword">await</span> fetch(<span class="code-string">`https://api.weather.com/${city}`</span>);<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">const</span> data = <span class="code-keyword">await</span> response.<span class="code-function">json</span>();<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-function">displayWeather</span>(data);<br>
+                            &nbsp;&nbsp;} <span class="code-keyword">catch</span> (error) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-function">showError</span>(<span class="code-string">"Failed to fetch weather data"</span>);<br>
+                            &nbsp;&nbsp;}<br>
+                            }
+                        </div>
+                    </div>
+
+                    <h3>Intermediate Projects: Level Up Your Skills</h3>
+                    <p>Ready for more challenge? These projects introduce important concepts like state management and more complex data handling.</p>
+
+                    <div class="project-idea">
+                        <div class="project-title">
+                            Task Management App
+                            <span class="difficulty-level intermediate">Intermediate</span>
+                        </div>
+                        <div class="skills-list">
+                            <span class="skill-tag">State Management</span>
+                            <span class="skill-tag">Local Storage</span>
+                            <span class="skill-tag">CRUD Operations</span>
+                            <span class="skill-tag">UI/UX Design</span>
+                        </div>
+                        <p><strong>Why build this?</strong> This teaches you how to manage application state and handle Create, Read, Update, Delete operations - the foundation of most web apps.</p>
+                        <p><strong>What you'll learn:</strong> Managing application state, local storage for data persistence, implementing full CRUD functionality, better UI/UX principles.</p>
+                        <div class="step-by-step">
+                            <h4>Key Features to Implement:</h4>
+                            <div class="step">
+                                <div class="step-number">1</div>
+                                <div class="step-content">Add new tasks with titles, descriptions, and due dates</div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">2</div>
+                                <div class="step-content">Mark tasks as complete/incomplete</div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">3</div>
+                                <div class="step-content">Edit existing tasks</div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">4</div>
+                                <div class="step-content">Delete tasks (with confirmation)</div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">5</div>
+                                <div class="step-content">Save tasks to localStorage so they persist between sessions</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-idea">
+                        <div class="project-title">
+                            Budget Tracker
+                            <span class="difficulty-level intermediate">Intermediate</span>
+                        </div>
+                        <div class="skills-list">
+                            <span class="skill-tag">Data Visualization</span>
+                            <span class="skill-tag">Form Validation</span>
+                            <span class="skill-tag">Charts/Graphs</span>
+                            <span class="skill-tag">Data Calculations</span>
+                        </div>
+                        <p><strong>Why build this?</strong> This project combines form handling, data calculations, and visualization - skills you'll use in countless applications.</p>
+                        <p><strong>What you'll learn:</strong> Complex form validation, data calculations and aggregations, integrating chart libraries, handling user input securely.</p>
+                    </div>
+
+                    <h3>Advanced Projects: Ready for the Big Leagues</h3>
+                    <p>These projects will push your skills and prepare you for professional development work.</p>
+
+                    <div class="project-idea">
+                        <div class="project-title">
+                            E-commerce Platform
+                            <span class="difficulty-level advanced">Advanced</span>
+                        </div>
+                        <div class="skills-list">
+                            <span class="skill-tag">Full-Stack</span>
+                            <span class="skill-tag">Database</span>
+                            <span class="skill-tag">Authentication</span>
+                            <span class="skill-tag">Payment Processing</span>
+                        </div>
+                        <p><strong>Why build this?</strong> This is as real-world as it gets. You'll touch almost every aspect of modern web development.</p>
+                        <p><strong>What you'll learn:</strong> Full-stack development, database design, user authentication, payment integration, complex state management, security considerations.</p>
+                        <div class="step-by-step">
+                            <h4>System Architecture:</h4>
+                            <div class="step">
+                                <div class="step-number">1</div>
+                                <div class="step-content">Frontend with product listings, search, and shopping cart</div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">2</div>
+                                <div class="step-content">Backend API for products, users, and orders</div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">3</div>
+                                <div class="step-content">Database design for products, users, and orders</div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">4</div>
+                                <div class="step-content">User authentication and authorization</div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">5</div>
+                                <div class="step-content">Payment processing integration (use Stripe test mode)</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-idea">
+                        <div class="project-title">
+                            Social Media Dashboard
+                            <span class="difficulty-level advanced">Advanced</span>
+                        </div>
+                        <div class="skills-list">
+                            <span class="skill-tag">Real-time Updates</span>
+                            <span class="skill-tag">Multiple APIs</span>
+                            <span class="skill-tag">Data Aggregation</span>
+                            <span class="skill-tag">Performance</span>
+                        </div>
+                        <p><strong>Why build this?</strong> This teaches you how to work with multiple data sources, handle real-time updates, and manage complex data displays.</p>
+                        <p><strong>What you'll learn:</strong> Working with multiple APIs, real-time data with WebSockets, data aggregation and analysis, performance optimization for data-heavy applications.</p>
+                    </div>
+
+                    <div class="guide-section">
+                        <h3>My Project Building Methodology</h3>
+                        <p>After building hundreds of projects myself and teaching thousands of students, I've developed a reliable process:</p>
+                        
+                        <div class="step-by-step">
+                            <div class="step">
+                                <div class="step-number">1</div>
+                                <div class="step-content"><strong>Plan Before You Code</strong> - Sketch your app on paper. What features does it need? What's the user flow?</div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">2</div>
+                                <div class="step-content"><strong>Build the Minimum Viable Product (MVP)</strong> - Create the simplest version that works. No fancy features yet.</div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">3</div>
+                                <div class="step-content"><strong>Make It Work, Then Make It Right</strong> - Get the functionality working first, then refactor and improve the code.</div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">4</div>
+                                <div class="step-content"><strong>Test Everything</strong> - Try to break your app. What happens with invalid inputs? Slow connections?</div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">5</div>
+                                <div class="step-content"><strong>Deploy and Share</strong> - Put it online (Netlify, Vercel, GitHub Pages) and show people what you built!</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3>Common Project Mistakes to Avoid</h3>
+                    <p>I've made all these mistakes so you don't have to:</p>
+                    <ul>
+                        <li><strong>Starting too big</strong> - Begin with features you can actually complete in a reasonable time</li>
+                        <li><strong>Perfecting instead of shipping</strong> - Your first version doesn't need to be perfect</li>
+                        <li><strong>Ignoring mobile users</strong> - Always test on different screen sizes</li>
+                        <li><strong>Skipping error handling</strong> - Users will do things you never expected</li>
+                        <li><strong>Not using version control</strong> - Git is your safety net when things go wrong</li>
+                    </ul>
+
+                    <div class="guide-section">
+                        <h3>Ready to Start Building?</h3>
+                        <p>Pick one project from the beginner section and start today. Don't overthink it - the goal isn't perfection, it's learning. Every bug you fix, every feature you implement, every problem you solve makes you a better developer.</p>
+                        <p><strong>Remember:</strong> The project you actually build is worth more than ten projects you only plan to build. Start small, build consistently, and watch your skills grow faster than you ever thought possible.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-title">CodeSkill</h3>
+                    <p>Free hands-on coding tutorials, practical projects, and problem-solving challenges for all skill levels.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3 class="footer-title">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="projects.html">Project Ideas</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3 class="footer-title">Legal</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 CodeSkill. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Navigation Toggle
+        const navToggle = document.querySelector('.nav-toggle');
+        const navMenu = document.querySelector('.nav-menu');
+        const navClose = document.querySelector('.nav-close');
+        const menuBackdrop = document.getElementById('menuBackdrop');
+        
+        navToggle.addEventListener('click', () => {
+            navMenu.classList.add('active');
+            menuBackdrop.classList.add('active');
+            navToggle.style.display = 'none';
+            document.body.style.overflow = 'hidden';
+        });
+        
+        navClose.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+            menuBackdrop.classList.remove('active');
+            navToggle.style.display = 'block';
+            document.body.style.overflow = '';
+        });
+        
+        menuBackdrop.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+            menuBackdrop.classList.remove('active');
+            navToggle.style.display = 'block';
+            document.body.style.overflow = '';
+        });
+        
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                menuBackdrop.classList.remove('active');
+                navToggle.style.display = 'block';
+                document.body.style.overflow = '';
+            });
+        });
+    </script>
+</body>
+</html>
